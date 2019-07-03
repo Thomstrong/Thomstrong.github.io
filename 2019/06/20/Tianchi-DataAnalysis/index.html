@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta name="baidu-site-verification" content="UqlC4pwKIm">
+  <meta name="baidu-site-verification" content="d3U0dGeqGw">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="1C1XSuJ8TgM2O0mcZvsgzEdy0IdRZOJfxDYPyh18U9Q">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.cat.net/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="比赛,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数智教育数据可视化创新大赛总结后端 使用Django Rest Framework中规中矩的api，memcached简单配置   环境搭建  使用virtualenv创建虚拟环境，防止环境污染 pip install 可以使用国内镜像源，pip install -i http://xxx.com/yyy/ 阿里云 http://mirrors.aliyun.com/pypi/simple/ 中">
+<meta name="keywords" content="比赛">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数智教育数据可视化创新大赛总结">
+<meta property="og:url" content="https://thomstrong.github.io/2019/06/20/Tianchi-DataAnalysis/index.html">
+<meta property="og:site_name" content="Thomstrong&#39;s Blog">
+<meta property="og:description" content="数智教育数据可视化创新大赛总结后端 使用Django Rest Framework中规中矩的api，memcached简单配置   环境搭建  使用virtualenv创建虚拟环境，防止环境污染 pip install 可以使用国内镜像源，pip install -i http://xxx.com/yyy/ 阿里云 http://mirrors.aliyun.com/pypi/simple/ 中">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-03T07:29:26.151Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数智教育数据可视化创新大赛总结">
+<meta name="twitter:description" content="数智教育数据可视化创新大赛总结后端 使用Django Rest Framework中规中矩的api，memcached简单配置   环境搭建  使用virtualenv创建虚拟环境，防止环境污染 pip install 可以使用国内镜像源，pip install -i http://xxx.com/yyy/ 阿里云 http://mirrors.aliyun.com/pypi/simple/ 中">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thomstrong.github.io/2019/06/20/Tianchi-DataAnalysis/">
+
+
+
+
+
+  <title>数智教育数据可视化创新大赛总结 | Thomstrong's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-111723881-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Thomstrong's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://thomstrong.github.io/2019/06/20/Tianchi-DataAnalysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Thomstrong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Thomstrong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">数智教育数据可视化创新大赛总结</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-20T11:34:19+08:00">
+                2019-06-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-07-03T15:29:26+08:00">
+                2019-07-03
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,529
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><h1 id="数智教育数据可视化创新大赛总结"><a href="#数智教育数据可视化创新大赛总结" class="headerlink" title="数智教育数据可视化创新大赛总结"></a>数智教育数据可视化创新大赛总结</h1><h3 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h3><blockquote>
+<p>使用Django Rest Framework中规中矩的api，memcached简单配置</p>
+</blockquote>
+<ul>
+<li><p>环境搭建</p>
+<ul>
+<li>使用virtualenv创建虚拟环境，防止环境污染</li>
+<li>pip install 可以使用国内镜像源，pip install -i <a href="http://xxx.com/yyy/" target="_blank" rel="noopener">http://xxx.com/yyy/</a><ul>
+<li>阿里云 <a href="http://mirrors.aliyun.com/pypi/simple/" target="_blank" rel="noopener">http://mirrors.aliyun.com/pypi/simple/</a></li>
+<li>中国科技大学 <a href="https://pypi.mirrors.ustc.edu.cn/simple/" target="_blank" rel="noopener">https://pypi.mirrors.ustc.edu.cn/simple/</a></li>
+<li>豆瓣(douban) <a href="http://pypi.douban.com/simple/" target="_blank" rel="noopener">http://pypi.douban.com/simple/</a></li>
+<li>清华大学 <a href="https://pypi.tuna.tsinghua.edu.cn/simple/" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple/</a></li>
+<li>中国科学技术大学 <a href="http://pypi.mirrors.ustc.edu.cn/simple/" target="_blank" rel="noopener">http://pypi.mirrors.ustc.edu.cn/simple/</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据库配置</p>
+<ul>
+<li><p>考虑数据整体不会有太大变动，可能需要从本地开发环境直接迁移到线上服务器，所以使用docker搭载postgres的方法，上线后可直接将docker镜像进行恢复然后迁移数据</p>
+</li>
+<li><p>docker 镜像备份方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. docker save [container_name] &gt; bak.tar <span class="comment"># save as tar</span></span><br><span class="line">2. docker load -i ./bak.tar <span class="comment"># 恢复container</span></span><br><span class="line">3. 进入postgre创建database然后执行如下</span><br><span class="line">4. cat your_dump.sql | docker <span class="built_in">exec</span> -i your-db-container psql -U tianchiuser tianchidb</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>数据迁移</p>
+<ul>
+<li><p>使用runpython在migration中运行自定义脚本</p>
+<ul>
+<li>编写<code>def fun(apps, schema_editor)</code>函数，通过<code>apps.get_model()</code>获取数据模型</li>
+<li>在operations中加入 <code>migrations.RunPython(fun, reverse_code=migrations.RunPython.noop)</code></li>
+<li><code>reverse_code=migrations.RunPython.noop</code>使用reverse_code去定义回滚时使用的方法，此处会忽略runpython产生的任何修改，直接回滚</li>
+</ul>
+</li>
+<li><p>回滚migration <a href="https://simpleisbetterthancomplex.com/tutorial/2016/07/26/how-to-reset-migrations.html" target="_blank" rel="noopener">参考链接</a></p>
+<ul>
+<li><code>python manage.py migrate [app_name] [migration_name]</code>将某个app的migrations回滚到某个migration文件为止</li>
+<li>合并migration树<ol>
+<li>./manage.py migrate —fake [app_name] zero 回滚全部migrate，但是保留数据</li>
+<li>删除所有migration文件</li>
+<li>./manage.py makemigrations 重新生成migration文件</li>
+<li>./manage.py migrate —fake-initial 重新应用合并的migration 文件</li>
+</ol>
+</li>
+<li><code>python manage.py showmigrations</code>可以查看当前已应用的migration</li>
+</ul>
+</li>
+<li><p>Postgres 中创建用户</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">psql</span><br><span class="line">postgres<span class="comment"># CREATE USER xxxx1 WITH PASSWORD 'xxxx';</span></span><br><span class="line">postgres<span class="comment"># CREATE DATABASE xxxx2;</span></span><br><span class="line">postgres<span class="comment"># GRANT ALL PRIVILEGES ON DATABASE xxxx2 to xxxx1;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>缓存配置(memcached) <a href="http://chibisov.github.io/drf-extensions/docs/#cache-response" target="_blank" rel="noopener">参考文档</a></p>
+<ul>
+<li><p>settings配置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">CACHES = &#123;</span><br><span class="line">    <span class="string">'default'</span>: &#123;</span><br><span class="line">        <span class="string">'BACKEND'</span>: <span class="string">'django.core.cache.backends.memcached.MemcachedCache'</span>,</span><br><span class="line">        <span class="string">'LOCATION'</span>: <span class="string">'127.0.0.1:11211'</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">INSTALLED_APPS = [</span><br><span class="line">    ...,</span><br><span class="line">    <span class="string">'django_extensions'</span>,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">REST_FRAMEWORK_EXTENSIONS = &#123;</span><br><span class="line">    <span class="string">'DEFAULT_CACHE_KEY_FUNC'</span>: <span class="string">'utils.cache_funcs.calculate_cache_key'</span></span><br><span class="line">&#125; <span class="comment"># 使用自定义的calculate_cache_key函数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过请求的url进行缓存</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calculate_cache_key</span><span class="params">(view_instance, view_method,</span></span></span><br><span class="line"><span class="function"><span class="params">                        request, args, kwargs)</span>:</span></span><br><span class="line">    url = <span class="string">'&#123;&#125;?'</span>.format(request.path)</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> request.query_params:</span><br><span class="line">        url += <span class="string">'&#123;&#125;=&#123;&#125;&amp;'</span>.format(key, request.query_params[key])</span><br><span class="line">    <span class="keyword">return</span> url</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用rest_framework_extensions提供的<code>@cache_response([x seconds]])</code>装饰器进行view的缓存</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><blockquote>
+<p>使用 Ant Design Pro脚手架，Umi &amp; Dva</p>
+</blockquote>
+<ul>
+<li><p>Umi 要点</p>
+<ul>
+<li>umi 里约定 mock 文件夹下的文件或者 page(s) 文件夹下的 _mock 文件即 mock 文件</li>
+<li>对于整个系统来说，请求接口是复杂并且繁多的，为了处理大量模拟请求的场景，我们通常把每一个数据模型抽象成一个文件，统一放在 <code>mock</code> 的文件夹中，然后他们会自动被引入。</li>
+<li>当本地开发完毕之后，修改config.js中的proxy配置</li>
+<li>umi with dva<ul>
+<li>按目录约定注册 model，无需手动 <code>app.model</code></li>
+<li>文件名即 namespace，可以省去 <code>model</code> 导出的 <code>namespace</code> key</li>
+<li>无需手写 <code>router.js</code>，交给 umi 处理，支持 <code>model</code> 和 <code>component</code> 的按需加载</li>
+<li>内置 query-string 处理，无需再手动解码和编码</li>
+<li>内置 dva-loading 和 dva-immer，其中 dva-immer 需通过配置开启</li>
+<li>开箱即用，无需安装额外依赖，比如 dva、dva-loading、dva-immer、path-to-regexp、object-assign、react、react-dom 等</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Dva</p>
+<ul>
+<li><p>State：一个对象，保存整个应用状态</p>
+</li>
+<li><p>View：React 组件构成的视图层</p>
+</li>
+<li><p>Action：一个对象，描述事件</p>
+</li>
+<li><p>connect 方法：一个函数，绑定 State 到 View，用于建立state 和 props的映射</p>
+</li>
+<li><p>dispatch 方法：一个函数，发送 Action 到 State，被 connect 的 Component 会自动在 props 中拥有 dispatch 方法。</p>
+</li>
+<li><p>model 对象属性</p>
+<ul>
+<li><p>namespace: 当前 Model 的名称。整个应用的 State，由多个小的 Model 的 State 以 namespace 为 key 合成</p>
+</li>
+<li><p>state: 该 Model 当前的状态。数据保存在这里，直接决定了视图层的输出</p>
+</li>
+<li><p>reducers: Action 处理器，处理同步动作，用来算出最新的 State</p>
+</li>
+<li><p>effects：Action 处理器，处理异步动</p>
+<ul>
+<li><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">addAfter1Second</span>(<span class="params">action, &#123; put, call &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">yield</span> call(delay, <span class="number">1000</span>);</span><br><span class="line">  <span class="keyword">yield</span> put(&#123; <span class="attr">type</span>: <span class="string">'add'</span> &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Effect 是一个 Generator 函数，内部使用 yield 关键字，标识每一步的操作（不管是异步或同步）。</p>
+</li>
+<li><p>call：执行异步函数</p>
+</li>
+<li><p>put：发出一个 Action，类似于 dispatch</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>DOM 和 BOM</p>
+<ul>
+<li><p>window对象对应着浏览器窗口本身，这个对象的属性和方法通常被称为BOM</p>
+</li>
+<li><p>D（文档）可以理解为整个Web加载的网页文档，O（对象）可以理解为类似window对象只来的东西，可以调用属性和方法，这里我们说的是document对象，M（模型）可以理解为网页文档的树形结构，DOM树由节点构成</p>
+</li>
+<li><p>Window对象包含属性：document、location、navigator、screen、history、frames</p>
+<p>Document根节点包含子节点：forms、location、anchors、images、links</p>
+</li>
+<li><p>BOM的核心是window，而window对象又具有双重角色，它既是通过js访问浏览器窗口的一个接口，又是一个Global（全局）对象</p>
+</li>
+<li><p>document对象：实际上是window对象的属性，document == window.document为true，是唯一一个既属于BOM又属于DOM的对象</p>
+</li>
+</ul>
+</li>
+<li><p>Suspense 相关 <a href="https://zhuanlan.zhihu.com/p/58979795" target="_blank" rel="noopener">参考文章</a></p>
+<ul>
+<li><p>懒加载<code>const ScoreLineChart = React.lazy(() =&gt; import(&#39;./ScoreLineChart&#39;));</code></p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Suspense fallback=&#123;&lt;div&gt;Loading...&lt;/div&gt;&#125;&gt;</span><br><span class="line">    &lt;ScoreLineChart /&gt;</span><br><span class="line">&lt;/Suspense&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用懒加载的组件必须放入suspense中</p>
+</li>
+<li><p>未使用懒加载的组件不能放入suspense中，否则可能导致所挂载的dom没有渲染出来而导致报错</p>
+</li>
+</ul>
+</li>
+<li><p><code>constructor.name</code>不要用于做为判断的条件，因为webpack后会翻译为其他名字</p>
+</li>
+</ul>
+<h3 id="部署-webpack"><a href="#部署-webpack" class="headerlink" title="部署 webpack"></a>部署 <a href="https://webpack.js.org/" target="_blank" rel="noopener">webpack</a></h3><blockquote>
+<p>Umi build + nginx + docker实现</p>
+</blockquote>
+<ul>
+<li><p>基于docker的打包和发布真的是很方便的，虽然在项目中使用的深度还不是很深，仅用了一些皮毛</p>
+</li>
+<li><p>webpack 打包时可用hush防止缓存不刷新带来的报错 <a href="https://www.cnblogs.com/ihardcoder/p/5623411.html" target="_blank" rel="noopener">参考链接</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: <span class="string">'[name].bundle.js'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cdn 加速还是很有用的 <a href="https://unpkg.com/" target="_blank" rel="noopener">免费cdn加速</a></p>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>官方文档要仔细阅读</li>
+<li>不要重复造轮子</li>
+<li><p>皮毛只能解决问题，但不能理解问题</p>
+</li>
+<li><p>代码规范还是要注重一下..虽然本次比赛比较赶没有任何规范</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Thomstrong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://thomstrong.github.io/2019/06/20/Tianchi-DataAnalysis/" title="数智教育数据可视化创新大赛总结">https://thomstrong.github.io/2019/06/20/Tianchi-DataAnalysis/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/比赛/" rel="tag"># 比赛</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/17/2019-Byte-Camp/" rel="next" title="2019 Byte Camp-工程赛道面试经历">
+                <i class="fa fa-chevron-left"></i> 2019 Byte Camp-工程赛道面试经历
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/20/Memcached/" rel="prev" title="Memcached 知识点">
+                Memcached 知识点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Thomstrong">
+            
+              <p class="site-author-name" itemprop="name">Thomstrong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+			<!--my custom code begin-->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+			<script type="text/javascript">
+			  $("#sidebar").hover(function(){
+				$("#mydivshow").velocity('stop').velocity({opacity: 1});
+			  },function(){
+				$("#mydivshow").velocity('stop').velocity({opacity: 0});
+			  });
+			</script>
+			<div id="mydivshow" class="mydivshow">
+			<!--my custom code end-->
+			
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Thomstrong" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:thomstrong.1996@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+        </div>
+		<!--my custom code begin-->
+		</div>
+		<!--my custom code end-->
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数智教育数据可视化创新大赛总结"><span class="nav-number">1.</span> <span class="nav-text">数智教育数据可视化创新大赛总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#后端"><span class="nav-number">1.0.1.</span> <span class="nav-text">后端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端"><span class="nav-number">1.0.2.</span> <span class="nav-text">前端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署-webpack"><span class="nav-number">1.0.3.</span> <span class="nav-text">部署 webpack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.0.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Thomstrong</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">4.1k</span>
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/exturl.js?v=5.1.3"></script>
+
+
+  <script src="/js/src/Aplayer-Controler.js"></script>
+<div id="AP-controler"></div>
+<script type="text/javascript">
+var myapc=new APlayer_Controler({
+		APC_dom:$('#AP-controler'),
+		aplayer:ap, //此为绑定的aplayer对象
+		attach_right:false,
+		position:{top:'300px',bottom:''},
+		fixed:true,
+		btn_width:100,
+		btn_height:120,
+		img_src:['http://oty1v077k.bkt.clouddn.com/bukagirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/jumpgirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/pentigirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/%E8%90%8C1.gif'],
+		img_style:{repeat:'no-repeat',position:'center',size:'contain'},
+		ctrls_color:'rgba(173,255,47,0.8)',
+		ctrls_hover_color:'rgba(255,140,0,0.7)',
+		tips_on:true,
+		tips_width:140,
+		tips_height:25,
+		tips_color:'rgba(255,255,255,0.6)',
+		tips_content:{},
+		timeout:30
+	});
+</script>
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+
+
+</body>
+</html>
