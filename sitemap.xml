@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://thomstrong.github.io/about/index.html</loc>
+    
+    <lastmod>2019-07-03T08:21:48.933Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://thomstrong.github.io/2019/07/02/SQL-vs-NoSQL/</loc>
     
     <lastmod>2019-07-03T08:04:01.013Z</lastmod>
@@ -40,13 +47,6 @@
     <loc>https://thomstrong.github.io/2019/06/17/2019-Byte-Camp/</loc>
     
     <lastmod>2019-07-03T07:29:20.683Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://thomstrong.github.io/about/index.html</loc>
-    
-    <lastmod>2018-01-08T22:56:10.000Z</lastmod>
     
   </url>
   
