@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://thomstrong.github.io/2019/06/21/Redis/</loc>
+    
+    <lastmod>2019-07-03T12:27:02.563Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://thomstrong.github.io/about/index.html</loc>
     
     <lastmod>2019-07-03T08:29:09.624Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>https://thomstrong.github.io/2019/07/01/Network-Protocal/</loc>
     
     <lastmod>2019-07-03T08:02:18.089Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://thomstrong.github.io/2019/06/21/Redis/</loc>
-    
-    <lastmod>2019-07-03T07:39:21.054Z</lastmod>
     
   </url>
   

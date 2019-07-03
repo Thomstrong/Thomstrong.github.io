@@ -143,7 +143,7 @@
 <meta property="og:description" content="Redis知识点汇总概念 C 语言写成的，开源的 key-value 数据库 和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set 使用score排序)和hash（哈希类型） 这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。 与">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://thomstrong.github.io/images/redis_vs_memcached.jpg">
-<meta property="og:updated_time" content="2019-07-03T07:39:21.054Z">
+<meta property="og:updated_time" content="2019-07-03T12:27:02.563Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis知识点">
 <meta name="twitter:description" content="Redis知识点汇总概念 C 语言写成的，开源的 key-value 数据库 和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set 使用score排序)和hash（哈希类型） 这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。 与">
@@ -364,7 +364,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-07-03T15:39:21+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-07-03T20:27:02+08:00">
                 2019-07-03
               </time>
             
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  774
+                  2,078
                 </span>
               
 
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  9
                 </span>
               
             </div>
@@ -456,16 +456,14 @@
 <li>列表（链表）：LPUSH/ RPUSH/ LPOP/ RPOP/ LRANGE</li>
 <li>集合：SADD/ SMEMBERS</li>
 <li>有序集合（ZSET）：ZADD/ ZRANGE</li>
-<li><p>HyperLogLog（集合基数统计）:PFADD/ PFCOUNT/ PFMERGE</p>
-</li>
-<li><p>发布订阅</p>
-<ul>
+<li>HyperLogLog（集合基数统计）:PFADD/ PFCOUNT/ PFMERGE</li>
+<li>2.8+ 扫描操作：SCAN/ SSCAN/ HSCAN/ ZSCAN</li>
+<li>发布订阅<ul>
 <li>发布订阅模式，两个客户端之间通过SUBSCRIBE/ PULISH交换消息</li>
 <li>命令：PUBLISH/ SUBSCRIBE/ PUBSUB</li>
 </ul>
 </li>
-<li><p>事务</p>
-<ul>
+<li>事务<ul>
 <li>从开始到执行会进入以下步骤：开始事务—进入队列—执行事务</li>
 <li>事务可以认为是一个批量执行的脚本，内部命令是原子的，但事务本身并非原子。中间的命令失败不会导致其之前命令回滚，也不会导致其之后命令放弃执行</li>
 <li>命令：<ul>
@@ -476,8 +474,7 @@
 </li>
 </ul>
 </li>
-<li><p>脚本：EVAL script numkeys key [key …] arg [arg …]</p>
-</li>
+<li>脚本：EVAL script numkeys key [key …] arg [arg …]</li>
 <li>备份与恢复<ul>
 <li>备份：<code>SAVE</code>命令存储数据到dump.rdb，<code>CONFIG GET dir</code>查看rdb文件存储位置，将文件备份</li>
 <li>恢复：只需将备份文件 (dump.rdb) 移动到 redis 安装目录并启动服务即可</li>
@@ -485,7 +482,81 @@
 </li>
 <li>性能测试：<code>redis-benchmark -n 10000  -q</code></li>
 </ul>
-
+<h3 id="keys-和-SCAN"><a href="#keys-和-SCAN" class="headerlink" title="keys 和 SCAN"></a>keys 和 SCAN</h3><ul>
+<li>keys {pattern} 获取所有符合pattern 的key<ul>
+<li>没有offset和limit参数，会返回所有的key</li>
+<li>复杂度O(n)， 当n较大时导致redis服务卡顿</li>
+<li>由于redis是单线程的，会阻塞redis后续的命令</li>
+</ul>
+</li>
+<li>scan {cursor} [MATCH pattern] [COUNT count]<ul>
+<li>复杂度虽然也是 O(n)，但是它是通过游标分步进行的，不会阻塞线程;</li>
+<li>提供 count 参数，可以控制每次返回结果的最大条数，count 只是对增量式迭代命令的一种提示(hint)，返回的结果可多可少;</li>
+<li>同 keys 一样，它也提供模式匹配功能;</li>
+<li>服务器不需要为游标保存状态，游标的唯一状态就是 scan 返回给客户端的游标整数;</li>
+<li>返回的结果可能会有重复，需要<strong>客户端去重复</strong>，这点非常重要;</li>
+<li>遍历的过程中如果有数据修改，改动后的数据能不能遍历到是不确定的;</li>
+<li>单次返回的结果是空的并不意味着遍历结束，而要看返回的游标值是否为零</li>
+</ul>
+</li>
+</ul>
+<h3 id="一些规范"><a href="#一些规范" class="headerlink" title="一些规范"></a>一些规范</h3><blockquote>
+<p>参考<a href="https://mp.weixin.qq.com/s/E2ZPXTE7lXfHFH2bMRnj0g" target="_blank" rel="noopener">推送</a></p>
+</blockquote>
+<ul>
+<li><p>Key 名称设计：</p>
+<ul>
+<li><p>在尽量保持可读性的前提下，缩短key的长度</p>
+<p><code>user:{uid}:friends:messages:{mid} 简化为 u:{uid}:fr:m:{mid}。</code></p>
+</li>
+</ul>
+</li>
+<li><p>value 设计：</p>
+<ul>
+<li>拒绝bigkey，string类型控制在10KB以内，hash、list、set、zset元素个数不要超过5000。</li>
+<li>如果你观察到 Redis 的内存大起大落，这极有可能是因为大 key 导致的，这时候你就需要定位出具体是哪个 key，<code>redis-cli --bigkeys -i 0.1 # 每隔100条scan就会休眠0.1s</code>命令可以用来找到。</li>
+<li>非字符串的bigkey，不要使用del删除，使用hscan、sscan、zscan方式渐进式删除，同时要注意防止bigkey过期时间自动删除问题(例如一个200万的zset设置1小时过期，会触发del操作，造成阻塞，而且该操作不会不出现在慢查询中(latency可查))，查找方法和删除方法</li>
+<li>选择适合的数据类型</li>
+</ul>
+</li>
+<li><p>建议使用expire设置过期时间(条件允许可以打散过期时间，防止集中过期)，不过期的数据重点关注idletime。</p>
+</li>
+<li><p>避免一些在n比较大时的O(n)操作，禁用一些危险命令，可在conf文件中使用<code>rename-command flushdb flushddbb</code>命令对危险命令进行重命名</p>
+</li>
+<li><p>使用如原生的<code>mget</code> <code>mset</code>或非原生的<code>pipline</code>这种批量命令来提高效率，</p>
+</li>
+<li><p>不建议过多使用事务功能</p>
+</li>
+<li><p>避免多个应用使用一个redis实例，不想干业务拆分，公共数据做服务化</p>
+</li>
+<li><p>根据自身业务类型，选好maxmemory-policy(最大内存淘汰策略)，设置好过期时间。</p>
+<p>默认策略是volatile-lru，即超过最大内存后，在过期键中使用lru算法进行key的剔除，保证不过期数据不被删除，但是可能会出现OOM问题。</p>
+<p><strong>其他策略如下</strong>：</p>
+<ul>
+<li>allkeys-lru：根据LRU算法删除键，不管数据有没有设置超时属性，直到腾出足够空间为止。</li>
+<li>allkeys-random：随机删除所有键，直到腾出足够空间为止。</li>
+<li>volatile-random:随机删除过期键，直到腾出足够空间为止。</li>
+<li>volatile-ttl：根据键值对象的ttl属性，删除最近将要过期数据。如果没有，回退到noeviction策略。</li>
+<li>noeviction：不会剔除任何数据，拒绝所有写入操作并返回客户端错误信息”(error) OOM command not allowed when used memory”，此时Redis只响应读操作。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Jedis下删除bigkeys的一些代码示例"><a href="#Jedis下删除bigkeys的一些代码示例" class="headerlink" title="Jedis下删除bigkeys的一些代码示例"></a>Jedis下删除bigkeys的一些代码示例</h3><ul>
+<li>Hash删除: hscan + hdel</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delBigHash</span><span class="params">(String host, <span class="keyword">int</span> port, String password, String bigHashKey)</span> </span>&#123;</span><br><span class="line">    Jedis jedis = <span class="keyword">new</span> Jedis(host, port);</span><br><span class="line">    <span class="keyword">if</span> (password != <span class="keyword">null</span> &amp;&amp; !<span class="string">""</span>.equals(password)) &#123;</span><br><span class="line">        jedis.auth(password);</span><br><span class="line">    &#125;</span><br><span class="line">    ScanParams scanParams = <span class="keyword">new</span> ScanParams().count(<span class="number">100</span>);</span><br><span class="line">    String cursor = <span class="string">"0"</span>;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        ScanResult&lt;Entry&lt;String, String&gt;&gt; scanResult = jedis.hscan(bigHashKey, cursor, scanParams);</span><br><span class="line">        List&lt;Entry&lt;String, String&gt;&gt; entryList = scanResult.getResult();</span><br><span class="line">        <span class="keyword">if</span> (entryList != <span class="keyword">null</span> &amp;&amp; !entryList.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">for</span> (Entry&lt;String, String&gt; entry : entryList) &#123;</span><br><span class="line">                jedis.hdel(bigHashKey, entry.getKey());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cursor = scanResult.getStringCursor();</span><br><span class="line">    &#125; <span class="keyword">while</span> (!<span class="string">"0"</span>.equals(cursor));</span><br><span class="line"></span><br><span class="line">    <span class="comment">//删除bigkey</span></span><br><span class="line">    jedis.del(bigHashKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>List删除: ltrim</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delBigList</span><span class="params">(String host, <span class="keyword">int</span> port, String password, String bigListKey)</span> </span>&#123;</span><br><span class="line">    Jedis jedis = <span class="keyword">new</span> Jedis(host, port);</span><br><span class="line">    <span class="keyword">if</span> (password != <span class="keyword">null</span> &amp;&amp; !<span class="string">""</span>.equals(password)) &#123;</span><br><span class="line">        jedis.auth(password);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">long</span> llen = jedis.llen(bigListKey);</span><br><span class="line">    <span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">while</span> (counter &lt; llen) &#123;</span><br><span class="line">        <span class="comment">//每次从左侧截掉100个</span></span><br><span class="line">        jedis.ltrim(bigListKey, left, llen);</span><br><span class="line">        counter += left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//最终删除key</span></span><br><span class="line">    jedis.del(bigListKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Set删除: sscan + srem</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delBigSet</span><span class="params">(String host, <span class="keyword">int</span> port, String password, String bigSetKey)</span> </span>&#123;</span><br><span class="line">    Jedis jedis = <span class="keyword">new</span> Jedis(host, port);</span><br><span class="line">    <span class="keyword">if</span> (password != <span class="keyword">null</span> &amp;&amp; !<span class="string">""</span>.equals(password)) &#123;</span><br><span class="line">        jedis.auth(password);</span><br><span class="line">    &#125;</span><br><span class="line">    ScanParams scanParams = <span class="keyword">new</span> ScanParams().count(<span class="number">100</span>);</span><br><span class="line">    String cursor = <span class="string">"0"</span>;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        ScanResult&lt;String&gt; scanResult = jedis.sscan(bigSetKey, cursor, scanParams);</span><br><span class="line">        List&lt;String&gt; memberList = scanResult.getResult();</span><br><span class="line">        <span class="keyword">if</span> (memberList != <span class="keyword">null</span> &amp;&amp; !memberList.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">for</span> (String member : memberList) &#123;</span><br><span class="line">                jedis.srem(bigSetKey, member);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cursor = scanResult.getStringCursor();</span><br><span class="line">    &#125; <span class="keyword">while</span> (!<span class="string">"0"</span>.equals(cursor));</span><br><span class="line"></span><br><span class="line">    <span class="comment">//删除bigkey</span></span><br><span class="line">    jedis.del(bigSetKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>SortedSet删除: zscan + zrem</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delBigZset</span><span class="params">(String host, <span class="keyword">int</span> port, String password, String bigZsetKey)</span> </span>&#123;</span><br><span class="line">    Jedis jedis = <span class="keyword">new</span> Jedis(host, port);</span><br><span class="line">    <span class="keyword">if</span> (password != <span class="keyword">null</span> &amp;&amp; !<span class="string">""</span>.equals(password)) &#123;</span><br><span class="line">        jedis.auth(password);</span><br><span class="line">    &#125;</span><br><span class="line">    ScanParams scanParams = <span class="keyword">new</span> ScanParams().count(<span class="number">100</span>);</span><br><span class="line">    String cursor = <span class="string">"0"</span>;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        ScanResult&lt;Tuple&gt; scanResult = jedis.zscan(bigZsetKey, cursor, scanParams);</span><br><span class="line">        List&lt;Tuple&gt; tupleList = scanResult.getResult();</span><br><span class="line">        <span class="keyword">if</span> (tupleList != <span class="keyword">null</span> &amp;&amp; !tupleList.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">for</span> (Tuple tuple : tupleList) &#123;</span><br><span class="line">                jedis.zrem(bigZsetKey, tuple.getElement());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cursor = scanResult.getStringCursor();</span><br><span class="line">    &#125; <span class="keyword">while</span> (!<span class="string">"0"</span>.equals(cursor));</span><br><span class="line"></span><br><span class="line">    <span class="comment">//删除bigkey</span></span><br><span class="line">    jedis.del(bigZsetKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -703,7 +774,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis知识点汇总"><span class="nav-number">1.</span> <span class="nav-text">Redis知识点汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.0.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对比memcached"><span class="nav-number">1.0.2.</span> <span class="nav-text">对比memcached</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优势"><span class="nav-number">1.0.3.</span> <span class="nav-text">优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作"><span class="nav-number">1.0.4.</span> <span class="nav-text">操作</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis知识点汇总"><span class="nav-number">1.</span> <span class="nav-text">Redis知识点汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.0.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对比memcached"><span class="nav-number">1.0.2.</span> <span class="nav-text">对比memcached</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优势"><span class="nav-number">1.0.3.</span> <span class="nav-text">优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作"><span class="nav-number">1.0.4.</span> <span class="nav-text">操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#keys-和-SCAN"><span class="nav-number">1.0.5.</span> <span class="nav-text">keys 和 SCAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些规范"><span class="nav-number">1.0.6.</span> <span class="nav-text">一些规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jedis下删除bigkeys的一些代码示例"><span class="nav-number">1.0.7.</span> <span class="nav-text">Jedis下删除bigkeys的一些代码示例</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -737,7 +808,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">7.1k</span>
+    <span title="Site words total count">8.4k</span>
   
 </div>
 
