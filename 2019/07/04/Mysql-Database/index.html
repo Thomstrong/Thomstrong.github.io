@@ -134,18 +134,18 @@
 
 
 
-<meta name="description" content="Memcached知识点概念Memcached是一个免费开源的，高性能的，具有分布式对象的缓存系统，它可以用来保存一些经常存取的对象或数据，保存的数据像一张巨大的HASH表，该表以Key-value对的方式存在内存中。 流程 检查客户端请求是否在memcached中  若有则直接返回  若无则从数据库查询后返回，并存储到memcached中  数据库更新需要同时更新memcached，保证一致性">
+<meta name="description" content="关系型数据库——MySQL部分概念  存储过程 个人感觉很像是用SQL语句封装出的函数   一些预编译的SQL语句，执行效率较高 在一定程度上保障数据安全  视图视图是一种虚拟的表，具有和物理表相同的功能。可以对视图进行增，改，查，操作，试图通常是有一个表或者多个表的行或列的子集。对视图的修改不影响基本表。它使得我们获取数据更容易，相比多表查询。  只暴露部分字段给访问者，所以就建一个虚表，就">
 <meta name="keywords" content="技术">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Memcached 知识点">
-<meta property="og:url" content="https://thomstrong.github.io/2019/06/20/Memcached/index.html">
+<meta property="og:title" content="Mysql数据库">
+<meta property="og:url" content="https://thomstrong.github.io/2019/07/04/Mysql-Database/index.html">
 <meta property="og:site_name" content="Thomstrong&#39;s Blog">
-<meta property="og:description" content="Memcached知识点概念Memcached是一个免费开源的，高性能的，具有分布式对象的缓存系统，它可以用来保存一些经常存取的对象或数据，保存的数据像一张巨大的HASH表，该表以Key-value对的方式存在内存中。 流程 检查客户端请求是否在memcached中  若有则直接返回  若无则从数据库查询后返回，并存储到memcached中  数据库更新需要同时更新memcached，保证一致性">
+<meta property="og:description" content="关系型数据库——MySQL部分概念  存储过程 个人感觉很像是用SQL语句封装出的函数   一些预编译的SQL语句，执行效率较高 在一定程度上保障数据安全  视图视图是一种虚拟的表，具有和物理表相同的功能。可以对视图进行增，改，查，操作，试图通常是有一个表或者多个表的行或列的子集。对视图的修改不影响基本表。它使得我们获取数据更容易，相比多表查询。  只暴露部分字段给访问者，所以就建一个虚表，就">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-03T07:33:05.584Z">
+<meta property="og:updated_time" content="2019-07-05T08:00:39.548Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Memcached 知识点">
-<meta name="twitter:description" content="Memcached知识点概念Memcached是一个免费开源的，高性能的，具有分布式对象的缓存系统，它可以用来保存一些经常存取的对象或数据，保存的数据像一张巨大的HASH表，该表以Key-value对的方式存在内存中。 流程 检查客户端请求是否在memcached中  若有则直接返回  若无则从数据库查询后返回，并存储到memcached中  数据库更新需要同时更新memcached，保证一致性">
+<meta name="twitter:title" content="Mysql数据库">
+<meta name="twitter:description" content="关系型数据库——MySQL部分概念  存储过程 个人感觉很像是用SQL语句封装出的函数   一些预编译的SQL语句，执行效率较高 在一定程度上保障数据安全  视图视图是一种虚拟的表，具有和物理表相同的功能。可以对视图进行增，改，查，操作，试图通常是有一个表或者多个表的行或列的子集。对视图的修改不影响基本表。它使得我们获取数据更容易，相比多表查询。  只暴露部分字段给访问者，所以就建一个虚表，就">
 
 
 
@@ -175,13 +175,13 @@
 
 
 
-  <link rel="canonical" href="https://thomstrong.github.io/2019/06/20/Memcached/">
+  <link rel="canonical" href="https://thomstrong.github.io/2019/07/04/Mysql-Database/">
 
 
 
 
 
-  <title>Memcached 知识点 | Thomstrong's Blog</title>
+  <title>Mysql数据库 | Thomstrong's Blog</title>
   
 
 
@@ -317,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://thomstrong.github.io/2019/06/20/Memcached/">
+    <link itemprop="mainEntityOfPage" href="https://thomstrong.github.io/2019/07/04/Mysql-Database/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Thomstrong">
@@ -334,7 +334,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Memcached 知识点</h2>
+          <h2 class="post-title" itemprop="name headline">Mysql数据库</h2>
         
 
         <div class="post-meta">
@@ -346,8 +346,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-20T15:30:29+08:00">
-                2019-06-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-04T23:23:24+08:00">
+                2019-07-04
               </time>
             
 
@@ -362,8 +362,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-07-03T15:33:05+08:00">
-                2019-07-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-07-05T16:00:39+08:00">
+                2019-07-05
               </time>
             
           </span>
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,138
+                  1,987
                 </span>
               
 
@@ -406,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  7
                 </span>
               
             </div>
@@ -427,52 +427,98 @@
       
 
       
-        <script src="/assets/js/APlayer.min.js"> </script><h1 id="Memcached知识点"><a href="#Memcached知识点" class="headerlink" title="Memcached知识点"></a>Memcached知识点</h1><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>Memcached是一个免费开源的，高性能的，具有分布式对象的缓存系统，它可以用来保存一些经常存取的对象或数据，保存的数据像一张巨大的<strong>HASH表</strong>，该表以Key-value对的方式存在<strong>内存</strong>中。</p>
-<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ul>
-<li><p>检查客户端请求是否在memcached中</p>
-</li>
-<li><p>若有则直接返回</p>
-</li>
-<li><p>若无则从数据库查询后返回，并存储到memcached中</p>
-</li>
-<li><p>数据库更新需要同时更新memcached，保证一致性</p>
-</li>
-<li><p>memcached内存用完后会使用LRU策略加上到期失效策略，首先替换到期失效数据，之后替换最近未使用过的数据</p>
-<blockquote>
-<p>缓存置换算法（页面置换算法）FIFO/ LFU/ LRU</p>
-<ol>
-<li>FIFO 先进先出，最先进入缓存的最先替换掉</li>
-<li>LFU 最近最少使用，替换掉最近一段时间使用次数最少的数据</li>
-<li>LRU 最近最久未使用使用，替换掉最近一段时间没使用过的，以最近一次使用时间为基准，替换最远的数据空间</li>
-</ol>
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote>
+<p>关系型数据库——MySQL部分概念</p>
 </blockquote>
-</li>
-</ul>
-<h3 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h3><ul>
-<li><p>协议简单：基于文本行的协议，直接通过telnet在memcached服务器上可进行存取数据操作</p>
-<blockquote>
-<p>Telnet 远程连接服务，作用于tcp/ip协议的应用层</p>
+<h3 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h3><blockquote>
+<p>个人感觉很像是用SQL语句封装出的函数</p>
 </blockquote>
-</li>
-<li><p>基于libevent事件处理：libevent是一套利用C开发的程序库，由事件驱动，跨平台，支持并发编程</p>
-</li>
-<li>内置的内存管理方式：所有数据存于内存，LRU算法替换，数据易失</li>
-<li>分布式：分布式取决于memcache客户端，memcached服务器之间互不通信，数据独立存储</li>
+<ul>
+<li>一些预编译的SQL语句，执行效率较高</li>
+<li>在一定程度上保障数据安全</li>
 </ul>
-<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><blockquote>
-<p>服务启动方法<code>/usr/local/memcached/bin/memcached –p 11211 –d –u root –P /tmp/memcached.pid</code></p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">telnet 127.0.0.1 11211 # 远程连接memcached</span><br><span class="line">stats items # 获取所有items的序号，例如items:29:hits_to_warm</span><br><span class="line">stats cachedump 29 0 # 获取编号29的item的key，返回如:1:/api/courses/tags/?；0表示返回所有slab中的item；若指定返回1个则使用stats cachedump 29 1</span><br><span class="line"></span><br><span class="line">get :1:/api/courses/tags/? # 获取key对应的值，多个键空格分割</span><br><span class="line"></span><br><span class="line">set cai 0 900 9 # 设置/更新key为cai的值为caicaicai，过期时间为900ms，以下输入的数据占9字节</span><br><span class="line">caicaicai # 存储成功返回STORED，失败返回ERROR</span><br><span class="line"></span><br><span class="line">add cai 0 900 9 # 设置key为cai的值为caicaicai，过期时间为900ms，以下输入的数据占9字节</span><br><span class="line">caicaicai # 存储成功返回STORED，失败或key存在返回NOT_STORED</span><br><span class="line"></span><br><span class="line"><span class="meta"> #</span><span class="bash"> replace 用于直接替换</span></span><br><span class="line"><span class="meta"> #</span><span class="bash"> append 用于直接在key对应的数据后面追加数据</span></span><br><span class="line"><span class="meta"> #</span><span class="bash"> prepend 用于直接在key对应的数据前面追加数据</span></span><br><span class="line"> cas cai 0 900 3 14 # 14为gets获取到的token，CAS 通过先检查token后再设置/更新值，避免数据不一致</span><br><span class="line"> aaa # 成功返回STORED；保存错误/语法错误返回ERROR；EXISTS说明token过期/不合法；NOT_FOUND该key不存在</span><br><span class="line"></span><br><span class="line"> gets cai # 返回带有token的value</span><br><span class="line"></span><br><span class="line">incr key increment_value # 自增key对应的value，必须是32位无符号整数</span><br><span class="line">decr key increment_value # 自减key对应的value，必须是32位无符号整数</span><br><span class="line"></span><br><span class="line">stats # 输出统计信息</span><br></pre></td></tr></table></figure>
-<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><ul>
-<li>内存分配：Slab allocation机制分配和管理，先按照预定的大小，将分配的内存分割成特定长度的内存块chunck，然后再把相同的内存块分成组slab，根据值的大小去匹配slab大小，找就近的slab存放</li>
-<li>缓存策略：失效策略 + LRU；不会监控存入的key/value是否过期，而是获取key时去查看记录的时间戳，检查key/value是否过期</li>
-<li>分布式算法：memcached本身不存在分布式，而是客户端进行分布式选择memcached服务器进行分布式存储，因此只考虑服务器选择算法<ul>
-<li>余数算法：求得key的整数散列值，然后根据服务器台数求的余数进行服务器选择；但是服务器的增减都会导致缓存失效</li>
-<li>散列算法：首先将服务器散列值映射到0～2^32^编号的圆上，然后找到从key的散列值开始的第一个圆点作为目标服务器；当从中间插入服务器时，只有第一个服务器逆时针算的第一个服务器会受影响；减少服务器时，只有所减少服务器的逆时针方向第一个服务器之间的数据会受影响</li>
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>视图是一种虚拟的表，具有和物理表相同的功能。可以对视图进行增，改，查，操作，试图通常是有一个表或者多个表的行或列的子集。对视图的修改不影响基本表。它使得我们获取数据更容易，相比多表查询。</p>
+<ul>
+<li>只暴露部分字段给访问者，所以就建一个虚表，就是视图。</li>
+<li>查询的数据来源于不同的表，而查询者希望以统一的方式查询，这样也可以建立一个视图，把多个表查询结果联合起来，查询者只需要直接从视图中获取数据，不必考虑数据来源于不同表所带来的差异</li>
+</ul>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><ul>
+<li>是对数据库表中一个或多个列的值进行排序的结构，帮助提高数据访问速度的数据库对象</li>
+<li>索引加快了检索速度，但是降低了插入、删除、更新等维护任务的速度，大部分的更新操作同时需要更新索引</li>
+<li>索引可以避免全表扫描，多数查询可仅扫描少量索引页及数据页</li>
+<li>对于非聚集索引，有些查询甚至可以不访问数据页</li>
+<li>聚集索引可以避免数据插入操作集中于表的最后一个数据页</li>
+<li>某些情况下索引还可以避免排序操作</li>
+</ul>
+<h4 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h4><ul>
+<li>一条索引记录中包含的基本信息包括：键值（即你定义索引时指定的所有字段的值）+逻辑指针（指向数据页或者另一索引页）</li>
+<li>当为空表创建索引时，数据库系统将分配一个索引页，在插入前保持空状态；当有数据插入时加入一行索引记录；当根结点满时，进行分裂：<ul>
+<li>创建两个儿子节点</li>
+<li>将当前根结点近似分为两半，分别写入儿子节点</li>
+<li>将根结点加上指针指向新的两个儿子节点</li>
+</ul>
+</li>
+<li>数据被删除导致索引中只包含一条索引记录时，该记录可能会被移至临近的索引页中，索引合并</li>
+</ul>
+<h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><ul>
+<li>聚集索引：索引的逻辑顺序和数据的物理存储顺序相同<ul>
+<li>应用场景：列经常被分组排序/搜索范围数据/主键列/外键列/仅有小数目的不同值</li>
+<li>每个表中只能有一个聚集索引</li>
+</ul>
+</li>
+<li>非聚集索引：索引的逻辑顺序和数据的物理存储顺序不同<ul>
+<li>应用场景：列经常被分组排序/频繁更新列/主键列/外键列/大数目的不同值</li>
+</ul>
+</li>
+<li>区别<ul>
+<li>聚集索引是一种稀疏索引，数据页上一级的索引页存储的是页指针，而不是行指针。而对于非聚集索引，则是密集索引，在数据页的上一级索引页它为每一个数据行存储一条索引记录。</li>
+<li>聚集索引的叶子结点是数据节点，非聚集索引的叶子结点并非数据结点</li>
 </ul>
 </li>
 </ul>
-<h3 id="可视化工具"><a href="#可视化工具" class="headerlink" title="可视化工具"></a>可视化工具</h3><p><a href="https://github.com/junstor/memadmin" target="_blank" rel="noopener">Memadmin</a></p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><ul>
+<li>主键并非都是聚合索引，使用了聚合索引的主键查询速度更快</li>
+<li>建立适当的聚合索引，才能更好的提高查询的效率</li>
+<li>一个复合索引包含A,B,C,D四列，则A为“引导列”；复合索引的引导列应该是查询最频繁的列</li>
+<li>索引有助于提高检索性能，但过多或不当的索引也会导致系统低效。因为用户在表中每加进一个索引，数据库就要做更多的工作。过多的索引甚至会导致索引碎片。所以说，我们要建立一个“适当”的索引体系，特别是对聚合索引的创建，更应精益求精，才能使数据库性能更好的发挥</li>
+<li>索引通常查询数据比全表扫描要快，但需要空间来存储，也需要定期维护。不必要的索引反而会使查询反应时间变慢.使用索引查询不一定能提高查询性能</li>
+</ul>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><ul>
+<li>并发控制的基本单位</li>
+<li>一个操作序列，要么都执行，要么都不执行，结束时能保持数据一致性</li>
+<li>定义事务的三条语句<ul>
+<li>BEGIN TRANSACTION </li>
+<li>COMMIT </li>
+<li>ROLLBACK</li>
+</ul>
+</li>
+<li>用户在事务（transaction）内可以声明（declare）被称为保存点（savepoint）的标记。保存点将一个大事务划分为较小的片断。</li>
+</ul>
+<h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h3><ul>
+<li>触发器是一中特殊的存储过程，主要是通过事件来触发而被执行的。</li>
+<li>它可以强化约束，来维护数据的完整性和一致性，可以跟踪数据库内的操作从而不允许未经许可的更新和变化。</li>
+<li>可以联级运算。如，某表上的触发器上包含对另一个表的数据操作，而该操作又会导致该表触发器被触发。</li>
+<li>一个数据表可以有多个触发器，但一个触发器只能对应一个表</li>
+</ul>
+<h3 id="drop、delete与truncate"><a href="#drop、delete与truncate" class="headerlink" title="drop、delete与truncate"></a><strong>drop、delete</strong>与truncate</h3><ul>
+<li>不再需要一张表及其数据的时候，用<strong>drop</strong></li>
+<li>想删除部分数据行时候，用<strong>delete</strong>，并且带上where子句</li>
+<li>保留表而删除所有数据的时候用<strong>truncate</strong>, 再插入时自增长id又从1开始 </li>
+<li>当表被<strong>TRUNCATE</strong> 后，这个表和索引所占用的空间会恢复到初始大小，而<strong>DELETE</strong>操作不会减少表或索引所占用的空间。<strong>DROP</strong>语句将表所占用的空间全释放掉。</li>
+<li>速度上，drop &gt; truncate &gt; delete</li>
+<li>delete语句为DML（data maintain Language),这个操作会被放到 rollback segment中,事务提交后才生效。如果有相应的 tigger,执行的时候将被触发。</li>
+<li>truncate、drop是DLL（data define language),操作立即生效，原数据不放到 rollback segment中，<strong>不能回滚</strong>。(如果一不小心把一个表truncate掉，也是可以恢复的，只是不能通过rollback来恢复)</li>
+<li>对于外键（foreignkey ）约束引用的表，不能使用 truncate table，而应使用不带 where 子句的 delete 语句。</li>
+<li>truncatetable不能用于参与了索引视图的表。</li>
+<li>drop语句将删除表的结构所依赖的约束，触发器，索引，依赖于该表的存储过程/函数将保留,但是变为invalid状态。</li>
+</ul>
+<h3 id="超键、候选键、主键、外键"><a href="#超键、候选键、主键、外键" class="headerlink" title="超键、候选键、主键、外键"></a>超键、候选键、主键、外键</h3><ul>
+<li>超键：在关系中能唯一标识元组的属性集称为关系模式的超键。一个属性可以为作为一个超键，多个属性组合在一起也可以作为一个超键。超键包含候选键和主键。</li>
+<li>候选键：是最小超键，即没有冗余元素（对数据唯一性不起作用的列元素）的超键。</li>
+<li>主键：数据库表中对储存数据对象予以唯一和完整标识的数据列或属性的组合。一个数据列只能有一个主键，且主键的取值不能缺失，即不能为空值（Null）。</li>
+<li>外键：在一个表中存在的另一个表的主键称此表的外键。</li>
+</ul>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Student( </span><br><span class="line"><span class="keyword">ID</span> <span class="built_in">NUMBER</span> PRIMARY <span class="keyword">KEY</span>, </span><br><span class="line"><span class="keyword">NAME</span> VARCHAR2(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>);//建表 </span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> view_name <span class="keyword">AS</span> </span><br><span class="line"><span class="keyword">Select</span> * <span class="keyword">FROM</span> Table_name;//建视图 </span><br><span class="line"></span><br><span class="line"><span class="keyword">Create</span> <span class="keyword">UNIQUE</span> <span class="keyword">INDEX</span> index_name <span class="keyword">ON</span> TableName(col_name);//建索引 </span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> tablename &#123;column1,column2,…&#125; <span class="keyword">values</span>(exp1,exp2,…);//插入 </span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> Viewname &#123;column1,column2,…&#125; <span class="keyword">values</span>(exp1,exp2,…);//插入视图实际影响表 </span><br><span class="line"></span><br><span class="line"><span class="keyword">UPDATE</span> tablename <span class="keyword">SET</span> <span class="keyword">name</span>=<span class="string">'zang 3'</span> condition;//更新数据 </span><br><span class="line"></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> Tablename <span class="keyword">WHERE</span> condition;//删除 </span><br><span class="line"></span><br><span class="line"><span class="keyword">GRANT</span> (<span class="keyword">Select</span>,<span class="keyword">delete</span>,…) <span class="keyword">ON</span> (对象) <span class="keyword">TO</span> USER_NAME [<span class="keyword">WITH</span> <span class="keyword">GRANT</span> <span class="keyword">OPTION</span>];//授权 </span><br><span class="line"></span><br><span class="line"><span class="keyword">REVOKE</span> (权限表) <span class="keyword">ON</span>(对象) <span class="keyword">FROM</span> USER_NAME [<span class="keyword">WITH</span> <span class="keyword">REVOKE</span> <span class="keyword">OPTION</span>] //撤权</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -493,7 +539,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://thomstrong.github.io/2019/06/20/Memcached/" title="Memcached 知识点">https://thomstrong.github.io/2019/06/20/Memcached/</a>
+    <a href="https://thomstrong.github.io/2019/07/04/Mysql-Database/" title="Mysql数据库">https://thomstrong.github.io/2019/07/04/Mysql-Database/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -521,8 +567,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/20/Tianchi-DataAnalysis/" rel="next" title="数智教育数据可视化创新大赛总结">
-                <i class="fa fa-chevron-left"></i> 数智教育数据可视化创新大赛总结
+              <a href="/2019/07/04/Docker/" rel="next" title="Docker知识点">
+                <i class="fa fa-chevron-left"></i> Docker知识点
               </a>
             
           </div>
@@ -530,10 +576,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/21/Redis/" rel="prev" title="Redis知识点">
-                Redis知识点 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -691,7 +733,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Memcached知识点"><span class="nav-number">1.</span> <span class="nav-text">Memcached知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.0.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程"><span class="nav-number">1.0.2.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特征"><span class="nav-number">1.0.3.</span> <span class="nav-text">特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动"><span class="nav-number">1.0.4.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法"><span class="nav-number">1.0.5.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可视化工具"><span class="nav-number">1.0.6.</span> <span class="nav-text">可视化工具</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储过程"><span class="nav-number">1.</span> <span class="nav-text">存储过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图"><span class="nav-number">2.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引"><span class="nav-number">3.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#存储"><span class="nav-number">3.1.</span> <span class="nav-text">存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分类"><span class="nav-number">3.2.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">3.3.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务"><span class="nav-number">4.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#触发器"><span class="nav-number">5.</span> <span class="nav-text">触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drop、delete与truncate"><span class="nav-number">6.</span> <span class="nav-text">drop、delete与truncate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#超键、候选键、主键、外键"><span class="nav-number">7.</span> <span class="nav-text">超键、候选键、主键、外键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用命令"><span class="nav-number">8.</span> <span class="nav-text">常用命令</span></a></li></ol></div>
             
 
           </div>
