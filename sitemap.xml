@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://thomstrong.github.io/2019/06/17/2019-Byte-Camp/</loc>
+    
+    <lastmod>2019-07-05T08:19:43.278Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://thomstrong.github.io/2019/07/04/Mysql-Database/</loc>
     
     <lastmod>2019-07-05T08:00:39.548Z</lastmod>
@@ -54,13 +61,6 @@
     <loc>https://thomstrong.github.io/2019/06/20/Tianchi-DataAnalysis/</loc>
     
     <lastmod>2019-07-03T07:29:26.151Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://thomstrong.github.io/2019/06/17/2019-Byte-Camp/</loc>
-    
-    <lastmod>2019-07-03T07:29:20.683Z</lastmod>
     
   </url>
   
