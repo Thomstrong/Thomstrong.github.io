@@ -123,7 +123,7 @@
 
 
 
-  <meta name="keywords" content="技术,">
+  <meta name="keywords" content="缓存,">
 
 
 
@@ -135,7 +135,7 @@
 
 
 <meta name="description" content="Redis知识点汇总概念 C 语言写成的，开源的 key-value 数据库 和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set 使用score排序)和hash（哈希类型） 这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。 与">
-<meta name="keywords" content="技术">
+<meta name="keywords" content="缓存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis知识点">
 <meta property="og:url" content="https://thomstrong.github.io/2019/06/21/Redis/index.html">
@@ -143,7 +143,7 @@
 <meta property="og:description" content="Redis知识点汇总概念 C 语言写成的，开源的 key-value 数据库 和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set 使用score排序)和hash（哈希类型） 这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。 与">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://thomstrong.github.io/images/redis_vs_memcached.jpg">
-<meta property="og:updated_time" content="2019-07-03T12:28:00.622Z">
+<meta property="og:updated_time" content="2019-07-15T03:01:18.697Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis知识点">
 <meta name="twitter:description" content="Redis知识点汇总概念 C 语言写成的，开源的 key-value 数据库 和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set 使用score排序)和hash（哈希类型） 这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。 与">
@@ -257,6 +257,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
@@ -364,12 +374,34 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-07-03T20:28:00+08:00">
-                2019-07-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-07-15T11:01:18+08:00">
+                2019-07-15
               </time>
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -557,6 +589,7 @@
 <li>SortedSet删除: zscan + zrem</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delBigZset</span><span class="params">(String host, <span class="keyword">int</span> port, String password, String bigZsetKey)</span> </span>&#123;</span><br><span class="line">    Jedis jedis = <span class="keyword">new</span> Jedis(host, port);</span><br><span class="line">    <span class="keyword">if</span> (password != <span class="keyword">null</span> &amp;&amp; !<span class="string">""</span>.equals(password)) &#123;</span><br><span class="line">        jedis.auth(password);</span><br><span class="line">    &#125;</span><br><span class="line">    ScanParams scanParams = <span class="keyword">new</span> ScanParams().count(<span class="number">100</span>);</span><br><span class="line">    String cursor = <span class="string">"0"</span>;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        ScanResult&lt;Tuple&gt; scanResult = jedis.zscan(bigZsetKey, cursor, scanParams);</span><br><span class="line">        List&lt;Tuple&gt; tupleList = scanResult.getResult();</span><br><span class="line">        <span class="keyword">if</span> (tupleList != <span class="keyword">null</span> &amp;&amp; !tupleList.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">for</span> (Tuple tuple : tupleList) &#123;</span><br><span class="line">                jedis.zrem(bigZsetKey, tuple.getElement());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cursor = scanResult.getStringCursor();</span><br><span class="line">    &#125; <span class="keyword">while</span> (!<span class="string">"0"</span>.equals(cursor));</span><br><span class="line"></span><br><span class="line">    <span class="comment">//删除bigkey</span></span><br><span class="line">    jedis.del(bigZsetKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -591,7 +624,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/技术/" rel="tag"># 技术</a>
+            <a href="/tags/缓存/" rel="tag"># 缓存</a>
           
         </div>
       
@@ -710,12 +743,21 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
             
 
             
@@ -723,7 +765,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -808,7 +850,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">17.8k</span>
+    <span title="Site words total count">20.9k</span>
   
 </div>
 
