@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://thomstrong.github.io/2019/07/23/first-golang/</loc>
+    <lastmod>2019-09-26</lastmod>
+  </url>  <url>
     <loc>https://thomstrong.github.io/2019/09/26/recent-work/</loc>
     <lastmod>2019-09-25</lastmod>
   </url>  <url>
@@ -9,9 +12,6 @@
   </url>  <url>
     <loc>https://thomstrong.github.io/2019/08/31/Byte-Camp-Over/</loc>
     <lastmod>2019-08-31</lastmod>
-  </url>  <url>
-    <loc>https://thomstrong.github.io/2019/07/23/first-golang/</loc>
-    <lastmod>2019-07-28</lastmod>
   </url>  <url>
     <loc>https://thomstrong.github.io/2019/07/15/first-java/</loc>
     <lastmod>2019-07-23</lastmod>
