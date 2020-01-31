@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://thomstrong.github.io/2019/07/10/sort-algorithm/</loc>
+    <lastmod>2020-01-31</lastmod>
+  </url>  <url>
+    <loc>https://thomstrong.github.io/2019/12/12/learn-go-geektime/</loc>
+    <lastmod>2020-01-28</lastmod>
+  </url>  <url>
     <loc>https://thomstrong.github.io/2019/07/23/first-golang/</loc>
-    <lastmod>2019-12-04</lastmod>
+    <lastmod>2019-12-09</lastmod>
   </url>  <url>
     <loc>https://thomstrong.github.io/2019/09/28/go-module/</loc>
     <lastmod>2019-10-09</lastmod>
@@ -20,9 +26,6 @@
     <lastmod>2019-07-23</lastmod>
   </url>  <url>
     <loc>https://thomstrong.github.io/2019/07/12/yuanfudao/</loc>
-    <lastmod>2019-07-15</lastmod>
-  </url>  <url>
-    <loc>https://thomstrong.github.io/2019/07/10/sort-algorithm/</loc>
     <lastmod>2019-07-15</lastmod>
   </url>  <url>
     <loc>https://thomstrong.github.io/2019/07/07/Operation-System/</loc>

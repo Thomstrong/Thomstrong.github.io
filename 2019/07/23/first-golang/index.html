@@ -123,7 +123,7 @@
 
 
 
-  <meta name="keywords" content="Go语言,">
+  <meta name="keywords" content="Golang,">
 
 
 
@@ -135,14 +135,14 @@
 
 
 <meta name="description" content="学习自菜鸟教程/编码自Go指南/更全的教程  简介分类 静态强类型、编译型、并发型  特色 简洁、快速、安全 并行、有趣、开源 内存管理、数组安全、编译迅速  用途 搭载 Web 服务器 存储集群 巨型中央服务器的系统  写代码一个例子12345678package main // 定义包名，main包表示一个可独立执行的程序，每个Go应用都包含一个名为main的包import &quot;fmt&quot; /">
-<meta name="keywords" content="Go语言">
+<meta name="keywords" content="Golang">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Go 语言基础学习">
 <meta property="og:url" content="https://thomstrong.github.io/2019/07/23/first-golang/index.html">
 <meta property="og:site_name" content="Thomstrong&#39;s Blog">
 <meta property="og:description" content="学习自菜鸟教程/编码自Go指南/更全的教程  简介分类 静态强类型、编译型、并发型  特色 简洁、快速、安全 并行、有趣、开源 内存管理、数组安全、编译迅速  用途 搭载 Web 服务器 存储集群 巨型中央服务器的系统  写代码一个例子12345678package main // 定义包名，main包表示一个可独立执行的程序，每个Go应用都包含一个名为main的包import &quot;fmt&quot; /">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-04T15:50:12.143Z">
+<meta property="og:updated_time" content="2019-12-09T16:28:40.527Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Go 语言基础学习">
 <meta name="twitter:description" content="学习自菜鸟教程/编码自Go指南/更全的教程  简介分类 静态强类型、编译型、并发型  特色 简洁、快速、安全 并行、有趣、开源 内存管理、数组安全、编译迅速  用途 搭载 Web 服务器 存储集群 巨型中央服务器的系统  写代码一个例子12345678package main // 定义包名，main包表示一个可独立执行的程序，每个Go应用都包含一个名为main的包import &quot;fmt&quot; /">
@@ -372,12 +372,34 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-04T23:50:12+08:00">
-                2019-12-04
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-10T00:28:40+08:00">
+                2019-12-10
               </time>
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -400,7 +422,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,885
+                  4,947
                 </span>
               
 
@@ -462,24 +484,40 @@
 </blockquote>
 <ul>
 <li>基本类型：<code>int</code>、<code>bool</code>、<code>float32</code>、<code>float64</code>、<code>string</code>(字符串的字节使用 UTF-8 编码标识 Unicode 文本)</li>
-<li>衍生类型<ul>
-<li>指针类型（Pointer）</li>
-<li>数组类型</li>
-<li>结构化类型(struct)</li>
-<li>Channel 类型</li>
-<li>函数类型</li>
-<li>切片类型</li>
-<li>接口类型（interface）</li>
-<li>Map 类型</li>
+<li><p>衍生类型</p>
+<ul>
+<li><p>指针类型（Pointer）</p>
+</li>
+<li><p>数组类型</p>
+<ul>
+<li>比较</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">slice1 := []<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;</span><br><span class="line">slice2 := []<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">slice3 := []<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;</span><br><span class="line">slice4 := []<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(slice1 == slice2) <span class="comment">// 编译错误，长度不相等，无法比较</span></span><br><span class="line">fmt.Println(slice1 == slice3) <span class="comment">// true</span></span><br><span class="line">fmt.Println(slice1 == slice4) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
-<li><p>单变量声明方法</p>
+</ul>
 <ul>
+<li><p>结构化类型(struct)</p>
+</li>
+<li><p>Channel 类型</p>
+</li>
+<li><p>函数类型</p>
+</li>
+<li><p>切片类型</p>
+</li>
+<li><p>接口类型（interface）</p>
+</li>
+<li><p>Map 类型</p>
+<ul>
+<li>单变量声明方法</li>
+</ul>
+</li>
 <li><code>var agePtr *int</code> 没有初始化则默认为零值</li>
 <li><code>var d = true</code> 赋初值省略变脸类型</li>
 <li><code>f := &quot;Runoob&quot;</code> 省略<code>var</code>和变量类型，只能在函数中出现，且只能用于声明</li>
 </ul>
-</li>
+<ul>
 <li><p>多变量声明</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x, y <span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> (  <span class="comment">// 这种因式分解关键字的写法一般用于声明全局变量</span></span><br><span class="line">    a <span class="keyword">int</span></span><br><span class="line">    b <span class="keyword">bool</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 </li>
@@ -496,7 +534,7 @@
 <li>算数运算<code>+ - * / % ++ --</code></li>
 <li>关系运算<code>&gt; &lt; == != &gt;= &lt;=</code></li>
 <li>逻辑运算<code>&amp;&amp; || !</code></li>
-<li>位运算<code>&amp; | ^ &gt;&gt; &lt;&lt;</code></li>
+<li>位运算<code>&amp; | ^ &gt;&gt; &lt;&lt; &amp;^(按位清零)</code></li>
 <li>赋值运算<code>=</code>(以及运算后赋值<code>+=</code>等等)</li>
 <li>其他运算<code>&amp; *</code></li>
 </ul>
@@ -808,7 +846,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Go语言/" rel="tag"># Go语言</a>
+            <a href="/tags/Golang/" rel="tag"># Golang</a>
           
         </div>
       
@@ -927,7 +965,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -949,7 +987,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1020,7 +1058,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -1034,7 +1072,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">34.4k</span>
+    <span title="Site words total count">35.2k</span>
   
 </div>
 

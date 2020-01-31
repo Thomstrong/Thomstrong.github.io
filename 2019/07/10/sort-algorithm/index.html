@@ -153,7 +153,7 @@
 <meta property="og:image" content="https://thomstrong.github.io/images/count_sort.gif">
 <meta property="og:image" content="https://thomstrong.github.io/images/bucket_sort.gif">
 <meta property="og:image" content="https://thomstrong.github.io/images/base_sort.gif">
-<meta property="og:updated_time" content="2019-07-15T03:02:03.511Z">
+<meta property="og:updated_time" content="2020-01-31T15:48:36.089Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序算法">
 <meta name="twitter:description" content="参考博文 / 图片来自微信推送文章  一些概念 稳定性：假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即在原序列中，r[i] == r[j]，且r[i]在r[j]之前，而在排序后的序列中，r[i]仍在r[j]之前，则称这种排序算法是稳定的；否则称为不稳定的 时间复杂度：排序过程中对单个数据的访问总次数 空间复杂度：排序过程中需要辅助的存储空间">
@@ -384,8 +384,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-07-15T11:02:03+08:00">
-                2019-07-15
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-31T23:48:36+08:00">
+                2020-01-31
               </time>
             
           </span>
@@ -434,7 +434,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,559
+                  1,809
                 </span>
               
 
@@ -450,7 +450,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  8
                 </span>
               
             </div>
@@ -537,7 +537,7 @@
 <p><img src="/images/heap_sort.gif" alt="堆排序"></p>
 </li>
 <li><p>代码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># todo 一时todo一时爽，一直todo一直爽</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// golang</span></span><br><span class="line"><span class="comment">// 堆插入，生成大根堆结构</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">HeapInsert</span><span class="params">(nums []<span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">1</span>; i &lt; <span class="built_in">len</span>(nums); i++ &#123;</span><br><span class="line">		childIndex := i</span><br><span class="line">		parentIndex := (childIndex - <span class="number">1</span>) &gt;&gt; <span class="number">1</span></span><br><span class="line">		<span class="keyword">for</span> childIndex &gt; <span class="number">0</span> &amp;&amp; nums[parentIndex] &lt; nums[childIndex] &#123; <span class="comment">// O(logN)</span></span><br><span class="line">			nums[parentIndex], nums[childIndex] = nums[childIndex], nums[parentIndex]</span><br><span class="line">			childIndex = parentIndex</span><br><span class="line">			parentIndex = (childIndex - <span class="number">1</span>) &gt;&gt; <span class="number">1</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 堆调整，将大根冒泡</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">HeapAdjust</span><span class="params">(nums []<span class="keyword">int</span>, to <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> to == <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	cur := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		leftChildI := cur&lt;&lt;<span class="number">1</span> + <span class="number">1</span></span><br><span class="line">		<span class="keyword">if</span> leftChildI &gt; to &#123; <span class="comment">// nums[to] is the max num</span></span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">		rightChildI := leftChildI + <span class="number">1</span></span><br><span class="line">		tobeChildI := leftChildI</span><br><span class="line">		<span class="keyword">if</span> rightChildI &lt; to &amp;&amp; nums[rightChildI] &gt; nums[leftChildI] &#123;</span><br><span class="line">			tobeChildI = rightChildI</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> nums[cur] &lt; nums[tobeChildI] &#123;</span><br><span class="line">			nums[cur], nums[tobeChildI] = nums[tobeChildI], nums[cur]</span><br><span class="line">			cur = tobeChildI</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">break</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 堆排序</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">HeapSort</span><span class="params">(nums []<span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	HeapInsert(nums)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="built_in">len</span>(nums) - <span class="number">1</span>; i &gt; <span class="number">0</span>; i-- &#123;</span><br><span class="line">		nums[<span class="number">0</span>], nums[i] = nums[i], nums[<span class="number">0</span>]</span><br><span class="line">		HeapAdjust(nums, i<span class="number">-1</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="交换排序"><a href="#交换排序" class="headerlink" title="交换排序"></a>交换排序</h3><h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h4><ul>
@@ -571,7 +571,7 @@
 <p><img src="/images/quick_sort.gif" alt="快速排序"></p>
 </li>
 <li><p>代码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span><span class="params">(nums)</span>:</span></span><br><span class="line">    sort(nums, <span class="number">0</span>, len(nums) - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sort</span><span class="params">(nums，startIndex，endIndex)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> endIndex &lt;= startIndex:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    pivotIndex = partition(nums, startIndex, endIndex)</span><br><span class="line">    sort(nums, startIndex, pivotIndex<span class="number">-1</span>)</span><br><span class="line">    sort(nums, pivotIndex + <span class="number">1</span>, endIndex)</span><br><span class="line"></span><br><span class="line">def partition(nums, int startIndex, int endIndex) &#123;</span><br><span class="line">    pivot = nums[startIndex] <span class="comment">#取基准值</span></span><br><span class="line">    mark = startIndex <span class="comment"># Mark初始化为起始下标</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(startIndex + <span class="number">1</span>, endIndex + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> nums[i] &lt; pivot:</span><br><span class="line">            <span class="comment"># 小于基准值 则mark+1，并交换位置。</span></span><br><span class="line">            mark += <span class="number">1</span></span><br><span class="line">            nums[mark], nums[i] = nums[i], nums[mark]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 基准值与mark对应元素调换位置</span></span><br><span class="line">    arr[startIndex] = arr[mark]</span><br><span class="line">    arr[mark] = pivot</span><br><span class="line">    <span class="keyword">return</span> mark</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 划分，将数组划分为大于基准值，等于基准值，小于基准值三个部分</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">partition</span><span class="params">(nums []<span class="keyword">int</span>, from, to <span class="keyword">int</span>)</span> <span class="params">(midl, midr <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	left := from - <span class="number">1</span></span><br><span class="line">	right := to</span><br><span class="line">	cur := from</span><br><span class="line">	<span class="keyword">for</span> cur &lt; right &#123;</span><br><span class="line">		<span class="keyword">if</span> nums[cur] &lt; nums[to] &#123;</span><br><span class="line">			nums[cur], nums[left+<span class="number">1</span>] = nums[left+<span class="number">1</span>], nums[cur]</span><br><span class="line">			left += <span class="number">1</span></span><br><span class="line">			cur += <span class="number">1</span></span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> nums[cur] &gt; nums[to] &#123;</span><br><span class="line">			nums[cur], nums[right<span class="number">-1</span>] = nums[right<span class="number">-1</span>], nums[cur]</span><br><span class="line">			right -= <span class="number">1</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			cur += <span class="number">1</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	nums[to], nums[right] = nums[right], nums[to]</span><br><span class="line">	right += <span class="number">1</span></span><br><span class="line">	<span class="keyword">return</span> left + <span class="number">1</span>, right - <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 随机基准值快排</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">QuickSort</span><span class="params">(nums []<span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	rand.Seed(time.Now().UnixNano())</span><br><span class="line">	pivot := rand.Int63n(<span class="keyword">int64</span>(<span class="built_in">len</span>(nums)))</span><br><span class="line">	nums[pivot], nums[<span class="built_in">len</span>(nums)<span class="number">-1</span>] = nums[<span class="built_in">len</span>(nums)<span class="number">-1</span>], nums[pivot]</span><br><span class="line">	quickSort(nums, <span class="number">0</span>, <span class="built_in">len</span>(nums)<span class="number">-1</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 快排递归结构</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">quickSort</span><span class="params">(nums []<span class="keyword">int</span>, from, to <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> from &gt;= to &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	midLeft, midRight := partition(nums, from, to)</span><br><span class="line">	quickSort(nums, from, midLeft<span class="number">-1</span>)</span><br><span class="line">	quickSort(nums, midRight+<span class="number">1</span>, to)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><ul>
@@ -782,7 +782,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -804,7 +804,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -875,7 +875,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -889,7 +889,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">34.4k</span>
+    <span title="Site words total count">35.2k</span>
   
 </div>
 
