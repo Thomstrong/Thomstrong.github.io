@@ -123,7 +123,7 @@
 
 
 
-  <meta name="keywords" content="缓存,">
+  <meta name="keywords" content="Golang,">
 
 
 
@@ -134,18 +134,18 @@
 
 
 
-<meta name="description" content="Memcached知识点概念Memcached是一个免费开源的，高性能的，具有分布式对象的缓存系统，它可以用来保存一些经常存取的对象或数据，保存的数据像一张巨大的HASH表，该表以Key-value对的方式存在内存中。 流程 检查客户端请求是否在memcached中  若有则直接返回  若无则从数据库查询后返回，并存储到memcached中  数据库更新需要同时更新memcached，保证一致性">
-<meta name="keywords" content="缓存">
+<meta name="description" content="并发与并行并发 ≠ 并行并发并发指的是在某个时刻，程序可以同时执行多个独立的程序逻辑，若干逻辑可同时执行，但不意味着同时处理。并且在一个CPU情况下，即使有若干并发，也只能等待一个CPU资源。例如，可以一边听讲一边刷微博，但是某个时间片内，你的一个大脑只能处理一件事情。 并行并行指的是你可以在同一时间处理多个任务，并非编程语言可以带来的特性，需要硬件的支持。例如，可以通过扩展一个电脑，你来听课，">
+<meta name="keywords" content="Golang">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Memcached 知识点">
-<meta property="og:url" content="https://thomstrong.github.io/2019/06/20/Memcached/index.html">
+<meta property="og:title" content="浅尝 Golang gorountine &amp; GC">
+<meta property="og:url" content="https://thomstrong.github.io/2020/02/12/go-gc-and-so-on/index.html">
 <meta property="og:site_name" content="Thomstrong&#39;s Blog">
-<meta property="og:description" content="Memcached知识点概念Memcached是一个免费开源的，高性能的，具有分布式对象的缓存系统，它可以用来保存一些经常存取的对象或数据，保存的数据像一张巨大的HASH表，该表以Key-value对的方式存在内存中。 流程 检查客户端请求是否在memcached中  若有则直接返回  若无则从数据库查询后返回，并存储到memcached中  数据库更新需要同时更新memcached，保证一致性">
+<meta property="og:description" content="并发与并行并发 ≠ 并行并发并发指的是在某个时刻，程序可以同时执行多个独立的程序逻辑，若干逻辑可同时执行，但不意味着同时处理。并且在一个CPU情况下，即使有若干并发，也只能等待一个CPU资源。例如，可以一边听讲一边刷微博，但是某个时间片内，你的一个大脑只能处理一件事情。 并行并行指的是你可以在同一时间处理多个任务，并非编程语言可以带来的特性，需要硬件的支持。例如，可以通过扩展一个电脑，你来听课，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-15T03:01:26.121Z">
+<meta property="og:updated_time" content="2020-02-13T16:53:34.781Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Memcached 知识点">
-<meta name="twitter:description" content="Memcached知识点概念Memcached是一个免费开源的，高性能的，具有分布式对象的缓存系统，它可以用来保存一些经常存取的对象或数据，保存的数据像一张巨大的HASH表，该表以Key-value对的方式存在内存中。 流程 检查客户端请求是否在memcached中  若有则直接返回  若无则从数据库查询后返回，并存储到memcached中  数据库更新需要同时更新memcached，保证一致性">
+<meta name="twitter:title" content="浅尝 Golang gorountine &amp; GC">
+<meta name="twitter:description" content="并发与并行并发 ≠ 并行并发并发指的是在某个时刻，程序可以同时执行多个独立的程序逻辑，若干逻辑可同时执行，但不意味着同时处理。并且在一个CPU情况下，即使有若干并发，也只能等待一个CPU资源。例如，可以一边听讲一边刷微博，但是某个时间片内，你的一个大脑只能处理一件事情。 并行并行指的是你可以在同一时间处理多个任务，并非编程语言可以带来的特性，需要硬件的支持。例如，可以通过扩展一个电脑，你来听课，">
 
 
 
@@ -175,13 +175,13 @@
 
 
 
-  <link rel="canonical" href="https://thomstrong.github.io/2019/06/20/Memcached/">
+  <link rel="canonical" href="https://thomstrong.github.io/2020/02/12/go-gc-and-so-on/">
 
 
 
 
 
-  <title>Memcached 知识点 | Thomstrong's Blog</title>
+  <title>浅尝 Golang gorountine & GC | Thomstrong's Blog</title>
   
 
 
@@ -327,7 +327,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://thomstrong.github.io/2019/06/20/Memcached/">
+    <link itemprop="mainEntityOfPage" href="https://thomstrong.github.io/2020/02/12/go-gc-and-so-on/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Thomstrong">
@@ -344,7 +344,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Memcached 知识点</h2>
+          <h2 class="post-title" itemprop="name headline">浅尝 Golang gorountine & GC</h2>
         
 
         <div class="post-meta">
@@ -356,8 +356,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-20T15:30:29+08:00">
-                2019-06-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-12T23:53:02+08:00">
+                2020-02-12
               </time>
             
 
@@ -372,8 +372,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-07-15T11:01:26+08:00">
-                2019-07-15
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-14T00:53:34+08:00">
+                2020-02-14
               </time>
             
           </span>
@@ -422,7 +422,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,138
+                  1,831
                 </span>
               
 
@@ -438,7 +438,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  7
                 </span>
               
             </div>
@@ -459,52 +459,100 @@
       
 
       
-        <script src="/assets/js/APlayer.min.js"> </script><h1 id="Memcached知识点"><a href="#Memcached知识点" class="headerlink" title="Memcached知识点"></a>Memcached知识点</h1><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>Memcached是一个免费开源的，高性能的，具有分布式对象的缓存系统，它可以用来保存一些经常存取的对象或数据，保存的数据像一张巨大的<strong>HASH表</strong>，该表以Key-value对的方式存在<strong>内存</strong>中。</p>
-<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ul>
-<li><p>检查客户端请求是否在memcached中</p>
-</li>
-<li><p>若有则直接返回</p>
-</li>
-<li><p>若无则从数据库查询后返回，并存储到memcached中</p>
-</li>
-<li><p>数据库更新需要同时更新memcached，保证一致性</p>
-</li>
-<li><p>memcached内存用完后会使用LRU策略加上到期失效策略，首先替换到期失效数据，之后替换最近未使用过的数据</p>
-<blockquote>
-<p>缓存置换算法（页面置换算法）FIFO/ LFU/ LRU</p>
-<ol>
-<li>FIFO 先进先出，最先进入缓存的最先替换掉</li>
-<li>LFU 最近最少使用，替换掉最近一段时间使用次数最少的数据</li>
-<li>LRU 最近最久未使用使用，替换掉最近一段时间没使用过的，以最近一次使用时间为基准，替换最远的数据空间</li>
-</ol>
+        <script src="/assets/js/APlayer.min.js"> </script><h2 id="并发与并行"><a href="#并发与并行" class="headerlink" title="并发与并行"></a>并发与并行</h2><h3 id="并发-≠-并行"><a href="#并发-≠-并行" class="headerlink" title="并发 ≠ 并行"></a>并发 ≠ 并行</h3><h4 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h4><p>并发指的是在某个时刻，程序可以同时执行多个独立的程序逻辑，若干逻辑可同时执行，但不意味着<strong>同时处理</strong>。并且在一个CPU情况下，即使有若干并发，也只能等待一个CPU资源。例如，可以一边听讲一边刷微博，但是某个时间片内，你的一个大脑只能处理一件事情。</p>
+<h4 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h4><p>并行指的是你可以在同一时间<strong>处理</strong>多个任务，并非编程语言可以带来的特性，需要硬件的支持。例如，可以通过扩展一个电脑，你来听课，而电脑一边爬取微博信息。</p>
+<h4 id="关联"><a href="#关联" class="headerlink" title="关联"></a>关联</h4><p>并发是并行的前提，通过并发的构造方法，使得一个程序可以达到（趋近于）并行化。</p>
+<h3 id="CPU密集-amp-I-O密集"><a href="#CPU密集-amp-I-O密集" class="headerlink" title="CPU密集 &amp; I/O密集"></a>CPU密集 &amp; I/O密集</h3><h4 id="CPU密集"><a href="#CPU密集" class="headerlink" title="CPU密集"></a>CPU密集</h4><blockquote>
+<p>想起今天面试脑子里那糟糕的例子</p>
 </blockquote>
-</li>
-</ul>
-<h3 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h3><ul>
-<li><p>协议简单：基于文本行的协议，直接通过telnet在memcached服务器上可进行存取数据操作</p>
-<blockquote>
-<p>Telnet 远程连接服务，作用于tcp/ip协议的应用层</p>
+<p>对于CPU密集的计算过程，单核场景下的并发并不能达到理想效果，反而可能因为过度的上下文切换和线程的创建/销毁，使得性能进一步变差</p>
+<h4 id="I-O密集型"><a href="#I-O密集型" class="headerlink" title="I/O密集型"></a>I/O密集型</h4><p>对于I/O密集型的计算过程，单核场景下的并发，可以使得某个线程在I/O等待的时候继续处理其他线程的事情，从而提高性能。</p>
+<h2 id="Goroutine"><a href="#Goroutine" class="headerlink" title="Goroutine"></a>Goroutine</h2><h3 id="多进程与多线程"><a href="#多进程与多线程" class="headerlink" title="多进程与多线程"></a>多进程与多线程</h3><h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><p>多进程模型相对简单，但是存在资源开销大和进程间通信的问题。</p>
+<h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><p>多线程模型相对复杂，会有死锁，线程安全，模型复杂等问题，但却因为资源开销及易于管理等优点适用于对于性能要求较高的应用。</p>
+<h4 id="Goroutine-1"><a href="#Goroutine-1" class="headerlink" title="Goroutine"></a>Goroutine</h4><p>Golang采用的是两级线程模型，但它对系统线程（内核级线程）进行了封装，暴露了一个轻量级的协程goroutine（用户级线程）供用户使用，而用户级线程到内核级线程的调度由golang的runtime负责，调度逻辑对外透明。优势在于上下文切换在完全用户态进行，无需像线程一样频繁在用户态与内核态之间切换，节约了资源消耗。</p>
+<h2 id="GPM-模型"><a href="#GPM-模型" class="headerlink" title="GPM 模型"></a>GPM 模型</h2><blockquote>
+<p>参考<a href="https://www.cnblogs.com/zkweb/p/7815600.html" target="_blank" rel="noopener">博客</a></p>
 </blockquote>
-</li>
-<li><p>基于libevent事件处理：libevent是一套利用C开发的程序库，由事件驱动，跨平台，支持并发编程</p>
-</li>
-<li>内置的内存管理方式：所有数据存于内存，LRU算法替换，数据易失</li>
-<li>分布式：分布式取决于memcache客户端，memcached服务器之间互不通信，数据独立存储</li>
+<h3 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h3><h4 id="G"><a href="#G" class="headerlink" title="G"></a>G</h4><ul>
+<li>G即Goroutine，就是我们所说的协程，为用户级线程，通过<code>sched</code>变量保存上下文信息。</li>
+<li>goroutine的创建、休眠、恢复、停止都受到go runtime的管理</li>
+<li>goroutine执行异步操作时进入休眠状态，操作完成后恢复，无需占用系统线程</li>
+<li>goroutine创建或恢复时会添加到运行队列，等待M取出运行</li>
 </ul>
-<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><blockquote>
-<p>服务启动方法<code>/usr/local/memcached/bin/memcached –p 11211 –d –u root –P /tmp/memcached.pid</code></p>
+<h4 id="M"><a href="#M" class="headerlink" title="M"></a>M</h4><ul>
+<li>M即Machine，对内核级线程的封装，相当于系统线程，数量等于真实CPU数</li>
+<li>M可以执行两种代码<ul>
+<li>go代码，即goroutine，需要一个P</li>
+<li>原生代码，即系统调用之类的代码，无需P</li>
+</ul>
+</li>
+<li>若G需要执行无法避免阻塞的原生代码，M会释放持有的P并进入阻塞状态，P将被其他M获取使用</li>
+</ul>
+<h4 id="P"><a href="#P" class="headerlink" title="P"></a>P</h4><ul>
+<li>P即Processor，即G和M的调度对象，用来调度G和M之间的关联关系，可通过GOMAXPROCS设置，默认为核心数</li>
+<li>P可以认为是go代码控制并行度的机制，对于M拥有P后才可以执行G</li>
+<li>在P中的数据是锁自由(lock free，不使用锁的情况下使得线程之间的变量同步)的，读写这些数据的效率会非常高</li>
+</ul>
+<h3 id="三者关系"><a href="#三者关系" class="headerlink" title="三者关系"></a>三者关系</h3><ul>
+<li>每个P对象拥有一个LRQ（Local Run Queue），为分配的G保存在GRQ（Global Run Queue）中，等待分配给一个P的LRQ</li>
+<li>通过P的连接，对M和G解耦，即G希望使用M必须绑定一个P，通过多个M和多个P对应，实现并行处理多个G</li>
+</ul>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><h4 id="G的状态"><a href="#G的状态" class="headerlink" title="G的状态"></a>G的状态</h4><ul>
+<li><p>空闲：刚创建，仍未初始化</p>
+</li>
+<li><p>待运行：在运行队列中，等待被M取出运行</p>
+</li>
+<li><p>运行中：M正在运行这个G，这个M拥有一个P</p>
+</li>
+<li>系统调用中：M正在运行G发起的系统调用，此时不占有P</li>
+<li>等待中：正在等待某些条件完成，此时不在运行也不在运行队列中</li>
+<li>已中止：G未被使用，可能已经执行完毕，在freelist中等待下次复用</li>
+<li>栈复制中：G正在获取一个新的栈空间，把原来的内容复制过去，用于防治GC扫描</li>
+</ul>
+<h4 id="M的动作"><a href="#M的动作" class="headerlink" title="M的动作"></a>M的动作</h4><blockquote>
+<p>M无明确的状态标记，可认为有如下过程</p>
 </blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">telnet 127.0.0.1 11211 # 远程连接memcached</span><br><span class="line">stats items # 获取所有items的序号，例如items:29:hits_to_warm</span><br><span class="line">stats cachedump 29 0 # 获取编号29的item的key，返回如:1:/api/courses/tags/?；0表示返回所有slab中的item；若指定返回1个则使用stats cachedump 29 1</span><br><span class="line"></span><br><span class="line">get :1:/api/courses/tags/? # 获取key对应的值，多个键空格分割</span><br><span class="line"></span><br><span class="line">set cai 0 900 9 # 设置/更新key为cai的值为caicaicai，过期时间为900ms，以下输入的数据占9字节</span><br><span class="line">caicaicai # 存储成功返回STORED，失败返回ERROR</span><br><span class="line"></span><br><span class="line">add cai 0 900 9 # 设置key为cai的值为caicaicai，过期时间为900ms，以下输入的数据占9字节</span><br><span class="line">caicaicai # 存储成功返回STORED，失败或key存在返回NOT_STORED</span><br><span class="line"></span><br><span class="line"><span class="meta"> #</span> replace 用于直接替换</span><br><span class="line"><span class="meta"> #</span> append 用于直接在key对应的数据后面追加数据</span><br><span class="line"><span class="meta"> #</span> prepend 用于直接在key对应的数据前面追加数据</span><br><span class="line"> cas cai 0 900 3 14 # 14为gets获取到的token，CAS 通过先检查token后再设置/更新值，避免数据不一致</span><br><span class="line"> aaa # 成功返回STORED；保存错误/语法错误返回ERROR；EXISTS说明token过期/不合法；NOT_FOUND该key不存在</span><br><span class="line"></span><br><span class="line"> gets cai # 返回带有token的value</span><br><span class="line"></span><br><span class="line">incr key increment_value # 自增key对应的value，必须是32位无符号整数</span><br><span class="line">decr key increment_value # 自减key对应的value，必须是32位无符号整数</span><br><span class="line"></span><br><span class="line">stats # 输出统计信息</span><br></pre></td></tr></table></figure>
-<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><ul>
-<li>内存分配：Slab allocation机制分配和管理，先按照预定的大小，将分配的内存分割成特定长度的内存块chunck，然后再把相同的内存块分成组slab，根据值的大小去匹配slab大小，找就近的slab存放</li>
-<li>缓存策略：失效策略 + LRU；不会监控存入的key/value是否过期，而是获取key时去查看记录的时间戳，检查key/value是否过期</li>
-<li>分布式算法：memcached本身不存在分布式，而是客户端进行分布式选择memcached服务器进行分布式存储，因此只考虑服务器选择算法<ul>
-<li>余数算法：求得key的整数散列值，然后根据服务器台数求的余数进行服务器选择；但是服务器的增减都会导致缓存失效</li>
-<li>散列算法：首先将服务器散列值映射到0～2^32^编号的圆上，然后找到从key的散列值开始的第一个圆点作为目标服务器；当从中间插入服务器时，只有第一个服务器逆时针算的第一个服务器会受影响；减少服务器时，只有所减少服务器的逆时针方向第一个服务器之间的数据会受影响</li>
+<ul>
+<li>自旋：从获取拥有的P的运行队列中获取G</li>
+<li>执行G：执行G的代码，此时拥有P</li>
+<li>执行原生代码：执行原生代码或阻塞的syscall，此时不拥有P</li>
+<li>休眠：无G可运行时，休眠，加入空闲M链表中</li>
+</ul>
+<h4 id="P的状态"><a href="#P的状态" class="headerlink" title="P的状态"></a>P的状态</h4><ul>
+<li>空闲：M休眠后，若拥有P，P也会加入空闲链表</li>
+<li>运行中：M拥有P后，P的状态会变成运行中</li>
+<li>系统调用中：go调用原生代码，原生代码有反过来调用go代码是，P进入系统调用状态</li>
+<li>GC停止中：当gc stop the world时，P进入此状态</li>
+<li>已中止：当P的数量在运行时改变，数量减少时，多余的P会变为此状态</li>
+</ul>
+<h4 id="本地运行队列-LRQ"><a href="#本地运行队列-LRQ" class="headerlink" title="本地运行队列 LRQ"></a>本地运行队列 LRQ</h4><ul>
+<li><p>本地队列为P的运行队列，G会优先加入本地队列，M获取运行的G时也会优先从拥有的P的本地队列获取</p>
+</li>
+<li><p>环形队列，由256长度数组和两个序号head、tail组成</p>
+</li>
+<li>出入本地队列无需线程锁，当本地队列满时，G会加入全局运行队列</li>
+<li>当M从P的本地运行队列获取G时，发现队列为空，会从其他P中盗取一半G，此为<strong>Work Stealing</strong>机制</li>
+</ul>
+<h4 id="全局运行队列-GRQ"><a href="#全局运行队列-GRQ" class="headerlink" title="全局运行队列 GRQ"></a>全局运行队列 GRQ</h4><ul>
+<li>通过全局变量<code>sched</code>保存，出入队列使用线程锁</li>
+<li>全局队列使用链表和两个指针head、tail组成</li>
+</ul>
+<h4 id="空闲M链表"><a href="#空闲M链表" class="headerlink" title="空闲M链表"></a>空闲M链表</h4><ul>
+<li>发现无待运行的G，M开始休眠，通过全局<code>sched</code>保存空闲M链表</li>
+<li>进入休眠的M会等待一个信号量<code>m.park</code>，获取后会唤醒</li>
+<li>通过如下机制保证入队列的G可以有足够的M运行<ul>
+<li>入队列的G进入待运行状态，若无自旋的M但是有空闲P，就唤醒或新建M</li>
+<li>当M离开自旋状态，准备运行G时，如果当前无自旋的M但是有空闲P，唤醒或新建M，保证下一个G来时大概率会有M资源配合运行</li>
+<li>当M离开自旋状态，并准备休眠时，会在离开自旋状态后检查运行队列，如果有待运行的G则重新进入自旋状态</li>
 </ul>
 </li>
 </ul>
-<h3 id="可视化工具"><a href="#可视化工具" class="headerlink" title="可视化工具"></a>可视化工具</h3><p><a href="https://github.com/junstor/memadmin" target="_blank" rel="noopener">Memadmin</a></p>
+<h4 id="空闲P列表"><a href="#空闲P列表" class="headerlink" title="空闲P列表"></a>空闲P列表</h4><ul>
+<li>空闲P链表通过全局变量<code>sched</code>保存</li>
+<li>当P本地队列中不包含G且盗取不到G时，M会释放P然后进入休眠状态，并将P加到空闲P链表中</li>
+<li>下次G入队时，若发现有空闲P但是没有自旋M时，会唤醒或新建M，M拥有这个P，使得P重新进入运行状态</li>
+</ul>
+<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><p>==&gt; tobe continued</p>
 
       
     </div>
@@ -525,7 +573,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://thomstrong.github.io/2019/06/20/Memcached/" title="Memcached 知识点">https://thomstrong.github.io/2019/06/20/Memcached/</a>
+    <a href="https://thomstrong.github.io/2020/02/12/go-gc-and-so-on/" title="浅尝 Golang gorountine & GC">https://thomstrong.github.io/2020/02/12/go-gc-and-so-on/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -540,7 +588,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/缓存/" rel="tag"># 缓存</a>
+            <a href="/tags/Golang/" rel="tag"># Golang</a>
           
         </div>
       
@@ -553,8 +601,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/20/Tianchi-DataAnalysis/" rel="next" title="数智教育数据可视化创新大赛总结">
-                <i class="fa fa-chevron-left"></i> 数智教育数据可视化创新大赛总结
+              <a href="/2019/12/12/learn-go-geektime/" rel="next" title="极客时间Golang学习笔记">
+                <i class="fa fa-chevron-left"></i> 极客时间Golang学习笔记
               </a>
             
           </div>
@@ -562,10 +610,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/21/Redis/" rel="prev" title="Redis知识点">
-                Redis知识点 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -732,7 +776,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Memcached知识点"><span class="nav-number">1.</span> <span class="nav-text">Memcached知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.0.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程"><span class="nav-number">1.0.2.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特征"><span class="nav-number">1.0.3.</span> <span class="nav-text">特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动"><span class="nav-number">1.0.4.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法"><span class="nav-number">1.0.5.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可视化工具"><span class="nav-number">1.0.6.</span> <span class="nav-text">可视化工具</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发与并行"><span class="nav-number">1.</span> <span class="nav-text">并发与并行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并发-≠-并行"><span class="nav-number">1.1.</span> <span class="nav-text">并发 ≠ 并行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#并发"><span class="nav-number">1.1.1.</span> <span class="nav-text">并发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#并行"><span class="nav-number">1.1.2.</span> <span class="nav-text">并行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关联"><span class="nav-number">1.1.3.</span> <span class="nav-text">关联</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU密集-amp-I-O密集"><span class="nav-number">1.2.</span> <span class="nav-text">CPU密集 &amp; I/O密集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU密集"><span class="nav-number">1.2.1.</span> <span class="nav-text">CPU密集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#I-O密集型"><span class="nav-number">1.2.2.</span> <span class="nav-text">I/O密集型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Goroutine"><span class="nav-number">2.</span> <span class="nav-text">Goroutine</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多进程与多线程"><span class="nav-number">2.1.</span> <span class="nav-text">多进程与多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多进程"><span class="nav-number">2.1.1.</span> <span class="nav-text">多进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多线程"><span class="nav-number">2.1.2.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Goroutine-1"><span class="nav-number">2.1.3.</span> <span class="nav-text">Goroutine</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GPM-模型"><span class="nav-number">3.</span> <span class="nav-text">GPM 模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心概念"><span class="nav-number">3.1.</span> <span class="nav-text">核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#G"><span class="nav-number">3.1.1.</span> <span class="nav-text">G</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#M"><span class="nav-number">3.1.2.</span> <span class="nav-text">M</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P"><span class="nav-number">3.1.3.</span> <span class="nav-text">P</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三者关系"><span class="nav-number">3.2.</span> <span class="nav-text">三者关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构"><span class="nav-number">3.3.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#G的状态"><span class="nav-number">3.3.1.</span> <span class="nav-text">G的状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#M的动作"><span class="nav-number">3.3.2.</span> <span class="nav-text">M的动作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P的状态"><span class="nav-number">3.3.3.</span> <span class="nav-text">P的状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地运行队列-LRQ"><span class="nav-number">3.3.4.</span> <span class="nav-text">本地运行队列 LRQ</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全局运行队列-GRQ"><span class="nav-number">3.3.5.</span> <span class="nav-text">全局运行队列 GRQ</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空闲M链表"><span class="nav-number">3.3.6.</span> <span class="nav-text">空闲M链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空闲P列表"><span class="nav-number">3.3.7.</span> <span class="nav-text">空闲P列表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工作流程"><span class="nav-number">3.4.</span> <span class="nav-text">工作流程</span></a></li></ol></li></ol></div>
             
 
           </div>

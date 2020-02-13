@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://thomstrong.github.io/2019/07/10/sort-algorithm/</loc>
+    <loc>https://thomstrong.github.io/2020/02/12/go-gc-and-so-on/</loc>
     
-    <lastmod>2020-01-31T17:36:20.014Z</lastmod>
+    <lastmod>2020-02-13T16:53:34.781Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://thomstrong.github.io/2019/12/12/learn-go-geektime/</loc>
     
-    <lastmod>2020-01-28T15:02:24.420Z</lastmod>
+    <lastmod>2020-02-04T07:06:24.594Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://thomstrong.github.io/2019/07/10/sort-algorithm/</loc>
+    
+    <lastmod>2020-01-31T17:36:20.014Z</lastmod>
     
   </url>
   
