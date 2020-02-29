@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://thomstrong.github.io/"/>
-  <updated>2020-02-13T16:53:34.781Z</updated>
+  <updated>2020-02-29T07:04:26.637Z</updated>
   <id>https://thomstrong.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Etcd &amp; Raft</title>
+    <link href="https://thomstrong.github.io/2020/02/24/learn-etcd/"/>
+    <id>https://thomstrong.github.io/2020/02/24/learn-etcd/</id>
+    <published>2020-02-24T02:49:59.000Z</published>
+    <updated>2020-02-29T07:04:26.637Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h2 id="Etcd-简介"><a href="#Etcd-简介" class="headerlink" title="Etcd 简介"></a>Etcd 简介</h2><blockquote><p>在笔者看来，Etcd就是一个用<a href="https://github.com/etcd-io/etcd/tree/master/client" target="_blank" rel="noopener">SDK</a>访问的k-v存储。</p></blockquote><p><a href="https://etcd.io/" target="_blank" rel="noopener">官方</a>介绍一句话，A distributed, reliable key-value store for the most critical data of a distributed system，翻译一下就是分布式系统重要的k-v数据用我准没错。</p><p><strong>特性</strong></p><ul><li>接口简单：可通过标准的http工具完成数据读写，使用json作为数据格式</li><li>k-v存储：使用有分级组织目录的方式存储数据，如文件系统一般</li><li>变更监听：可以监听特定的Key / 目录的变更，可对值的更改作出反应</li><li>可靠：可选SSL客户端证书作为身份鉴别</li><li>性能：每个实例可支持10000次/s的写入</li><li>时效性：可选地设置Key的存储超时</li><li>一致性：通过Raft算法保证分布式部署下的数据一致性</li></ul><h2 id="Etcd-应用"><a href="#Etcd-应用" class="headerlink" title="Etcd 应用"></a>Etcd 应用</h2><h3 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h3><p>其高可用、强一致的特性，支持k-v数据的存储，不再赘述</p><h3 id="服务发现"><a href="#服务发现" class="headerlink" title="服务发现"></a>服务发现</h3><p>通过将Etcd作为注册中心，把服务名称与服务可用地址绑定，完成服务的注册和查找。</p><p><strong>作用</strong></p><ol><li>保证分布式场景下，注册中心中服务目录<strong>强一致</strong></li><li>通过Key过期机制，保持与服务间的心跳链接，<strong>监控服务健康状态</strong></li><li>通过Proxy模式使得服务之间相互连接</li></ol><h3 id="分布式场景下的Master选举"><a href="#分布式场景下的Master选举" class="headerlink" title="分布式场景下的Master选举"></a>分布式场景下的Master选举</h3><p>可通过Etcd的事务操作( mini-transactions )完成多个服务器之间的抢主操作，实现Master服务器选举。由于Etcd能够保证强一致，因此，若对于某个key，如master_ip使用事务写，则可以保证所有服务器读取到的master_ip是一致的。而当master发生异常后，又可以通过超时机制，将master_ip淘汰，完成新master选举。</p><h3 id="分布式并发控制"><a href="#分布式并发控制" class="headerlink" title="分布式并发控制"></a>分布式并发控制</h3><p>通过Etcd存储分布式信号量，完成分布式并发控制。同时，可以使用Etcd存储运行周期较长的任务数据，以便在机器故障，且需要导出执行状态时可恢复。</p><h2 id="Etcd-总结"><a href="#Etcd-总结" class="headerlink" title="Etcd 总结"></a>Etcd 总结</h2><h4 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h4><ul><li>强一致性、性能较好、变更监听</li><li>相比于zookeeper使用简单</li></ul><h4 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h4><ul><li>默认存储历史记录有限，因此更适合读多写少的场景，更新频繁会导致数据丢失</li></ul><h2 id="Raft-一致性算法"><a href="#Raft-一致性算法" class="headerlink" title="Raft 一致性算法"></a>Raft 一致性算法</h2><h3 id="什么是一致性"><a href="#什么是一致性" class="headerlink" title="什么是一致性"></a>什么是一致性</h3><h4 id="一致性"><a href="#一致性" class="headerlink" title="一致性"></a>一致性</h4><p>一致性是对于可容错分布式系统必须解决的基础问题，需要多个服务器在对同一个数据的存储上保持一致，即对于集群中任何一台请求某个数据所返回的值都是一样的。经典的一致性算法需要保证只要集群中大多数服务器可用，那么就可以处理请求，也就是说，比如集群中有5台服务器，挂了2台仍可以处理请求。但是如果挂了2台以上，那么就不再处理请求，而绝不会返回错误的结果。</p><h4 id="状态机-amp-Log"><a href="#状态机-amp-Log" class="headerlink" title="状态机 &amp; Log"></a>状态机 &amp; Log</h4><p>一致性算法通常的应用背景是在于复制状态机，同样也是构建一个可容错系统的常见方法。容错系统中，每个服务器有一个记录状态的结构，称为状态机；还有记录操作的log文件。<strong>状态机</strong>是构建容错系统的核心，并且从客户端看来，无论访问哪个服务器，即使集群中有少数服务器已经宕机，同一个请求获得的回复都是一致的。而对于每个状态机，它们都会从各自的log中获取输入命令。因此，一致性算法通常也是保证log的一致性，使得不同服务器之间有同样的操作命令序列，最终也就能实现状态机状态的一致。</p><h3 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h3><h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>可将背景设想为一个数据库服务器集群里面只存储了一个数，所有的请求都是对这个数据的操作。</p><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><h5 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h5><p>对于集群中的服务器有以下三种状态：</p><ul><li>跟随者 Follower：一个任期中除了Leader以外的服务器，也是服务器的初始状态</li><li>候选者 Candidate：任期超时后的Follower</li><li>领导者 Leader：被大多数服务器认可的Candidate，所有来自客户端的请求都需通过打向Leader完成</li></ul><h5 id="记录-Entry"><a href="#记录-Entry" class="headerlink" title="记录 Entry"></a>记录 Entry</h5><p>每个请求所代表的操作会以记录的形式在每个服务器的Log中保存</p><h5 id="插入记录-Append-Entries"><a href="#插入记录-Append-Entries" class="headerlink" title="插入记录 Append Entries"></a>插入记录 Append Entries</h5><p>Leader与Follower之间进行信息交互的数据结构</p><h5 id="心跳-Heart-beat"><a href="#心跳-Heart-beat" class="headerlink" title="心跳 Heart beat"></a>心跳 Heart beat</h5><p>Leader会定时给所有Follower发送Append Entries，维系组织关系，保证所有Follower能感知Leader</p><h5 id="选举-Election"><a href="#选举-Election" class="headerlink" title="选举 Election"></a>选举 Election</h5><p>通过选举，可在集群中选中一个对外交互的Leader服务器</p><h5 id="选举超时-election-timeout"><a href="#选举超时-election-timeout" class="headerlink" title="选举超时 election timeout"></a>选举超时 election timeout</h5><p>每个follower服务器中有一个超时时间，用于等待成为candidate的时机，通常为150～300 ms。</p><h4 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h4><h5 id="Leader-选举"><a href="#Leader-选举" class="headerlink" title="Leader 选举"></a>Leader 选举</h5><ol><li>Follower选举超时后，状态变为Candidate，开启新的任期，准备任选（先给自己投一票…过于真实）</li><li>Candidate发起对集群中其他服务器的投票邀请</li><li>收到邀请的服务器选举超时重置，满足以下条件对Candidate投票：<ul><li>当前任期内未投过票</li><li>Candidate的Log信息和我能够匹配</li></ul></li><li>获取大多数服务器投票后，Candidate变成Leader，否则等待下一轮选举超时，直到最终选出Leader</li><li>选举成功后Leader同步心跳</li></ol><h5 id="日志复制-Log-Replication"><a href="#日志复制-Log-Replication" class="headerlink" title="日志复制 Log Replication"></a>日志复制 Log Replication</h5><p>请求打到Leader上时，发生如下过程，完成一次日志的复制：</p><ol><li>Leader的log中写入一条记录，标记为未提交状态</li><li>下一次心跳时，向所有follower同步未提交的记录</li><li>Leader等到大多数follower响应，Leader将操作记录提交，返回client请求</li><li>下一次心跳时，同步提交的记录，使得所有follow也提交本次操作</li></ol><h5 id="算法流程-1"><a href="#算法流程-1" class="headerlink" title="算法流程"></a>算法流程</h5><p>首先经过Leader选举，在集群中选举出对外交互的Leader。Leader收到操作请求后，完成日志复制，使得集群Log一致。</p><p>发生网络故障导致脑裂时，由于过程中的操作存在“大多数”原则，因此只有大多数的请求会被响应。故障排除后，通过较高任期选举出的Leader心跳，数据就会再度同步，而之前未提交的请求则会被丢弃，集群再次达到一致状态</p><h3 id="Raft-总结"><a href="#Raft-总结" class="headerlink" title="Raft 总结"></a>Raft 总结</h3><h4 id="优势-1"><a href="#优势-1" class="headerlink" title="优势"></a>优势</h4><ul><li>相对于更早的Paxos算法易理解、易实现</li><li>性能较高，只需要大多数Follower同步即可写入</li><li>强调Leader的唯一性，保证了强一致性</li></ul><h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul><li>协议限制了只能有序提交，并且强调集群中只能有一个group</li></ul><h3 id="其他一致性协议"><a href="#其他一致性协议" class="headerlink" title="其他一致性协议"></a>其他一致性协议</h3><p>两阶段提交协议、三阶段提交协议、向量时钟RWN协议、Paxos协议、ZAB 算法、PBFT 算法</p><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>Etcd 官网：<a href="https://etcd.io/" target="_blank" rel="noopener">https://etcd.io/</a></p><p>Etcd repo：<a href="https://github.com/etcd-io/etcd" target="_blank" rel="noopener">https://github.com/etcd-io/etcd</a></p><p>Etcd介绍的博客：<a href="http://blog.itpub.net/69953029/viewspace-2667738/" target="_blank" rel="noopener">http://blog.itpub.net/69953029/viewspace-2667738/</a></p><p>Raft 一致性算法图解：<a href="https://raft.github.io/" target="_blank" rel="noopener">https://raft.github.io/</a></p><p>其他分布式协议：<a href="https://blog.csdn.net/chdhust/article/details/52651741" target="_blank" rel="noopener">https://blog.csdn.net/chdhust/article/details/52651741</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;Etcd-简介&quot;&gt;&lt;a href=&quot;#Etcd-简介&quot; class=&quot;headerlink&quot; title=&quot;Etcd 简介&quot;&gt;&lt;/a&gt;Etcd 简介&lt;/h2&gt;&lt;bl
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="https://thomstrong.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="etcd" scheme="https://thomstrong.github.io/tags/etcd/"/>
+    
+  </entry>
   
   <entry>
     <title>浅尝 Golang gorountine &amp; GC</title>
