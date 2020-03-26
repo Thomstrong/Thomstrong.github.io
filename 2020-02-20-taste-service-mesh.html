@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta name="baidu-site-verification" content="UqlC4pwKIm">
+  <meta name="baidu-site-verification" content="d3U0dGeqGw">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="1C1XSuJ8TgM2O0mcZvsgzEdy0IdRZOJfxDYPyh18U9Q">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.cat.net/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content=",,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一些概念扩展立方对于小规模的开发场景，应用即服务。而随着服务功能的扩展，就需要对服务进行扩展和演进。AKF扩展立方是《THE ART OF SCALABILITY》中描述的一种扩展模型，将应用比作立方体，对x, y, z三个维度进行扩展。  x方向是副本维度，通过复制应用程序进行扩展  优点：方便、常用 缺点：底层数据访问压力大、开发的复杂度没有降低   y方向是功能性解构，通过将应用程序中存在">
+<meta name="keywords" content="技术">
+<meta property="og:type" content="website">
+<meta property="og:title" content="初尝Service Mesh">
+<meta property="og:url" content="https://thomstrong.github.io/2020-02-20-taste-service-mesh.html">
+<meta property="og:site_name" content="Thomstrong&#39;s Blog">
+<meta property="og:description" content="一些概念扩展立方对于小规模的开发场景，应用即服务。而随着服务功能的扩展，就需要对服务进行扩展和演进。AKF扩展立方是《THE ART OF SCALABILITY》中描述的一种扩展模型，将应用比作立方体，对x, y, z三个维度进行扩展。  x方向是副本维度，通过复制应用程序进行扩展  优点：方便、常用 缺点：底层数据访问压力大、开发的复杂度没有降低   y方向是功能性解构，通过将应用程序中存在">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-26T17:32:22.487Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初尝Service Mesh">
+<meta name="twitter:description" content="一些概念扩展立方对于小规模的开发场景，应用即服务。而随着服务功能的扩展，就需要对服务进行扩展和演进。AKF扩展立方是《THE ART OF SCALABILITY》中描述的一种扩展模型，将应用比作立方体，对x, y, z三个维度进行扩展。  x方向是副本维度，通过复制应用程序进行扩展  优点：方便、常用 缺点：底层数据访问压力大、开发的复杂度没有降低   y方向是功能性解构，通过将应用程序中存在">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thomstrong.github.io/2020-02-20-taste-service-mesh.html">
+
+
+
+
+
+  <title>初尝Service Mesh | Thomstrong's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-111723881-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Thomstrong's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+	<h2 class="post-title" itemprop="name headline">初尝Service Mesh</h2>
+
+
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <script src="/assets/js/APlayer.min.js"> </script><h2 id="一些概念"><a href="#一些概念" class="headerlink" title="一些概念"></a>一些概念</h2><h3 id="扩展立方"><a href="#扩展立方" class="headerlink" title="扩展立方"></a>扩展立方</h3><p>对于小规模的开发场景，应用即服务。而随着服务功能的扩展，就需要对服务进行扩展和演进。AKF扩展立方是《<a href="https://microservices.io/articles/scalecube.html" target="_blank" rel="noopener">THE ART OF SCALABILITY</a>》中描述的一种扩展模型，将应用比作立方体，对x, y, z三个维度进行扩展。</p>
+<ul>
+<li><p>x方向是副本维度，通过复制应用程序进行扩展</p>
+<ul>
+<li>优点：方便、常用</li>
+<li>缺点：底层数据访问压力大、开发的复杂度没有降低</li>
+</ul>
+</li>
+<li><p>y方向是功能性解构，通过将应用程序中存在的功能集拆分，将一个或多个功能相近的功能划分为子程序，微服务化即为重要的y方向扩展方式</p>
+<ul>
+<li>动词划分：下单服务、登录服务</li>
+<li>名词划分：普通用户服务、管理员服务</li>
+</ul>
+</li>
+<li>z方向是数据划分，通常用来对数据库进行扩展，如数据分片<ul>
+<li>优点：减少每个服务器的数据存储、减少IO、故障隔离</li>
+<li>缺点：实现复杂、数据划分方案设计复杂、不能解决开发复杂的问题</li>
+</ul>
+</li>
+</ul>
+<h3 id="微服务-Micro-Service"><a href="#微服务-Micro-Service" class="headerlink" title="微服务 Micro-Service"></a>微服务 Micro-Service</h3><p>与微服务相对应的是单体服务。单体服务通过将所有功能整合到一个服务中来实现。而微服务架构，将公用业务抽象成为单个公共服务，使得架构整体变得<strong>分工明确</strong>、<strong>责任清晰</strong>。但是，缺点在于，多个服务间联系复杂，导致<strong>故障排查非常困难</strong>、单个服务故障可能导致<strong>雪崩</strong>。因此，需要配合监控、链路跟踪、日志分析、限流、熔断、服务注册、降级、测试等服务治理手段。</p>
+<h3 id="云原生-Cloud-Native"><a href="#云原生-Cloud-Native" class="headerlink" title="云原生 Cloud Native"></a>云原生 Cloud Native</h3><p>到了2015年Google主导成立了云原生计算基金会（CNCF），起初CNCF对云原生（Cloud Native）的定义包含以下三个方面：</p>
+<ul>
+<li>应用容器化</li>
+<li>面向微服务架构</li>
+<li>应用支持容器的编排调度</li>
+</ul>
+<p>参考：<a href="https://landscape.cncf.io/" target="_blank" rel="noopener">Cloud Native Landscape</a>, CNCF 对于云原生的定义有了重新定位</p>
+<ul>
+<li>云原生技术有利于各组织在公有云、私有云和混合云等新型动态环境中，构建和运行可弹性扩展的应用。云原生的代表技术包括<strong>容器</strong>、<strong>服务网格</strong>、<strong>微服务</strong>、<strong>不可变基础设施</strong>和<strong>声明式API</strong></li>
+<li>这些技术能够<strong>构建容错性好</strong>、<strong>易于管理</strong>和便于观察的<strong>松耦合系统</strong>。结合可靠的自动化手段，云原生技术使工程师能够轻松地对系统作出频繁和可预测的重大变更。</li>
+<li>云原生计算基金会（CNCF）致力于培育和维护一个厂商中立的<strong>开源生态系统</strong>，来推广云原生技术。我们通过将最前沿的模式民主化，让这些创新为大众所用。</li>
+</ul>
+<h3 id="服务网格-Service-Mesh"><a href="#服务网格-Service-Mesh" class="headerlink" title="服务网格 Service Mesh"></a>服务网格 Service Mesh</h3><p>Service Mesh 通常是<strong>一组</strong>轻量级的网络<strong>代理</strong>程序，这些网络代理程序就部署在用户的应用程序旁边，而应用的代码感知不到他们的存在。Service Mesh作为代理程序，通过将微服务治理的代码抽象为一个只用于通信的反向代理，接管应用程序的出入口流量，完成<strong>服务发现</strong>、<strong>服务治理</strong>、<strong>服务安全</strong>等管理工作。在Service Mesh中，负责网络通信的部分叫数据平面(Data Plane)，负责配置管理的部分叫做控制平面(Control Plane)。数据面和控制面组成了Service Mesh的基本架构。</p>
+<h2 id="痛点-amp-需求"><a href="#痛点-amp-需求" class="headerlink" title="痛点 &amp; 需求"></a>痛点 &amp; 需求</h2><h3 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h3><h4 id="多语言"><a href="#多语言" class="headerlink" title="多语言"></a>多语言</h4><p>微服务架构下产生的各个服务，在很大可能上不会使用统一的语言、框架，也就导致了需要基于每种语言开发一套相关的服务治理功能，这其中就产生了巨大的<strong>人力耗费</strong>，并且需要<strong>更高的维护成本</strong>。</p>
+<h4 id="多协议"><a href="#多协议" class="headerlink" title="多协议"></a>多协议</h4><p>对于线上服务，会有诸如HTTP、RPC、MySQL等多种服务存在。对于每种服务，有其对应的协议，每种协议也会存在不同版本之间不兼容的情况。而对于服务间产生的流量，又有相同管理办法的场景存在，如对HTTP服务会有超时控制、对RPC服务也需要超时控制。仅靠服务化框架是很<strong>难解决不同协议流量的统一管理问题</strong>。</p>
+<h4 id="性能限制"><a href="#性能限制" class="headerlink" title="性能限制"></a>性能限制</h4><p>对于一些性能较为平庸的语言，或者开发语言本身不适合做服务治理的情况，会导致开发出的<strong>服务治理部分消耗反而成为服务性能瓶颈</strong>，同时由于性能开销侧面也会带来对<strong>机器成本的消耗</strong>。</p>
+<h4 id="更新推动"><a href="#更新推动" class="headerlink" title="更新推动"></a>更新推动</h4><p>在没有统一管理入口的情况下，某一个版本的治理算法可能在某一个服务上停留很久。若这个治理算法存在bug或者性能极为低下，修改后，由于用户侧可能存在诸多现实问题，<strong>推动用户升级极为困难</strong>。</p>
+<h4 id="收敛治理"><a href="#收敛治理" class="headerlink" title="收敛治理"></a>收敛治理</h4><p>在上述痛点中，都暴露出，对于微服务治理，更希望将治理的核心方法抽离出来，与具体业务独立，而将服务治理作为一种服务对外提供，让用户更专注于自己的业务而只需要对服务治理进行接入即可。</p>
+<h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><blockquote>
+<p>基于上述痛点，对于微服务治理则提出服务网格 Service Mesh 模型，并且对于Service Mesh 提出一些需求目标</p>
+</blockquote>
+<h4 id="语言无关"><a href="#语言无关" class="headerlink" title="语言无关"></a>语言无关</h4><p>将服务治理能力对外开放，提供一套统一的接入方式，只需要服务化框架侧实现一套序列化方法，来实现服务发现等服务治理能力。</p>
+<h4 id="协议无关"><a href="#协议无关" class="headerlink" title="协议无关"></a>协议无关</h4><p>统一一套新的标准，接入方只需要使得协议满足新的标准，即可使用流量代理。</p>
+<h4 id="性能提升"><a href="#性能提升" class="headerlink" title="性能提升"></a>性能提升</h4><p>服务治理的执行逻辑需要使用性能表现较为优秀的语言，例如Istio使用基于C++实现的Envoy作为流量代理，在性能上有极大保障。</p>
+<h4 id="更新方便"><a href="#更新方便" class="headerlink" title="更新方便"></a>更新方便</h4><p>由于服务治理能力已经收敛，可以做到用户接入后，更新对用户无感知。</p>
+<h4 id="能力收敛"><a href="#能力收敛" class="headerlink" title="能力收敛"></a>能力收敛</h4><p>基于上述需求的实现，服务治理能力已经收敛到一个基础服务上，用户只需要按照介入方式接入即可使用一套完整的服务治理功能，无需过多关注治理逻辑，因而将治理和业务进行有效隔离。</p>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><h2 id="常用框架"><a href="#常用框架" class="headerlink" title="常用框架"></a>常用框架</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://jimmysong.io/kubernetes-handbook/cloud-native/cloud-native-definition.html" target="_blank" rel="noopener">https://jimmysong.io/kubernetes-handbook/cloud-native/cloud-native-definition.html</a></p>
+<p><a href="https://microservices.io/articles/scalecube.html" target="_blank" rel="noopener">https://microservices.io/articles/scalecube.html</a></p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Thomstrong">
+            
+              <p class="site-author-name" itemprop="name">Thomstrong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+			<!--my custom code begin-->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+			<script type="text/javascript">
+			  $("#sidebar").hover(function(){
+				$("#mydivshow").velocity('stop').velocity({opacity: 1});
+			  },function(){
+				$("#mydivshow").velocity('stop').velocity({opacity: 0});
+			  });
+			</script>
+			<div id="mydivshow" class="mydivshow">
+			<!--my custom code end-->
+			
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Thomstrong" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:thomstrong@dingtalk.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+        </div>
+		<!--my custom code begin-->
+		</div>
+		<!--my custom code end-->
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一些概念"><span class="nav-number">1.</span> <span class="nav-text">一些概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展立方"><span class="nav-number">1.1.</span> <span class="nav-text">扩展立方</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微服务-Micro-Service"><span class="nav-number">1.2.</span> <span class="nav-text">微服务 Micro-Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#云原生-Cloud-Native"><span class="nav-number">1.3.</span> <span class="nav-text">云原生 Cloud Native</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务网格-Service-Mesh"><span class="nav-number">1.4.</span> <span class="nav-text">服务网格 Service Mesh</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#痛点-amp-需求"><span class="nav-number">2.</span> <span class="nav-text">痛点 &amp; 需求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#痛点"><span class="nav-number">2.1.</span> <span class="nav-text">痛点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多语言"><span class="nav-number">2.1.1.</span> <span class="nav-text">多语言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多协议"><span class="nav-number">2.1.2.</span> <span class="nav-text">多协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#性能限制"><span class="nav-number">2.1.3.</span> <span class="nav-text">性能限制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新推动"><span class="nav-number">2.1.4.</span> <span class="nav-text">更新推动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#收敛治理"><span class="nav-number">2.1.5.</span> <span class="nav-text">收敛治理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需求"><span class="nav-number">2.2.</span> <span class="nav-text">需求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语言无关"><span class="nav-number">2.2.1.</span> <span class="nav-text">语言无关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#协议无关"><span class="nav-number">2.2.2.</span> <span class="nav-text">协议无关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#性能提升"><span class="nav-number">2.2.3.</span> <span class="nav-text">性能提升</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新方便"><span class="nav-number">2.2.4.</span> <span class="nav-text">更新方便</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#能力收敛"><span class="nav-number">2.2.5.</span> <span class="nav-text">能力收敛</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础概念"><span class="nav-number">3.</span> <span class="nav-text">基础概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用框架"><span class="nav-number">4.</span> <span class="nav-text">常用框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Thomstrong</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">43.5k</span>
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/exturl.js?v=5.1.3"></script>
+
+
+  <script src="/js/src/Aplayer-Controler.js"></script>
+<div id="AP-controler"></div>
+<script type="text/javascript">
+var myapc=new APlayer_Controler({
+		APC_dom:$('#AP-controler'),
+		aplayer:ap, //此为绑定的aplayer对象
+		attach_right:false,
+		position:{top:'300px',bottom:''},
+		fixed:true,
+		btn_width:100,
+		btn_height:120,
+		img_src:['http://oty1v077k.bkt.clouddn.com/bukagirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/jumpgirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/pentigirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/%E8%90%8C1.gif'],
+		img_style:{repeat:'no-repeat',position:'center',size:'contain'},
+		ctrls_color:'rgba(173,255,47,0.8)',
+		ctrls_hover_color:'rgba(255,140,0,0.7)',
+		tips_on:true,
+		tips_width:140,
+		tips_height:25,
+		tips_color:'rgba(255,255,255,0.6)',
+		tips_content:{},
+		timeout:30
+	});
+</script>
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+
+
+</body>
+</html>

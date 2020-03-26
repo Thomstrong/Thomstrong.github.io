@@ -134,18 +134,18 @@
 
 
 
-<meta name="description" content="并发与并行并发 ≠ 并行并发并发指的是在某个时刻，程序可以同时执行多个独立的程序逻辑，若干逻辑可同时执行，但不意味着同时处理。并且在一个CPU情况下，即使有若干并发，也只能等待一个CPU资源。例如，可以一边听讲一边刷微博，但是某个时间片内，你的一个大脑只能处理一件事情。 并行并行指的是你可以在同一时间处理多个任务，并非编程语言可以带来的特性，需要硬件的支持。例如，可以通过扩展一个电脑，你来听课，">
+<meta name="description" content="并发的演进单进程单进程时代，一切只能串行。 问题：  one by one  阻塞了怎么办？效率太低  多进程&amp;amp;多线程多进程/多线程解决了阻塞问题，让进程阻塞时空闲的CPU可以很好的利用起来，这样，似乎多个进程是在同时被运行。 问题：  进程间创建、切换、销毁需要占用很长时间，调度大量时间 进程/线程占用更多的内存资源  协程线程分为内核态线程和用户态线程，一个用户态线程必须绑定一个内核">
 <meta name="keywords" content="Golang">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅尝 Golang gorountine &amp; GC">
+<meta property="og:title" content="浅尝 Golang gorountine">
 <meta property="og:url" content="https://thomstrong.github.io/2020/02/12/go-gc-and-so-on/index.html">
 <meta property="og:site_name" content="Thomstrong&#39;s Blog">
-<meta property="og:description" content="并发与并行并发 ≠ 并行并发并发指的是在某个时刻，程序可以同时执行多个独立的程序逻辑，若干逻辑可同时执行，但不意味着同时处理。并且在一个CPU情况下，即使有若干并发，也只能等待一个CPU资源。例如，可以一边听讲一边刷微博，但是某个时间片内，你的一个大脑只能处理一件事情。 并行并行指的是你可以在同一时间处理多个任务，并非编程语言可以带来的特性，需要硬件的支持。例如，可以通过扩展一个电脑，你来听课，">
+<meta property="og:description" content="并发的演进单进程单进程时代，一切只能串行。 问题：  one by one  阻塞了怎么办？效率太低  多进程&amp;amp;多线程多进程/多线程解决了阻塞问题，让进程阻塞时空闲的CPU可以很好的利用起来，这样，似乎多个进程是在同时被运行。 问题：  进程间创建、切换、销毁需要占用很长时间，调度大量时间 进程/线程占用更多的内存资源  协程线程分为内核态线程和用户态线程，一个用户态线程必须绑定一个内核">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-13T16:53:34.781Z">
+<meta property="og:updated_time" content="2020-03-26T17:37:06.502Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅尝 Golang gorountine &amp; GC">
-<meta name="twitter:description" content="并发与并行并发 ≠ 并行并发并发指的是在某个时刻，程序可以同时执行多个独立的程序逻辑，若干逻辑可同时执行，但不意味着同时处理。并且在一个CPU情况下，即使有若干并发，也只能等待一个CPU资源。例如，可以一边听讲一边刷微博，但是某个时间片内，你的一个大脑只能处理一件事情。 并行并行指的是你可以在同一时间处理多个任务，并非编程语言可以带来的特性，需要硬件的支持。例如，可以通过扩展一个电脑，你来听课，">
+<meta name="twitter:title" content="浅尝 Golang gorountine">
+<meta name="twitter:description" content="并发的演进单进程单进程时代，一切只能串行。 问题：  one by one  阻塞了怎么办？效率太低  多进程&amp;amp;多线程多进程/多线程解决了阻塞问题，让进程阻塞时空闲的CPU可以很好的利用起来，这样，似乎多个进程是在同时被运行。 问题：  进程间创建、切换、销毁需要占用很长时间，调度大量时间 进程/线程占用更多的内存资源  协程线程分为内核态线程和用户态线程，一个用户态线程必须绑定一个内核">
 
 
 
@@ -181,7 +181,7 @@
 
 
 
-  <title>浅尝 Golang gorountine & GC | Thomstrong's Blog</title>
+  <title>浅尝 Golang gorountine | Thomstrong's Blog</title>
   
 
 
@@ -344,7 +344,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">浅尝 Golang gorountine & GC</h2>
+          <h2 class="post-title" itemprop="name headline">浅尝 Golang gorountine</h2>
         
 
         <div class="post-meta">
@@ -372,8 +372,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-14T00:53:34+08:00">
-                2020-02-14
+              <time title="更新于" itemprop="dateModified" datetime="2020-03-27T01:37:06+08:00">
+                2020-03-27
               </time>
             
           </span>
@@ -422,7 +422,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,831
+                  3,473
                 </span>
               
 
@@ -438,7 +438,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7
+                  12
                 </span>
               
             </div>
@@ -459,17 +459,57 @@
       
 
       
-        <script src="/assets/js/APlayer.min.js"> </script><h2 id="并发与并行"><a href="#并发与并行" class="headerlink" title="并发与并行"></a>并发与并行</h2><h3 id="并发-≠-并行"><a href="#并发-≠-并行" class="headerlink" title="并发 ≠ 并行"></a>并发 ≠ 并行</h3><h4 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h4><p>并发指的是在某个时刻，程序可以同时执行多个独立的程序逻辑，若干逻辑可同时执行，但不意味着<strong>同时处理</strong>。并且在一个CPU情况下，即使有若干并发，也只能等待一个CPU资源。例如，可以一边听讲一边刷微博，但是某个时间片内，你的一个大脑只能处理一件事情。</p>
-<h4 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h4><p>并行指的是你可以在同一时间<strong>处理</strong>多个任务，并非编程语言可以带来的特性，需要硬件的支持。例如，可以通过扩展一个电脑，你来听课，而电脑一边爬取微博信息。</p>
+        <script src="/assets/js/APlayer.min.js"> </script><h2 id="并发的演进"><a href="#并发的演进" class="headerlink" title="并发的演进"></a>并发的演进</h2><h3 id="单进程"><a href="#单进程" class="headerlink" title="单进程"></a>单进程</h3><p>单进程时代，一切<strong>只能</strong>串行。</p>
+<p><strong>问题：</strong></p>
+<ol>
+<li>one by one </li>
+<li>阻塞了怎么办？<strong>效率太低</strong></li>
+</ol>
+<h3 id="多进程-amp-多线程"><a href="#多进程-amp-多线程" class="headerlink" title="多进程&amp;多线程"></a>多进程&amp;多线程</h3><p>多进程/多线程解决了阻塞问题，让进程阻塞时空闲的CPU可以很好的利用起来，这样，似乎多个进程是在同时被运行。</p>
+<p><strong>问题：</strong></p>
+<ol>
+<li>进程间创建、切换、销毁需要占用很长时间，调度大量时间</li>
+<li>进程/线程占用更多的内存资源</li>
+</ol>
+<h3 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h3><p>线程分为内核态线程和用户态线程，一个用户态线程必须绑定一个内核态线程。这样的用户态线程可以成为协程。多协程中协程与内核线程之间的关系可以是<code>N:1</code>、<code>1:1</code>、<code>N:M</code>。</p>
+<p><strong>优劣：</strong></p>
+<ol>
+<li><code>N:1</code> 线程切换完全在用户态，非常轻量。无法利用硬件多核优势</li>
+<li><code>1:1</code>实现简单，但将协程调度交由CPU实现，过于浪费</li>
+<li><code>N:M</code>既能利用好硬件加速又能避免CPU直接调度浪费，但调度器实现相对复杂。Golang基于此实现GPM模型。</li>
+</ol>
+<h2 id="并发与并行"><a href="#并发与并行" class="headerlink" title="并发与并行"></a>并发与并行</h2><h3 id="并发-≠-并行"><a href="#并发-≠-并行" class="headerlink" title="并发 ≠ 并行"></a>并发 ≠ 并行</h3><h4 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h4><p>并发是在单个CPU核上，线程通过时间片或者出让控制权来实现任务切换，达到同时运行多个任务的目的。任何时刻都只有一个任务被执行，其他任务通过某种算法来排队执行。例如，可以一边听讲一边刷微博，但是某个时间点，你的一个大脑只能处理一件事情；整体时间线上看，任何一个时刻都只有一件事情正在被处理。</p>
+<h4 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h4><p>并行是基于多核CPU场景下可以在同一时间<strong>处理</strong>多个任务，并非编程语言可以带来的特性，需要硬件的支持。例如，可以通过扩展一个电脑，你来听课，而电脑一边爬取微博信息。</p>
 <h4 id="关联"><a href="#关联" class="headerlink" title="关联"></a>关联</h4><p>并发是并行的前提，通过并发的构造方法，使得一个程序可以达到（趋近于）并行化。</p>
-<h3 id="CPU密集-amp-I-O密集"><a href="#CPU密集-amp-I-O密集" class="headerlink" title="CPU密集 &amp; I/O密集"></a>CPU密集 &amp; I/O密集</h3><h4 id="CPU密集"><a href="#CPU密集" class="headerlink" title="CPU密集"></a>CPU密集</h4><blockquote>
-<p>想起今天面试脑子里那糟糕的例子</p>
-</blockquote>
-<p>对于CPU密集的计算过程，单核场景下的并发并不能达到理想效果，反而可能因为过度的上下文切换和线程的创建/销毁，使得性能进一步变差</p>
+<h3 id="CPU密集-amp-I-O密集"><a href="#CPU密集-amp-I-O密集" class="headerlink" title="CPU密集 &amp; I/O密集"></a>CPU密集 &amp; I/O密集</h3><h4 id="CPU密集"><a href="#CPU密集" class="headerlink" title="CPU密集"></a>CPU密集</h4><p>对于CPU密集的计算过程，单核场景下的并发并不能达到理想效果，反而可能因为过度的上下文切换和线程的创建/销毁，使得性能进一步变差</p>
 <h4 id="I-O密集型"><a href="#I-O密集型" class="headerlink" title="I/O密集型"></a>I/O密集型</h4><p>对于I/O密集型的计算过程，单核场景下的并发，可以使得某个线程在I/O等待的时候继续处理其他线程的事情，从而提高性能。</p>
-<h2 id="Goroutine"><a href="#Goroutine" class="headerlink" title="Goroutine"></a>Goroutine</h2><h3 id="多进程与多线程"><a href="#多进程与多线程" class="headerlink" title="多进程与多线程"></a>多进程与多线程</h3><h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><p>多进程模型相对简单，但是存在资源开销大和进程间通信的问题。</p>
-<h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><p>多线程模型相对复杂，会有死锁，线程安全，模型复杂等问题，但却因为资源开销及易于管理等优点适用于对于性能要求较高的应用。</p>
-<h4 id="Goroutine-1"><a href="#Goroutine-1" class="headerlink" title="Goroutine"></a>Goroutine</h4><p>Golang采用的是两级线程模型，但它对系统线程（内核级线程）进行了封装，暴露了一个轻量级的协程goroutine（用户级线程）供用户使用，而用户级线程到内核级线程的调度由golang的runtime负责，调度逻辑对外透明。优势在于上下文切换在完全用户态进行，无需像线程一样频繁在用户态与内核态之间切换，节约了资源消耗。</p>
+<h2 id="Goroutine"><a href="#Goroutine" class="headerlink" title="Goroutine"></a>Goroutine</h2><h3 id="进程、线程、协程"><a href="#进程、线程、协程" class="headerlink" title="进程、线程、协程"></a>进程、线程、协程</h3><h4 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h4><p>进程是系统进行资源分配的基本单位，有独立内存空间。多进程模型相对简单，但是存在资源开销大和进程间通信的问题。</p>
+<h4 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h4><p>线程是CPU调度和分派的基本单位，线程依附于进程存在。多线程模型相对复杂，会有死锁，线程安全，模型复杂等问题，但却因为资源开销及易于管理等优点适用于对于性能要求较高的应用。</p>
+<h4 id="协程-1"><a href="#协程-1" class="headerlink" title="协程"></a>协程</h4><p>协程是一种<strong>用户态轻量级线程</strong>，协程调度完全由用户控制，协程切换只需要保存任务上下文，没有内核开销。</p>
+<h3 id="上下文切换"><a href="#上下文切换" class="headerlink" title="上下文切换"></a>上下文切换</h3><ul>
+<li><p>由于中断处理、多任务处理、用户态切换等原因，会导致CPU在线程之间切换，切换的过程就需要保存当前线程状态，并恢复另一个线程状态，这就是上下文切换。</p>
+</li>
+<li><p>上下文切换代价是很高的，会占用大量程序指令时间</p>
+</li>
+<li>如果存在跨核上下文切换，可能导致CPU缓存失效，带来更多的切换耗时</li>
+</ul>
+<h3 id="Goroutine-之轻"><a href="#Goroutine-之轻" class="headerlink" title="Goroutine 之轻"></a>Goroutine 之轻</h3><p>Golang实现了特殊的<strong>两级线程模型</strong>(GPM模型)，对系统线程（内核级线程）进行了封装，暴露了一个轻量级的协程goroutine（用户级线程）供用户使用。而用户级线程到内核级线程的调度由golang的runtime负责，调度逻辑对外透明。优势在于上下文切换在完全用户态进行，无需像线程一样频繁在用户态与内核态之间切换，节约了资源消耗。</p>
+<ul>
+<li><strong>上下文切换代价小</strong>，只涉及3哥寄存器 PC/SP/DX；对比线程，需要模式切换、更多寄存器刷新</li>
+<li><strong>内存占用少</strong>，线程栈空间通常为2M，Goroutine最小2K，由runtime伸缩分配；Golang程序中可轻松支持10W级别goroutine运行，线程到达1k时内存就一件达到2G</li>
+</ul>
+<h2 id="Goroutine历史"><a href="#Goroutine历史" class="headerlink" title="Goroutine历史"></a>Goroutine历史</h2><p>目前使用的goroutine调度器是2012年重新设计的，原先的goroutine调度器实现要点如下：</p>
+<ul>
+<li>全局存在一个go协程队列，线程通过锁访问队列，获取、执行goroutine</li>
+<li>存在多个线程可对队列中goroutine执行，阻塞放回</li>
+</ul>
+<p><strong>优劣：</strong></p>
+<ol>
+<li>基本实现多个线程的调度，并发执行go协程</li>
+<li>但是，对go协程队列的访问都需要获取锁，形成激烈锁竞争</li>
+<li>因为只有全局队列，所以在进程中创建的相关进程，仍然放到全局队列中等待执行，不能落在同一个M上，局部性较差</li>
+<li>CPU在M之间切换导致M频繁阻塞和取消阻塞，增加系统开销</li>
+</ol>
 <h2 id="GPM-模型"><a href="#GPM-模型" class="headerlink" title="GPM 模型"></a>GPM 模型</h2><blockquote>
 <p>参考<a href="https://www.cnblogs.com/zkweb/p/7815600.html" target="_blank" rel="noopener">博客</a></p>
 </blockquote>
@@ -477,25 +517,29 @@
 <li>G即Goroutine，就是我们所说的协程，为用户级线程，通过<code>sched</code>变量保存上下文信息。</li>
 <li>goroutine的创建、休眠、恢复、停止都受到go runtime的管理</li>
 <li>goroutine执行异步操作时进入休眠状态，操作完成后恢复，无需占用系统线程</li>
-<li>goroutine创建或恢复时会添加到运行队列，等待M取出运行</li>
+<li>goroutine创建或恢复时会添加到运行队列（先找某个P的Local队列全满则入Global队列），等待M取出运行</li>
 </ul>
 <h4 id="M"><a href="#M" class="headerlink" title="M"></a>M</h4><ul>
-<li>M即Machine，对内核级线程的封装，相当于系统线程，数量等于真实CPU数</li>
+<li>M即Machine，<strong>对内核级线程的封装</strong>，相当于内核级线程。</li>
+<li>M的数量是GO Runtime调整的，为防止过对OS线程导致系统调度不过来，默认限制为1W个；runtime/debug 中的SetMaxThreads函数可以设置M的最大数量</li>
 <li>M可以执行两种代码<ul>
-<li>go代码，即goroutine，需要一个P</li>
+<li>go代码，即goroutine，需要P</li>
 <li>原生代码，即系统调用之类的代码，无需P</li>
 </ul>
 </li>
-<li>若G需要执行无法避免阻塞的原生代码，M会释放持有的P并进入阻塞状态，P将被其他M获取使用</li>
+<li>若G需要执行无法避免阻塞的原生代码，M会释放持有的P并进入阻塞状态，P将被其他M获取使用，这就是<strong>hand off 机制</strong></li>
 </ul>
 <h4 id="P"><a href="#P" class="headerlink" title="P"></a>P</h4><ul>
-<li>P即Processor，即G和M的调度对象，用来调度G和M之间的关联关系，可通过GOMAXPROCS设置，默认为核心数</li>
-<li>P可以认为是go代码控制并行度的机制，对于M拥有P后才可以执行G</li>
-<li>在P中的数据是锁自由(lock free，不使用锁的情况下使得线程之间的变量同步)的，读写这些数据的效率会非常高</li>
+<li>P即Processor，即G和M的调度对象，用来调度G和M之间的关联关系，可通过GOMAXPROCS设置，默认为核心数；GOMAXPROCS最大为256</li>
+<li>P可以认为是go代码控制并行度的机制，P决定了G的最大并行数，对于<strong>M拥有P后才可以执行G</strong></li>
+<li>在<strong>P中的数据是锁自由</strong>(lock free，不使用锁的情况下使得线程之间的变量同步)的，读写这些数据的效率会非常高</li>
+</ul>
+<h4 id="sched"><a href="#sched" class="headerlink" title="sched"></a>sched</h4><ul>
+<li>Go 调度器，维护M队列、G队列以及调度器的一些状态信息</li>
 </ul>
 <h3 id="三者关系"><a href="#三者关系" class="headerlink" title="三者关系"></a>三者关系</h3><ul>
-<li>每个P对象拥有一个LRQ（Local Run Queue），为分配的G保存在GRQ（Global Run Queue）中，等待分配给一个P的LRQ</li>
-<li>通过P的连接，对M和G解耦，即G希望使用M必须绑定一个P，通过多个M和多个P对应，实现并行处理多个G</li>
+<li>每个P对象拥有一个LRQ（Local Run Queue），为分配的G保存在GRQ（Global Run Queue）中，等待分配给一个P的LRQ，<strong>对于G来说P相当于CPU核</strong></li>
+<li>通过P的连接，对M和G解耦，即G希望使用M必须绑定一个P，通过多个M和多个P对应，实现并行处理多个G，<strong>对 M 来说，P 提供了相关的执行环境</strong>(Context)，如内存分配状态(mcache)，任务队列(G)等</li>
 </ul>
 <h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><h4 id="G的状态"><a href="#G的状态" class="headerlink" title="G的状态"></a>G的状态</h4><ul>
 <li><p>空闲：刚创建，仍未初始化</p>
@@ -513,7 +557,7 @@
 <p>M无明确的状态标记，可认为有如下过程</p>
 </blockquote>
 <ul>
-<li>自旋：从获取拥有的P的运行队列中获取G</li>
+<li>自旋：获取到了P资源但是没有G可执行，寻找G的一种运行状态</li>
 <li>执行G：执行G的代码，此时拥有P</li>
 <li>执行原生代码：执行原生代码或阻塞的syscall，此时不拥有P</li>
 <li>休眠：无G可运行时，休眠，加入空闲M链表中</li>
@@ -528,10 +572,10 @@
 <h4 id="本地运行队列-LRQ"><a href="#本地运行队列-LRQ" class="headerlink" title="本地运行队列 LRQ"></a>本地运行队列 LRQ</h4><ul>
 <li><p>本地队列为P的运行队列，G会优先加入本地队列，M获取运行的G时也会优先从拥有的P的本地队列获取</p>
 </li>
-<li><p>环形队列，由256长度数组和两个序号head、tail组成</p>
+<li><p><strong>环形队列</strong>，由256长度数组和两个序号head、tail组成</p>
 </li>
-<li>出入本地队列无需线程锁，当本地队列满时，G会加入全局运行队列</li>
-<li>当M从P的本地运行队列获取G时，发现队列为空，会从其他P中盗取一半G，此为<strong>Work Stealing</strong>机制</li>
+<li>出入本地队列无需线程锁，当本地队列满时，会将本地队列的一半放入全局队列中。</li>
+<li>当M从P的本地运行队列获取G时，发现队列为空，会从全局队列中拿一批放入本地队列或者从其他P中盗取一半G，此为<strong>Work Stealing</strong>机制</li>
 </ul>
 <h4 id="全局运行队列-GRQ"><a href="#全局运行队列-GRQ" class="headerlink" title="全局运行队列 GRQ"></a>全局运行队列 GRQ</h4><ul>
 <li>通过全局变量<code>sched</code>保存，出入队列使用线程锁</li>
@@ -540,19 +584,47 @@
 <h4 id="空闲M链表"><a href="#空闲M链表" class="headerlink" title="空闲M链表"></a>空闲M链表</h4><ul>
 <li>发现无待运行的G，M开始休眠，通过全局<code>sched</code>保存空闲M链表</li>
 <li>进入休眠的M会等待一个信号量<code>m.park</code>，获取后会唤醒</li>
+<li>M阻塞，有就绪G和P时，又没有空闲M则会创建新的M</li>
 <li>通过如下机制保证入队列的G可以有足够的M运行<ul>
 <li>入队列的G进入待运行状态，若无自旋的M但是有空闲P，就唤醒或新建M</li>
 <li>当M离开自旋状态，准备运行G时，如果当前无自旋的M但是有空闲P，唤醒或新建M，保证下一个G来时大概率会有M资源配合运行</li>
 <li>当M离开自旋状态，并准备休眠时，会在离开自旋状态后检查运行队列，如果有待运行的G则重新进入自旋状态</li>
+<li>当全部G已经消耗完毕时，M进入自旋状态，此时会保持GOMAXPROCS个自旋M多余M进入休眠状态</li>
 </ul>
 </li>
 </ul>
 <h4 id="空闲P列表"><a href="#空闲P列表" class="headerlink" title="空闲P列表"></a>空闲P列表</h4><ul>
-<li>空闲P链表通过全局变量<code>sched</code>保存</li>
+<li>空闲P链表通过全局变量<code>sched</code>保存；在确定P的最大数量后，runtime就会把P创建好</li>
 <li>当P本地队列中不包含G且盗取不到G时，M会释放P然后进入休眠状态，并将P加到空闲P链表中</li>
 <li>下次G入队时，若发现有空闲P但是没有自旋M时，会唤醒或新建M，M拥有这个P，使得P重新进入运行状态</li>
 </ul>
-<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><p>==&gt; tobe continued</p>
+<h3 id="调度策略"><a href="#调度策略" class="headerlink" title="调度策略"></a>调度策略</h3><ul>
+<li>通过work stealing机制和hand off机制使得G和M对P有更好的复用</li>
+<li>通过GOMAXPROCS制定P数量来控制并发程度</li>
+<li>一般情况下一个协程需要等待前一个协程让出CPU才可以进入执行，goroutine通过限制最多占用10msCPU来防止其他goroutine被饿死</li>
+<li>对全局队列进行一定程度的弱化，只有当P使用work stealing也获取不到G时才尝试从全局队列获取G</li>
+</ul>
+<h3 id="go-func-发生了什么"><a href="#go-func-发生了什么" class="headerlink" title="go func{}发生了什么"></a><code>go func{}</code>发生了什么</h3><h4 id="M0-和-G0"><a href="#M0-和-G0" class="headerlink" title="M0 和 G0"></a>M0 和 G0</h4><ul>
+<li>M0是启动程序后编号为0的主线程，这个M对应实例存在全局变量runtime.m0中，不需要在heap上分配。M0执行初始化操作和启动第一个G后就和其他M一样了</li>
+<li>G0时每次启动一个M第一个创建的goroutine，G0仅负责调度G，不指向任何可执行函数，每个M都有自己的G0。在调度或者系统调用时会使用G0的栈空间，全局变量的G0是M0的G0。</li>
+</ul>
+<h4 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h4><ol>
+<li>创建一个G，首先查看P的LRQ，若满再考虑GRQ；入队列等待被调度</li>
+<li>M与P绑定，从P中获取G；若P本地队列为空，则从全局队列中获取G，获取失败则从其他P中盗取</li>
+<li>执行G，过程中<ul>
+<li>若发生系统调用，则M带着G进行系统调用，释放当前绑定的P</li>
+<li>若执行完成，则返回结果</li>
+<li>执行过程中创建新的G’，则优先加入P本地队列<ul>
+<li>创建G’，若发现本地队列已满，则将本地队列的一半放入全局队列中</li>
+<li>创建G’后，G会唤醒M和现有空闲P组合进入自旋状态</li>
+<li>自旋的新M-P组合会将现有全局队列根据P最大数量均分（至少为1）批量获取G入本地队列</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>G执行完毕，M切换G0进行调度，M-P进入自旋状态寻找下一个G执行</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>对golang协程调度模型的初步理解暂时告一段落，时间线拉的很长，并且还只是在懂得基本原理的层面，希望未来还能看到更深度的好文可以观摩学习。同时，也不排除这个年轻的语言在未来的某个版本中舍弃GPM模，但其设计方法和理念依然值得学习。</p>
 
       
     </div>
@@ -573,7 +645,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://thomstrong.github.io/2020/02/12/go-gc-and-so-on/" title="浅尝 Golang gorountine & GC">https://thomstrong.github.io/2020/02/12/go-gc-and-so-on/</a>
+    <a href="https://thomstrong.github.io/2020/02/12/go-gc-and-so-on/" title="浅尝 Golang gorountine">https://thomstrong.github.io/2020/02/12/go-gc-and-so-on/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -707,7 +779,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -718,7 +790,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -729,7 +801,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -780,7 +852,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发与并行"><span class="nav-number">1.</span> <span class="nav-text">并发与并行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并发-≠-并行"><span class="nav-number">1.1.</span> <span class="nav-text">并发 ≠ 并行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#并发"><span class="nav-number">1.1.1.</span> <span class="nav-text">并发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#并行"><span class="nav-number">1.1.2.</span> <span class="nav-text">并行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关联"><span class="nav-number">1.1.3.</span> <span class="nav-text">关联</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU密集-amp-I-O密集"><span class="nav-number">1.2.</span> <span class="nav-text">CPU密集 &amp; I/O密集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU密集"><span class="nav-number">1.2.1.</span> <span class="nav-text">CPU密集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#I-O密集型"><span class="nav-number">1.2.2.</span> <span class="nav-text">I/O密集型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Goroutine"><span class="nav-number">2.</span> <span class="nav-text">Goroutine</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多进程与多线程"><span class="nav-number">2.1.</span> <span class="nav-text">多进程与多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多进程"><span class="nav-number">2.1.1.</span> <span class="nav-text">多进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多线程"><span class="nav-number">2.1.2.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Goroutine-1"><span class="nav-number">2.1.3.</span> <span class="nav-text">Goroutine</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GPM-模型"><span class="nav-number">3.</span> <span class="nav-text">GPM 模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心概念"><span class="nav-number">3.1.</span> <span class="nav-text">核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#G"><span class="nav-number">3.1.1.</span> <span class="nav-text">G</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#M"><span class="nav-number">3.1.2.</span> <span class="nav-text">M</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P"><span class="nav-number">3.1.3.</span> <span class="nav-text">P</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三者关系"><span class="nav-number">3.2.</span> <span class="nav-text">三者关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构"><span class="nav-number">3.3.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#G的状态"><span class="nav-number">3.3.1.</span> <span class="nav-text">G的状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#M的动作"><span class="nav-number">3.3.2.</span> <span class="nav-text">M的动作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P的状态"><span class="nav-number">3.3.3.</span> <span class="nav-text">P的状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地运行队列-LRQ"><span class="nav-number">3.3.4.</span> <span class="nav-text">本地运行队列 LRQ</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全局运行队列-GRQ"><span class="nav-number">3.3.5.</span> <span class="nav-text">全局运行队列 GRQ</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空闲M链表"><span class="nav-number">3.3.6.</span> <span class="nav-text">空闲M链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空闲P列表"><span class="nav-number">3.3.7.</span> <span class="nav-text">空闲P列表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工作流程"><span class="nav-number">3.4.</span> <span class="nav-text">工作流程</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发的演进"><span class="nav-number">1.</span> <span class="nav-text">并发的演进</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单进程"><span class="nav-number">1.1.</span> <span class="nav-text">单进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多进程-amp-多线程"><span class="nav-number">1.2.</span> <span class="nav-text">多进程&amp;多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协程"><span class="nav-number">1.3.</span> <span class="nav-text">协程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发与并行"><span class="nav-number">2.</span> <span class="nav-text">并发与并行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并发-≠-并行"><span class="nav-number">2.1.</span> <span class="nav-text">并发 ≠ 并行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#并发"><span class="nav-number">2.1.1.</span> <span class="nav-text">并发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#并行"><span class="nav-number">2.1.2.</span> <span class="nav-text">并行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关联"><span class="nav-number">2.1.3.</span> <span class="nav-text">关联</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU密集-amp-I-O密集"><span class="nav-number">2.2.</span> <span class="nav-text">CPU密集 &amp; I/O密集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU密集"><span class="nav-number">2.2.1.</span> <span class="nav-text">CPU密集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#I-O密集型"><span class="nav-number">2.2.2.</span> <span class="nav-text">I/O密集型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Goroutine"><span class="nav-number">3.</span> <span class="nav-text">Goroutine</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程、线程、协程"><span class="nav-number">3.1.</span> <span class="nav-text">进程、线程、协程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进程"><span class="nav-number">3.1.1.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程"><span class="nav-number">3.1.2.</span> <span class="nav-text">线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#协程-1"><span class="nav-number">3.1.3.</span> <span class="nav-text">协程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上下文切换"><span class="nav-number">3.2.</span> <span class="nav-text">上下文切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Goroutine-之轻"><span class="nav-number">3.3.</span> <span class="nav-text">Goroutine 之轻</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Goroutine历史"><span class="nav-number">4.</span> <span class="nav-text">Goroutine历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GPM-模型"><span class="nav-number">5.</span> <span class="nav-text">GPM 模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心概念"><span class="nav-number">5.1.</span> <span class="nav-text">核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#G"><span class="nav-number">5.1.1.</span> <span class="nav-text">G</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#M"><span class="nav-number">5.1.2.</span> <span class="nav-text">M</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P"><span class="nav-number">5.1.3.</span> <span class="nav-text">P</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sched"><span class="nav-number">5.1.4.</span> <span class="nav-text">sched</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三者关系"><span class="nav-number">5.2.</span> <span class="nav-text">三者关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构"><span class="nav-number">5.3.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#G的状态"><span class="nav-number">5.3.1.</span> <span class="nav-text">G的状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#M的动作"><span class="nav-number">5.3.2.</span> <span class="nav-text">M的动作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P的状态"><span class="nav-number">5.3.3.</span> <span class="nav-text">P的状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地运行队列-LRQ"><span class="nav-number">5.3.4.</span> <span class="nav-text">本地运行队列 LRQ</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全局运行队列-GRQ"><span class="nav-number">5.3.5.</span> <span class="nav-text">全局运行队列 GRQ</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空闲M链表"><span class="nav-number">5.3.6.</span> <span class="nav-text">空闲M链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空闲P列表"><span class="nav-number">5.3.7.</span> <span class="nav-text">空闲P列表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度策略"><span class="nav-number">5.4.</span> <span class="nav-text">调度策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#go-func-发生了什么"><span class="nav-number">5.5.</span> <span class="nav-text">go func{}发生了什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#M0-和-G0"><span class="nav-number">5.5.1.</span> <span class="nav-text">M0 和 G0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流程"><span class="nav-number">5.5.2.</span> <span class="nav-text">流程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -814,7 +886,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">39.0k</span>
+    <span title="Site words total count">43.5k</span>
   
 </div>
 
