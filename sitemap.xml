@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://thomstrong.github.io/2020/03/14/first-paofu/</loc>
+    
+    <lastmod>2020-03-26T17:46:19.441Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://thomstrong.github.io/2020/02/12/go-gpm/</loc>
     
     <lastmod>2020-03-26T17:37:06.502Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://thomstrong.github.io/2020/03/12/golang-source-code/</loc>
     
     <lastmod>2020-03-25T17:54:21.136Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://thomstrong.github.io/2020/03/14/first-paofu/</loc>
-    
-    <lastmod>2020-03-21T08:38:59.567Z</lastmod>
     
   </url>
   
