@@ -142,7 +142,7 @@
 <meta property="og:site_name" content="Thomstrong&#39;s Blog">
 <meta property="og:description" content="并发的演进单进程单进程时代，一切只能串行。 问题：  one by one  阻塞了怎么办？效率太低  多进程&amp;amp;多线程多进程/多线程解决了阻塞问题，让进程阻塞时空闲的CPU可以很好的利用起来，这样，似乎多个进程是在同时被运行。 问题：  进程间创建、切换、销毁需要占用很长时间，调度大量时间 进程/线程占用更多的内存资源  协程线程分为内核态线程和用户态线程，一个用户态线程必须绑定一个内核">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-26T17:37:06.502Z">
+<meta property="og:updated_time" content="2020-04-07T08:00:01.695Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅尝 Golang gorountine">
 <meta name="twitter:description" content="并发的演进单进程单进程时代，一切只能串行。 问题：  one by one  阻塞了怎么办？效率太低  多进程&amp;amp;多线程多进程/多线程解决了阻塞问题，让进程阻塞时空闲的CPU可以很好的利用起来，这样，似乎多个进程是在同时被运行。 问题：  进程间创建、切换、销毁需要占用很长时间，调度大量时间 进程/线程占用更多的内存资源  协程线程分为内核态线程和用户态线程，一个用户态线程必须绑定一个内核">
@@ -372,8 +372,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-03-27T01:37:06+08:00">
-                2020-03-27
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-07T16:00:01+08:00">
+                2020-04-07
               </time>
             
           </span>
@@ -495,7 +495,7 @@
 </ul>
 <h3 id="Goroutine-之轻"><a href="#Goroutine-之轻" class="headerlink" title="Goroutine 之轻"></a>Goroutine 之轻</h3><p>Golang实现了特殊的<strong>两级线程模型</strong>(GPM模型)，对系统线程（内核级线程）进行了封装，暴露了一个轻量级的协程goroutine（用户级线程）供用户使用。而用户级线程到内核级线程的调度由golang的runtime负责，调度逻辑对外透明。优势在于上下文切换在完全用户态进行，无需像线程一样频繁在用户态与内核态之间切换，节约了资源消耗。</p>
 <ul>
-<li><strong>上下文切换代价小</strong>，只涉及3哥寄存器 PC/SP/DX；对比线程，需要模式切换、更多寄存器刷新</li>
+<li><strong>上下文切换代价小</strong>，只涉及3个寄存器 PC/SP/DX；对比线程，需要模式切换、更多寄存器刷新</li>
 <li><strong>内存占用少</strong>，线程栈空间通常为2M，Goroutine最小2K，由runtime伸缩分配；Golang程序中可轻松支持10W级别goroutine运行，线程到达1k时内存就一件达到2G</li>
 </ul>
 <h2 id="Goroutine历史"><a href="#Goroutine历史" class="headerlink" title="Goroutine历史"></a>Goroutine历史</h2><p>目前使用的goroutine调度器是2012年重新设计的，原先的goroutine调度器实现要点如下：</p>
@@ -779,7 +779,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -801,7 +801,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -886,7 +886,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">43.5k</span>
+    <span title="Site words total count">50.5k</span>
   
 </div>
 

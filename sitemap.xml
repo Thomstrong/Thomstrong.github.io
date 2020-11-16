@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://thomstrong.github.io/2019/07/23/first-golang/</loc>
+    
+    <lastmod>2020-11-16T02:53:09.682Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://thomstrong.github.io/2020/09/28/review-basic-knowledge/</loc>
+    
+    <lastmod>2020-11-16T02:53:09.682Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://thomstrong.github.io/2020/03/12/golang-source-code/</loc>
+    
+    <lastmod>2020-04-19T05:01:47.448Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://thomstrong.github.io/2020/02/12/go-gpm/</loc>
+    
+    <lastmod>2020-04-07T08:00:01.695Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://thomstrong.github.io/2020/03/14/first-paofu/</loc>
     
     <lastmod>2020-03-26T17:49:06.699Z</lastmod>
@@ -16,20 +44,6 @@
   </url>
   
   <url>
-    <loc>https://thomstrong.github.io/2020/02/12/go-gpm/</loc>
-    
-    <lastmod>2020-03-26T17:37:06.502Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://thomstrong.github.io/2020/03/12/golang-source-code/</loc>
-    
-    <lastmod>2020-03-25T17:54:21.136Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://thomstrong.github.io/2020/02/24/learn-etcd/</loc>
     
     <lastmod>2020-02-29T07:04:26.637Z</lastmod>
@@ -40,13 +54,6 @@
     <loc>https://thomstrong.github.io/2019/12/12/learn-go-geektime/</loc>
     
     <lastmod>2020-02-04T07:06:24.594Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://thomstrong.github.io/2019/07/23/first-golang/</loc>
-    
-    <lastmod>2019-12-09T16:28:40.527Z</lastmod>
     
   </url>
   

@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta name="baidu-site-verification" content="UqlC4pwKIm">
+  <meta name="baidu-site-verification" content="d3U0dGeqGw">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="1C1XSuJ8TgM2O0mcZvsgzEdy0IdRZOJfxDYPyh18U9Q">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.cat.net/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="基础知识,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数据库索引索引失效 or条件查询可能失效，可以使用union代替 字符串类型用引号括起来，否则失效 like非前缀匹配会引起失效 索引列使用mysql内置函数 索引列运算 索引字段使用!=、&amp;lt;&amp;gt;、not in、is null、is not null可能导致失效  左连接或右连接查询关联字段编码不一致  mysql优化器预估全表扫描快于索引查询  不适合索引场景 数据量少（插入耗时增加">
+<meta name="keywords" content="基础知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="秋招复习剪辑">
+<meta property="og:url" content="https://thomstrong.github.io/2020/09/28/review-basic-knowledge/index.html">
+<meta property="og:site_name" content="Thomstrong&#39;s Blog">
+<meta property="og:description" content="数据库索引索引失效 or条件查询可能失效，可以使用union代替 字符串类型用引号括起来，否则失效 like非前缀匹配会引起失效 索引列使用mysql内置函数 索引列运算 索引字段使用!=、&amp;lt;&amp;gt;、not in、is null、is not null可能导致失效  左连接或右连接查询关联字段编码不一致  mysql优化器预估全表扫描快于索引查询  不适合索引场景 数据量少（插入耗时增加">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-11-16T02:53:09.682Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="秋招复习剪辑">
+<meta name="twitter:description" content="数据库索引索引失效 or条件查询可能失效，可以使用union代替 字符串类型用引号括起来，否则失效 like非前缀匹配会引起失效 索引列使用mysql内置函数 索引列运算 索引字段使用!=、&amp;lt;&amp;gt;、not in、is null、is not null可能导致失效  左连接或右连接查询关联字段编码不一致  mysql优化器预估全表扫描快于索引查询  不适合索引场景 数据量少（插入耗时增加">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://thomstrong.github.io/2020/09/28/review-basic-knowledge/">
+
+
+
+
+
+  <title>秋招复习剪辑 | Thomstrong's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-111723881-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Thomstrong's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://thomstrong.github.io/2020/09/28/review-basic-knowledge/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Thomstrong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Thomstrong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">秋招复习剪辑</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-28T11:34:51+08:00">
+                2020-09-28
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-11-16T10:53:09+08:00">
+                2020-11-16
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,768
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  17
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h3 id="索引失效"><a href="#索引失效" class="headerlink" title="索引失效"></a>索引失效</h3><ul>
+<li>or条件查询可能失效，可以使用union代替</li>
+<li>字符串类型用引号括起来，否则失效</li>
+<li>like非前缀匹配会引起失效</li>
+<li>索引列使用mysql内置函数</li>
+<li>索引列运算</li>
+<li><p>索引字段使用!=、&lt;&gt;、not in、is null、is not null可能导致失效</p>
+</li>
+<li><p>左连接或右连接查询关联字段编码不一致</p>
+</li>
+<li>mysql优化器预估全表扫描快于索引查询</li>
+</ul>
+<h3 id="不适合索引场景"><a href="#不适合索引场景" class="headerlink" title="不适合索引场景"></a>不适合索引场景</h3><ul>
+<li>数据量少（插入耗时增加？）</li>
+<li>写多读少</li>
+<li>区分度低的字段（如性别）</li>
+</ul>
+<h3 id="索引底层规则"><a href="#索引底层规则" class="headerlink" title="索引底层规则"></a>索引底层规则</h3><ul>
+<li>覆盖索引（直接从索引一次性可查到数据）</li>
+<li>回表（二级索引不能查到会回聚集索引中再查以得到最终数据）</li>
+<li>索引条件下推优化（Using index condition）<ul>
+<li>目的：减少IO次数</li>
+<li>特殊：在根据索引获取数据时，通过下推条件判断是读取表中数据，还是读下一个索引，减少MySQL Server返回数据量</li>
+<li>适用于：整表扫描场景，InnoDB只适用于二级索引</li>
+<li>不适用于：引用子查询条件不能下推、调用存储过程不能下推、触发条件不能下推</li>
+<li>配置：默认开启，属于存储引擎的优化手段，可通过<code>SET optimizer_switch = &#39;index_condition_pushdown=off&#39;;</code>配置开关</li>
+</ul>
+</li>
+</ul>
+<h3 id="索引数据结构"><a href="#索引数据结构" class="headerlink" title="索引数据结构"></a>索引数据结构</h3><h4 id="为什么是B-树而不是"><a href="#为什么是B-树而不是" class="headerlink" title="为什么是B+树而不是"></a>为什么是B+树而不是</h4><ul>
+<li>一般二叉树<ul>
+<li>二叉树特殊化为链表，每次查询都是全表扫描</li>
+</ul>
+</li>
+<li>平衡二叉树<ul>
+<li>平衡二叉树可存储数据较少，一个节点只存一个键值和数据，而B数可以存更多数据</li>
+</ul>
+</li>
+<li>B树而是B+树<ul>
+<li>B树非叶子节点也有数据，读取一个磁盘块包含的节点更多，减少IO查询速度也更快</li>
+<li>B+树同层节点按序，且用双向链表连接，叶子节点内部数据用单向链表连接，使得排序、范围查找、去重查找变得更简单</li>
+</ul>
+</li>
+</ul>
+<h3 id="聚集索引和非聚集索引"><a href="#聚集索引和非聚集索引" class="headerlink" title="聚集索引和非聚集索引"></a>聚集索引和非聚集索引</h3><ul>
+<li>一个表中只能有一个聚集索引，和多个非聚集索引</li>
+<li>聚集索引索引键值的逻辑顺序对应了物理顺序，非聚集索引逻辑换顺序与物理顺序不同</li>
+<li>如何选择</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>动作</th>
+<th>使用聚集</th>
+<th>使用非聚集</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>列经常分组排序</td>
+<td>可</td>
+<td>可</td>
+</tr>
+<tr>
+<td>返回范围数据</td>
+<td>可</td>
+<td>不可</td>
+</tr>
+<tr>
+<td>一个或极少数不同值</td>
+<td>不可</td>
+<td>不可</td>
+</tr>
+<tr>
+<td>小数目不同值</td>
+<td>可</td>
+<td>不可</td>
+</tr>
+<tr>
+<td>大数目不同值</td>
+<td>不可</td>
+<td>可</td>
+</tr>
+<tr>
+<td>频繁更新列</td>
+<td>不可</td>
+<td>可</td>
+</tr>
+<tr>
+<td>外键列</td>
+<td>可</td>
+<td>可</td>
+</tr>
+<tr>
+<td>主键列</td>
+<td>可</td>
+<td>可</td>
+</tr>
+<tr>
+<td>频繁修改索引列</td>
+<td>不可</td>
+<td>可</td>
+</tr>
+</tbody>
+</table>
+<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<li>按粒度分：表锁、页锁、行锁<ul>
+<li>表锁：粒度最大、开销小、加锁快</li>
+<li>页锁：BDB支持的锁机制，无人使用</li>
+<li>行锁：对索引加锁，粒度最小锁，开销大、加锁慢，会出现死锁，冲突概率低，并发性能高<ul>
+<li>记录锁：锁住单行记录的索引</li>
+<li>间隙锁：锁住查询范围，防止幻读</li>
+<li>临键锁：扩充锁住前后范围，防止幻读</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>使用方式：共享锁、排它锁</li>
+<li>思想分：乐观锁、悲观锁</li>
+</ul>
+<h3 id="乐观锁和悲观锁（思想）"><a href="#乐观锁和悲观锁（思想）" class="headerlink" title="乐观锁和悲观锁（思想）"></a>乐观锁和悲观锁（思想）</h3><ul>
+<li>悲观锁：直接加锁，阻塞其他线程修改</li>
+<li>乐观锁：不上锁，更新的时候检查判定字段是否有被修改。CAS</li>
+<li>强行加锁，如果指定索引列则加行锁，否则加表锁</li>
+</ul>
+<h3 id="Next-Key-Lock"><a href="#Next-Key-Lock" class="headerlink" title="Next Key Lock"></a>Next Key Lock</h3><blockquote>
+<p>Record Lock 和 Gap Lock 的结合，记住！是为了解决幻读</p>
+</blockquote>
+<ul>
+<li>对非主键索引查询，记录的上下记录区间加锁，如对记录1,2,3,5,8查询3则会锁住(2,3]U[3,5)记录区间</li>
+<li>对主键索引，不会产生幻读，因此只加普通行锁</li>
+</ul>
+<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><ul>
+<li>程序出现高并发时，尽量对表串行化操作或锁升级，一次性获取全部资源</li>
+<li>设置<code>innodb_lock_wait_timeout</code>变量，使得锁等待超时回滚</li>
+<li>打开<code>innodb_deadlock_detect</code>变量，当发现死锁时，自动回滚其中一个事务</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li><strong>锁竞争查询</strong>：<code>show status like table_lock</code>可以查看锁竞争状态，waited越大代表锁竞争越严重</li>
+<li><strong>并发插入</strong>：通过<code>concurrent_insert</code>变量调整并发插入配置，0不支持、1只要没有删除即插入表尾、2无论是否有删除都插入表尾</li>
+</ul>
+<h2 id="查询优化方法"><a href="#查询优化方法" class="headerlink" title="查询优化方法"></a>查询优化方法</h2><ul>
+<li>加索引</li>
+<li>仅返回需要的字段</li>
+<li>offset &amp; limit</li>
+<li>sql结构优化</li>
+<li>分库分表<ul>
+<li>水平分表：一个库中的数据拆分为多个表（hash、range）</li>
+<li>垂直分表：按照业务拆分；按照字段活性，拆分主表和扩展表</li>
+<li>事务需要使用分布式事务</li>
+</ul>
+</li>
+<li>读写分离</li>
+</ul>
+<h4 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h4><ul>
+<li>explain</li>
+<li>慢查询日志（–log-slow-queries启动项和long_query_time ）</li>
+</ul>
+<h2 id="分布式主键方案"><a href="#分布式主键方案" class="headerlink" title="分布式主键方案"></a>分布式主键方案</h2><ul>
+<li>数据库自增序列或字段</li>
+<li>UUID</li>
+<li>Redis生成ID</li>
+</ul>
+<h2 id="引擎"><a href="#引擎" class="headerlink" title="引擎"></a>引擎</h2><h3 id="InnoDB和MyISAM区别"><a href="#InnoDB和MyISAM区别" class="headerlink" title="InnoDB和MyISAM区别"></a>InnoDB和MyISAM区别</h3><ul>
+<li>InnoDB独有<ul>
+<li>事务</li>
+<li>外键</li>
+<li>MVCC多版本并发控制</li>
+</ul>
+</li>
+<li>MyISAM独有<ul>
+<li>全文索引（InnoDB5.7后支持）</li>
+<li>变量保存表总行数，select count(*) from table更快</li>
+</ul>
+</li>
+<li>区别<ul>
+<li>InnoDB支持表、行锁，MyISAM只支持表锁，InnoDB使用索引默认为行锁，不使用则为表锁</li>
+<li>InnoDB必须有主键，MyISAM可以没有主键</li>
+<li>InnoDB表需要更多内存和存储，MyISAM可被压缩</li>
+<li>InnoDB按主键大小有序插入，MyISAM按插入顺序保存</li>
+</ul>
+</li>
+</ul>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="MySQL事务特性"><a href="#MySQL事务特性" class="headerlink" title="MySQL事务特性"></a>MySQL事务特性</h3><ul>
+<li>原子性<ul>
+<li>定义：事务作为整体，要么全部执行要么全部不执行</li>
+<li>机制保障：undo log恢复事务执行之前的状态</li>
+</ul>
+</li>
+<li>一致性<ul>
+<li>定义：事务开始之前和结束之后的数据不会被破坏，典型案例：转账</li>
+<li>机制保障：回滚、恢复、并发隔离</li>
+</ul>
+</li>
+<li>隔离性<ul>
+<li>定义：多事务并发访问时，事务之间是相互隔离的</li>
+<li>机制保障：锁、MVCC</li>
+</ul>
+</li>
+<li>持久性<ul>
+<li>定义：事务完成后，所有更改应该均保存到数据库中</li>
+<li>机制保障：redo log崩溃恢复</li>
+</ul>
+</li>
+</ul>
+<h3 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h3><h4 id="事务并发带来的问题"><a href="#事务并发带来的问题" class="headerlink" title="事务并发带来的问题"></a>事务并发带来的问题</h4><blockquote>
+<p>不同隔离级别导致的问题</p>
+</blockquote>
+<ul>
+<li>脏读：事务A读取到了事务B未提交的数据</li>
+<li>不可重复读：事务A受到事务B影响前后两次读取同一条数据不同</li>
+<li>幻读：事务A受事务B影响，前后两次读取同一批数据不同</li>
+</ul>
+<h4 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h4><blockquote>
+<p>带来上述问题</p>
+</blockquote>
+<ul>
+<li>读未提交：事务可以读取到其他事务未提交数据，导致脏读<ul>
+<li>读不加锁，写阻塞其他事务写，不阻塞读</li>
+</ul>
+</li>
+<li>读已提交：事务只能读取到其他事务中已经提交的数据，可能导致不可重复读<ul>
+<li>每次读取数据前，生成新的ReadView</li>
+</ul>
+</li>
+<li><p>可重复读：事务开始时会将select的数据打一份快照，保证同一个事务内select不受其他事务update/delete影响（系统默认隔离级别）</p>
+<ul>
+<li>仅在第一次读取时生成一个ReadView</li>
+</ul>
+</li>
+<li><p>串行化：防止事务并发</p>
+<ul>
+<li>读加共享锁，写加互斥锁</li>
+</ul>
+</li>
+</ul>
+<h3 id="MVCC-多版本并发控制"><a href="#MVCC-多版本并发控制" class="headerlink" title="MVCC 多版本并发控制"></a>MVCC 多版本并发控制</h3><ul>
+<li>依赖于隐式字段、undo日志、快照读&amp;当前读、Read View<ul>
+<li>每行记录存在隐藏列，记录事务ID、指向undo日志的指针、单调递增的RowID（无主键和非NULL唯一键）</li>
+<li>undo日志：事务未提交时修改数据操作的反向操作存到undo日志。数据的undo日志指针会将不同事务产生的多个版本用指针串连</li>
+<li>快照读：不加锁读，读取记录数据当前可见版本</li>
+<li>当前读：显式加锁读读取记录最新版本</li>
+<li>Read View：事务执行快照时产生的读视图，保存当时留存的事务ID列表，通过判断数据的记录事务ID决定数据是否可见<ul>
+<li>当前ID小于当前最小事务ID，说明数据在当前留存事务前已经提交，可见</li>
+<li>当前ID大于事务最大事务ID，说明数据版本是在ReadView生成后才生成，数据不可见</li>
+<li>生成数据版本的事务ID在事务ID列表中，说明事务只生成了数据版本，但是未提交，不可见；如果不在事务ID列表中，生成数据版本已提交，可见。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="其他-1"><a href="#其他-1" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>在使用exists和in时，遵循小表驱动大表原则</li>
+</ul>
+<h1 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h1><h2 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h2><h3 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h3><blockquote>
+<p>CPU调度进程，因此也称CPU调度算法</p>
+</blockquote>
+<h4 id="进程五状态模型"><a href="#进程五状态模型" class="headerlink" title="进程五状态模型"></a>进程五状态模型</h4><ul>
+<li>就绪：已经获得所有所需资源，等待分配处理机资源</li>
+<li>运行：占用处理机资源</li>
+<li>阻塞：等待所需资源得到满足</li>
+<li>新建：进程创建但未被提交，等待获取资源</li>
+<li>终止：进程运行完毕</li>
+</ul>
+<h4 id="CPU调度时机"><a href="#CPU调度时机" class="headerlink" title="CPU调度时机"></a>CPU调度时机</h4><ul>
+<li>运行状态到阻塞状态 =&gt; 非抢占式</li>
+<li>运行状态到就绪状态 =&gt; 抢占式</li>
+<li>阻塞状态到就绪状态 =&gt; 抢占式</li>
+<li>运行状态到终止状态  =&gt; 非抢占式</li>
+</ul>
+<h4 id="抢占式调度和非抢占式调度"><a href="#抢占式调度和非抢占式调度" class="headerlink" title="抢占式调度和非抢占式调度"></a>抢占式调度和非抢占式调度</h4><ul>
+<li>抢占式调度：当前进程被动放弃处理机，如时间片用完、有更紧急的事情需要处理（IO中断）、有更高优先级进程进入队列</li>
+<li>非抢占式调度：当前进程主动放弃处理机，如进程正常终止、进程运行中异常终止、近程主动请求阻塞（等待IO）</li>
+</ul>
+<h4 id="不会发生进程调度"><a href="#不会发生进程调度" class="headerlink" title="不会发生进程调度"></a>不会发生进程调度</h4><ul>
+<li>处理中断时</li>
+<li>进程在操作系统内核临界区时</li>
+<li>进行原子操作时</li>
+</ul>
+<h4 id="调度算法-1"><a href="#调度算法-1" class="headerlink" title="调度算法"></a>调度算法</h4><h5 id="批处理系统调度算法"><a href="#批处理系统调度算法" class="headerlink" title="批处理系统调度算法"></a>批处理系统调度算法</h5><blockquote>
+<p>关注公平性、平均周转时间、平均等待时间等理性指标，不考虑任务的紧急程度</p>
+</blockquote>
+<ul>
+<li><p>FCFS 先来先服务</p>
+<ul>
+<li>特点：非抢占式，先到先服务</li>
+<li>优点：对各个作业公平，算法简单，不会产生进程饿死</li>
+<li>缺点：对CPU密集作业有利，对IO密集作业不利。CPU密集型需要占用更多CPU时间，导致IO密集型需要更多的等待时间</li>
+</ul>
+</li>
+<li><p>SJF 短作业优先</p>
+<ul>
+<li>特点：短作业优先，非抢占式（抢占式场景为SRTN  最短剩余时间优先算法）</li>
+<li>优点：短作业可以更快被调度，拥有最短平均等待时间和平均周转时间</li>
+<li>缺点：长作业可能被饿死，工程实现上较难</li>
+</ul>
+</li>
+<li><p>HRRN 高响应比优先</p>
+<blockquote>
+<p>响应比 = （ 等待时间+实际运行时间 ）/ 实际运行时间 = 等待时间 / 实际运行时间 + 1 </p>
+</blockquote>
+<ul>
+<li>特点：综合FCFS和SJF算法，当运行时间相同，响应比越高等待时间越长越应该被调度类似FCFS；当等待时间相同，响应比越高运行时间越短越应该被调度类似SJF</li>
+</ul>
+</li>
+</ul>
+<h5 id="交互系统调度算法"><a href="#交互系统调度算法" class="headerlink" title="交互系统调度算法"></a>交互系统调度算法</h5><blockquote>
+<p>更注重响应时间、公平性、平衡性</p>
+</blockquote>
+<ul>
+<li>RR 时间片轮转法<ul>
+<li>特点：所有任务轮转使用固定时间片运行，抢占式调度</li>
+<li>优点：公平、响应快</li>
+<li>缺点：时间片把握，太长退化成FCFS，太短导致上下文切换时间过高</li>
+</ul>
+</li>
+<li>HPF 最高优先级调度<ul>
+<li>特点：根据任务优先级抢占式/非抢占式调度</li>
+<li>优点：考虑任务优先级情况</li>
+<li>缺点：任务可能会饿死</li>
+</ul>
+</li>
+<li>多级反馈队列<ul>
+<li>特点：<ul>
+<li>多级执行队列，不同队列执行时间片递增</li>
+<li>队列内部FCFS，一个时间片没有执行完则进入下一级队列</li>
+<li>已经是最后一级队列则放入队尾</li>
+<li>时间片越短队列级别越高，总是先抢占式调度高级别队列任务</li>
+</ul>
+</li>
+<li>优点：融合了FCFS的公平性、SFJ对短作业的照顾、RR对进程的响应速度</li>
+<li>缺点：存在进程饿死的场景</li>
+</ul>
+</li>
+</ul>
+<h3 id="内存页面置换"><a href="#内存页面置换" class="headerlink" title="内存页面置换"></a>内存页面置换</h3><h4 id="缺页中断"><a href="#缺页中断" class="headerlink" title="缺页中断"></a>缺页中断</h4><ul>
+<li>CPU执行Load M指令会访问M对应的页表</li>
+<li>当页表标记有效时，直接访问内存；标记无效时，发送缺页中断</li>
+<li>缺页中断后，查找磁盘对应数据，写入物理内存</li>
+<li>写入物理内存时，若找到空闲页，则直接写入，若未找到，则需要替换已存在的物理内存页，若是脏页则需要将对应的页写回盘，页表项标记无效</li>
+</ul>
+<h4 id="置换算法"><a href="#置换算法" class="headerlink" title="置换算法"></a>置换算法</h4><ul>
+<li>OPT 最佳页面置换<ul>
+<li>算法：置换下次访问时间最长的页</li>
+<li>优点：最低程度较少缺页</li>
+<li>缺点：工程无法实现，程序访问页面是无法准确预知下一次访问时间的</li>
+</ul>
+</li>
+<li>FIFO 先进先出<ul>
+<li>算法：替换驻留时间最长的页</li>
+<li>优点：实现简单</li>
+<li>缺点：性能较低</li>
+</ul>
+</li>
+<li>LRU 最久未使用<ul>
+<li>算法：替换最长时间没有被访问的页（双向链表，访问置队尾，替换队头）</li>
+<li>优点：性能相对FIFO有所提高，且工程上可以实现</li>
+<li>缺点：实现相对复杂，开销较大</li>
+</ul>
+</li>
+<li>时钟页面置换算法<ul>
+<li>算法：<ul>
+<li>构造环形队列，页面访问位初始化为0，初始指向0号页面</li>
+<li>若被访问，将访问位置1</li>
+<li>需要替换时，从当前指向节点开始，替换第一个访问位为0的页面，并将沿途为访问位为1的页面改为0</li>
+</ul>
+</li>
+<li>优点：结合了LRU和FIFO的特点，每次替换近期未使用的较早进入队列的页面，减少替换页面时的开销</li>
+</ul>
+</li>
+<li>LFU 最不常使用算法<ul>
+<li>算法：替换最不经常使用的页面，对页表项添加计数器，替换最小的页面</li>
+<li>缺点：对于短期内高频访问而之后不再访问的页面无法正确置换，同时计数器硬件成本较高</li>
+</ul>
+</li>
+</ul>
+<h3 id="磁盘调度算法"><a href="#磁盘调度算法" class="headerlink" title="磁盘调度算法"></a>磁盘调度算法</h3><h4 id="先来先服务"><a href="#先来先服务" class="headerlink" title="先来先服务"></a>先来先服务</h4><ul>
+<li>算法：按照请求顺序先来先服务</li>
+<li>特点：实现简单，但是效率无法保证</li>
+</ul>
+<h4 id="最短寻道时间优先"><a href="#最短寻道时间优先" class="headerlink" title="最短寻道时间优先"></a>最短寻道时间优先</h4><ul>
+<li>算法：总是找离磁头最近的磁道优先访问</li>
+<li>特点：效率有所提高，但是可能存在请求饿死</li>
+</ul>
+<h4 id="扫描算法"><a href="#扫描算法" class="headerlink" title="扫描算法"></a>扫描算法</h4><ul>
+<li>算法：也叫电梯算法，先朝某个方向移动至顶端再返回</li>
+<li>特点：效率有一定提升，但是每个磁道的响应频率存在差异</li>
+<li>循环扫描算法：每次朝同一个方向到达另一端顶点后，返回头部，中间不接收任何请求</li>
+</ul>
+<h4 id="LOOK-amp-C-LOOK算法"><a href="#LOOK-amp-C-LOOK算法" class="headerlink" title="LOOK &amp; C-LOOK算法"></a>LOOK &amp; C-LOOK算法</h4><ul>
+<li>算法：类似扫描算法，但是不到达端点，而是到达最远端请求磁道后即返回</li>
+</ul>
+<h2 id="进程互斥与同步"><a href="#进程互斥与同步" class="headerlink" title="进程互斥与同步"></a>进程互斥与同步</h2><h3 id="临界资源"><a href="#临界资源" class="headerlink" title="临界资源"></a>临界资源</h3><ul>
+<li>并发进程的共享资源</li>
+<li>同一时间内只支持一个进程访问</li>
+</ul>
+<h3 id="资源访问分区"><a href="#资源访问分区" class="headerlink" title="资源访问分区"></a>资源访问分区</h3><ul>
+<li>进入区：检查是否可以进入临界区</li>
+<li>临界区：访问共享资源</li>
+<li>退出区：重置临界区占用标识</li>
+<li>剩余区：其他逻辑</li>
+</ul>
+<h3 id="进程互斥原则"><a href="#进程互斥原则" class="headerlink" title="进程互斥原则"></a>进程互斥原则</h3><ul>
+<li>空闲让进：临界区空闲时应该让想要进去临界区的进程立刻进来</li>
+<li>忙则等待：如果已经有资源进入临界区，则其他进程只能等待</li>
+<li>有限等待：保证等待进入临界区的进程等待时间是有限的，不能一直等下去</li>
+<li>让权等待：当进程不能进入自己的临界区时，应该释放CPU资源，防止进程“忙等”</li>
+</ul>
+<h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><ul>
+<li>机制：通过P/V原语操作标记资源数量的变量，原语有不可中断的性质，实现多进程互斥访问</li>
+<li>数值型信号量：数值标记资源 + while循环等待</li>
+<li>记录型信号量：数值标记资源 + 进程等待队列，资源不足时阻塞进程，防止忙等</li>
+</ul>
+<h3 id="进程同步"><a href="#进程同步" class="headerlink" title="进程同步"></a>进程同步</h3><h4 id="使用信号量控制进程同步"><a href="#使用信号量控制进程同步" class="headerlink" title="使用信号量控制进程同步"></a>使用信号量控制进程同步</h4><ul>
+<li>信号量初始化为0</li>
+<li>在后操作之前使用P原语阻塞进程</li>
+<li>当“前操作”执行完毕后，调用V原语，增加资源，唤醒“后操作”进程。前VP后</li>
+</ul>
+<h3 id="典型例题"><a href="#典型例题" class="headerlink" title="典型例题"></a>典型例题</h3><h4 id="生产者消费者"><a href="#生产者消费者" class="headerlink" title="生产者消费者"></a>生产者消费者</h4><ul>
+<li>互斥规则：缓存区要么放要么取</li>
+<li>同步规则：只有缓存区有东西才可以取 ；只有缓存区有空位才可以放；</li>
+<li>伪代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">producer() &#123;					consumer() &#123;</span><br><span class="line">	生产商品					    P(full)</span><br><span class="line">	P(empty)					   P(mutex)</span><br><span class="line">	P(mutex)					  取商品</span><br><span class="line">	商品放入缓存					  V(mutex)</span><br><span class="line">	V(mutex)					  V(empty)</span><br><span class="line">	V(full)						  使用产品</span><br><span class="line">&#125;								&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="橘子苹果问题"><a href="#橘子苹果问题" class="headerlink" title="橘子苹果问题"></a>橘子苹果问题</h4><ul>
+<li>互斥规则：盘子要么放水果要么取水果</li>
+<li><p>同步规则：盘中有橘子儿子才取；盘中有苹果女儿才取；盘中无水果父母才放</p>
+</li>
+<li><p>伪代码</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Dad() &#123;				Mom() &#123;</span><br><span class="line">	P(empty)			P(empty)</span><br><span class="line">	放苹果				  放橘子</span><br><span class="line">	V(apple)			V(orage)</span><br><span class="line">&#125;					&#125;</span><br><span class="line"></span><br><span class="line">Daughter() &#123;		Son() &#123;</span><br><span class="line">	P(apple)			P(orange)</span><br><span class="line">	取苹果			  	  取橘子</span><br><span class="line">	V(empty)			V(empty)</span><br><span class="line">&#125;					&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h3><ul>
+<li>互斥规则：读写互斥，读读不互斥</li>
+<li>同步规则：无</li>
+<li>伪代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Writer() &#123;		Reader() &#123;</span><br><span class="line">	P(w)			P(w)	// 确保读写公平，防止写进程饿死</span><br><span class="line">	P(rw)			P(mutex)	// 锁住count，防止阻塞其他读进程</span><br><span class="line">	写文件			  if (count == 0) &#123;</span><br><span class="line">	V(rw)				P(rw)	// 首个读进程阻塞写操作</span><br><span class="line">	V(w)			&#125;</span><br><span class="line">					conunt += 1</span><br><span class="line">&#125;					V(mutex)</span><br><span class="line">					V(w)</span><br><span class="line">					读文件</span><br><span class="line">					P(mutex)</span><br><span class="line">					count --</span><br><span class="line">					if (count == 0) &#123;</span><br><span class="line">						V(rw)</span><br><span class="line">					&#125;</span><br><span class="line">					V(mutex)</span><br></pre></td></tr></table></figure>
+<h3 id="哲学家吃饭问题"><a href="#哲学家吃饭问题" class="headerlink" title="哲学家吃饭问题"></a>哲学家吃饭问题</h3><ul>
+<li>互斥规则：筷子只能被一位哲学家使用</li>
+<li>同步规则：只有等身边的哲学家吃完自己才能开始吃</li>
+<li>伪代码（略）<ul>
+<li>方法1：一次申请全部资源，使得拿筷子是原子操作</li>
+<li>方法2：奇数号哲学家先拿左手筷子，偶数号哲学家先拿右手筷子</li>
+<li>方法3：只有n-1人能够参与筷子争夺</li>
+</ul>
+</li>
+</ul>
+<h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><h3 id="OSI七层模型和TCP-IP四层模型"><a href="#OSI七层模型和TCP-IP四层模型" class="headerlink" title="OSI七层模型和TCP/IP四层模型"></a>OSI七层模型和TCP/IP四层模型</h3><blockquote>
+<p>ref: <a href="https://zhuanlan.zhihu.com/p/32059190" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/32059190</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>四层</th>
+<th>七层</th>
+<th>应用层</th>
+<th>功能</th>
+<th>TCP/IP协议族</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>7</td>
+<td>应用层</td>
+<td>为应用程序提供网络服务</td>
+<td>Http、Telnet、Ftp、Email、DNS</td>
+</tr>
+<tr>
+<td>4</td>
+<td>6</td>
+<td>表示层</td>
+<td>数据格式转化</td>
+<td>无</td>
+</tr>
+<tr>
+<td>4</td>
+<td>5</td>
+<td>会话层</td>
+<td>解除或建立与其他端点连接</td>
+<td>无</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>传输层</td>
+<td>提供端对端接口</td>
+<td>TCP、UDP（RTP）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3</td>
+<td>网络层</td>
+<td>数据包路由选择</td>
+<td>IP、ICMP、ARP、RARP、BOOTP</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>链路层</td>
+<td>传输有地址帧、错误检测</td>
+<td>SLIP、CSLIP、PPP、</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>物理层</td>
+<td>二进制形式传输</td>
+<td>IEEE 802.1A</td>
+</tr>
+</tbody>
+</table>
+<h3 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h3><ol>
+<li><p>慢启动</p>
+<ul>
+<li><p>连接建好后初始化窗口大小 cwnd = 10</p>
+</li>
+<li><p>当收到一个ACK，cwnd += 1，经过一个RTT，cwnd翻倍，指数增加</p>
+</li>
+<li><p>当cwnd &gt;= ssthresh时，进入拥塞避免算法</p>
+</li>
+</ul>
+</li>
+<li><p>拥塞避免</p>
+<ul>
+<li>经过一个RTT，发送方拥塞窗口cwnd += 1</li>
+</ul>
+</li>
+<li><p>快速重传</p>
+<ul>
+<li>主要用于丢包检测</li>
+</ul>
+</li>
+<li><p>快速恢复</p>
+<ul>
+<li>当检测到丢包时，触发快速重传，进入降窗状态，将cwnd降到一个合理值</li>
+</ul>
+</li>
+</ol>
+<h1 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h1><h2 id="缓存系统"><a href="#缓存系统" class="headerlink" title="缓存系统"></a>缓存系统</h2><h3 id="主要问题"><a href="#主要问题" class="headerlink" title="主要问题"></a>主要问题</h3><ul>
+<li>一致性：存储和缓存中的数据的一致性问题</li>
+<li>缓存击穿：查询在缓存中未命中，透传DB查询，大量击穿导致DB拒绝服务</li>
+<li>缓存雪崩：数据过期时间近似，大量数据同时过期或冷数据瞬间涌入大量请求导致DB压力过大拒绝服务</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Thomstrong
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://thomstrong.github.io/2020/09/28/review-basic-knowledge/" title="秋招复习剪辑">https://thomstrong.github.io/2020/09/28/review-basic-knowledge/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/基础知识/" rel="tag"># 基础知识</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/14/first-paofu/" rel="next" title="第一次制作泡芙有感">
+                <i class="fa fa-chevron-left"></i> 第一次制作泡芙有感
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Thomstrong">
+            
+              <p class="site-author-name" itemprop="name">Thomstrong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+			<!--my custom code begin-->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+			<script type="text/javascript">
+			  $("#sidebar").hover(function(){
+				$("#mydivshow").velocity('stop').velocity({opacity: 1});
+			  },function(){
+				$("#mydivshow").velocity('stop').velocity({opacity: 0});
+			  });
+			</script>
+			<div id="mydivshow" class="mydivshow">
+			<!--my custom code end-->
+			
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Thomstrong" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:thomstrong@dingtalk.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+        </div>
+		<!--my custom code begin-->
+		</div>
+		<!--my custom code end-->
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库"><span class="nav-number">1.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">1.1.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#索引失效"><span class="nav-number">1.1.1.</span> <span class="nav-text">索引失效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不适合索引场景"><span class="nav-number">1.1.2.</span> <span class="nav-text">不适合索引场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引底层规则"><span class="nav-number">1.1.3.</span> <span class="nav-text">索引底层规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引数据结构"><span class="nav-number">1.1.4.</span> <span class="nav-text">索引数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么是B-树而不是"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">为什么是B+树而不是</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚集索引和非聚集索引"><span class="nav-number">1.1.5.</span> <span class="nav-text">聚集索引和非聚集索引</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁"><span class="nav-number">1.2.</span> <span class="nav-text">锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分类"><span class="nav-number">1.2.1.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#乐观锁和悲观锁（思想）"><span class="nav-number">1.2.2.</span> <span class="nav-text">乐观锁和悲观锁（思想）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Next-Key-Lock"><span class="nav-number">1.2.3.</span> <span class="nav-text">Next Key Lock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁"><span class="nav-number">1.2.4.</span> <span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">1.2.5.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询优化方法"><span class="nav-number">1.3.</span> <span class="nav-text">查询优化方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL优化"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">SQL优化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式主键方案"><span class="nav-number">1.4.</span> <span class="nav-text">分布式主键方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引擎"><span class="nav-number">1.5.</span> <span class="nav-text">引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#InnoDB和MyISAM区别"><span class="nav-number">1.5.1.</span> <span class="nav-text">InnoDB和MyISAM区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务"><span class="nav-number">1.6.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL事务特性"><span class="nav-number">1.6.1.</span> <span class="nav-text">MySQL事务特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务隔离级别"><span class="nav-number">1.6.2.</span> <span class="nav-text">事务隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事务并发带来的问题"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">事务并发带来的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隔离级别"><span class="nav-number">1.6.2.2.</span> <span class="nav-text">隔离级别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVCC-多版本并发控制"><span class="nav-number">1.6.3.</span> <span class="nav-text">MVCC 多版本并发控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他-1"><span class="nav-number">1.7.</span> <span class="nav-text">其他</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统"><span class="nav-number">2.</span> <span class="nav-text">操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#调度算法"><span class="nav-number">2.1.</span> <span class="nav-text">调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程调度"><span class="nav-number">2.1.1.</span> <span class="nav-text">进程调度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进程五状态模型"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">进程五状态模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU调度时机"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">CPU调度时机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#抢占式调度和非抢占式调度"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">抢占式调度和非抢占式调度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不会发生进程调度"><span class="nav-number">2.1.1.4.</span> <span class="nav-text">不会发生进程调度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调度算法-1"><span class="nav-number">2.1.1.5.</span> <span class="nav-text">调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#批处理系统调度算法"><span class="nav-number">2.1.1.5.1.</span> <span class="nav-text">批处理系统调度算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#交互系统调度算法"><span class="nav-number">2.1.1.5.2.</span> <span class="nav-text">交互系统调度算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存页面置换"><span class="nav-number">2.1.2.</span> <span class="nav-text">内存页面置换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#缺页中断"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">缺页中断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#置换算法"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">置换算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘调度算法"><span class="nav-number">2.1.3.</span> <span class="nav-text">磁盘调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#先来先服务"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">先来先服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最短寻道时间优先"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">最短寻道时间优先</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扫描算法"><span class="nav-number">2.1.3.3.</span> <span class="nav-text">扫描算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LOOK-amp-C-LOOK算法"><span class="nav-number">2.1.3.4.</span> <span class="nav-text">LOOK &amp; C-LOOK算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程互斥与同步"><span class="nav-number">2.2.</span> <span class="nav-text">进程互斥与同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#临界资源"><span class="nav-number">2.2.1.</span> <span class="nav-text">临界资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资源访问分区"><span class="nav-number">2.2.2.</span> <span class="nav-text">资源访问分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程互斥原则"><span class="nav-number">2.2.3.</span> <span class="nav-text">进程互斥原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量"><span class="nav-number">2.2.4.</span> <span class="nav-text">信号量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程同步"><span class="nav-number">2.2.5.</span> <span class="nav-text">进程同步</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用信号量控制进程同步"><span class="nav-number">2.2.5.1.</span> <span class="nav-text">使用信号量控制进程同步</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#典型例题"><span class="nav-number">2.2.6.</span> <span class="nav-text">典型例题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生产者消费者"><span class="nav-number">2.2.6.1.</span> <span class="nav-text">生产者消费者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#橘子苹果问题"><span class="nav-number">2.2.6.2.</span> <span class="nav-text">橘子苹果问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件读写"><span class="nav-number">2.2.7.</span> <span class="nav-text">文件读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哲学家吃饭问题"><span class="nav-number">2.2.8.</span> <span class="nav-text">哲学家吃饭问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机网络"><span class="nav-number">3.</span> <span class="nav-text">计算机网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OSI七层模型和TCP-IP四层模型"><span class="nav-number">3.0.1.</span> <span class="nav-text">OSI七层模型和TCP/IP四层模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拥塞控制"><span class="nav-number">3.0.2.</span> <span class="nav-text">拥塞控制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统设计"><span class="nav-number">4.</span> <span class="nav-text">系统设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存系统"><span class="nav-number">4.1.</span> <span class="nav-text">缓存系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主要问题"><span class="nav-number">4.1.1.</span> <span class="nav-text">主要问题</span></a></li></ol></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Thomstrong</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">50.5k</span>
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/exturl.js?v=5.1.3"></script>
+
+
+  <script src="/js/src/Aplayer-Controler.js"></script>
+<div id="AP-controler"></div>
+<script type="text/javascript">
+var myapc=new APlayer_Controler({
+		APC_dom:$('#AP-controler'),
+		aplayer:ap, //此为绑定的aplayer对象
+		attach_right:false,
+		position:{top:'300px',bottom:''},
+		fixed:true,
+		btn_width:100,
+		btn_height:120,
+		img_src:['http://oty1v077k.bkt.clouddn.com/bukagirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/jumpgirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/pentigirl.jpg',
+				'http://oty1v077k.bkt.clouddn.com/%E8%90%8C1.gif'],
+		img_style:{repeat:'no-repeat',position:'center',size:'contain'},
+		ctrls_color:'rgba(173,255,47,0.8)',
+		ctrls_hover_color:'rgba(255,140,0,0.7)',
+		tips_on:true,
+		tips_width:140,
+		tips_height:25,
+		tips_color:'rgba(255,255,255,0.6)',
+		tips_content:{},
+		timeout:30
+	});
+</script>
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+
+
+</body>
+</html>
