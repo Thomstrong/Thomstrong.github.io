@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://thomstrong.github.io/"/>
-  <updated>2021-04-17T07:58:17.612Z</updated>
+  <updated>2021-08-29T14:33:01.808Z</updated>
   <id>https://thomstrong.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>磨刀探索</title>
+    <link href="https://thomstrong.github.io/2021/08/29/renew-knife/"/>
+    <id>https://thomstrong.github.io/2021/08/29/renew-knife/</id>
+    <published>2021-08-29T13:50:22.000Z</published>
+    <updated>2021-08-29T14:33:01.808Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><blockquote><p>参考 <a href="https://www.kfcshop.com.tw/article.php?id=63" target="_blank" rel="noopener">https://www.kfcshop.com.tw/article.php?id=63</a></p></blockquote><h3 id="什么是锋利"><a href="#什么是锋利" class="headerlink" title="什么是锋利"></a>什么是锋利</h3><p>在显微镜下锋利的刀刃呈现笔直、齐整的直线，而钝刀的刀锋则呈现弯曲、坑洼的曲线</p><h3 id="为什么不用磨刀器"><a href="#为什么不用磨刀器" class="headerlink" title="为什么不用磨刀器"></a>为什么不用磨刀器</h3><ol><li>简易磨刀器，通常是由两个交错的石头组成，它磨出的纹路与刀刃平行，一方面这样的刀锋缺乏割力；另一方面，只将刀锋回归直线，也难以保持锋利。除了省事，没啥好处</li><li>磨刀石，似乎是介于发烧友和懒人之间的一种选择</li><li>定角磨刀器，需要一定技术，同时可以磨出锋利的刀刃</li><li>磨刀棒，日常维持锋利的利器</li></ol><h3 id="磨刀石选择"><a href="#磨刀石选择" class="headerlink" title="磨刀石选择"></a>磨刀石选择</h3><h4 id="材料"><a href="#材料" class="headerlink" title="材料"></a>材料</h4><ul><li>人工合成<ul><li>阿大耐石、绿碳油石，较软，容易磨损，但是磨的快</li><li>人造红宝石、人造白刚玉，较硬，超耐磨，但是磨的慢</li></ul></li><li>天然油石<ul><li>砂岩或泥岩</li></ul></li></ul><h4 id="目数"><a href="#目数" class="headerlink" title="目数"></a>目数</h4><ul><li>目数越高越细腻，磨出的刀刃越光滑</li><li>菜刀一般800目左右、普通品牌即可</li></ul><h3 id="磨刀步骤"><a href="#磨刀步骤" class="headerlink" title="磨刀步骤"></a>磨刀步骤</h3><ol><li><p>浸泡磨刀石，充分浸泡磨刀石大约半小时，使其吸收水分，防止磨刀过程过热导致刀刃损坏</p></li><li><p>准备一盆水在边上，过程中可以不定时洒水降温和保持润滑</p></li><li><p>磨刀石先使用粗面磨后使用细面磨。可以使用铅笔在磨刀石上划线以观察自己的磨刀进度</p></li><li><p>姿势，确保力度均匀</p><ul><li><p>刀背比刀刃略高硬币厚度（可根据刀锋角度自行调整），高度要适中，过高虽然可以使得刀刃很锋利，但是刀刃也容易崩</p></li><li><p>手腕保持平稳不移动</p><p><img src="/images/renew_knife_finger.jpeg" alt></p></li></ul></li><li><p>分段打磨，垂直刀刃，刀刃分区域进行打磨，确保刀口全部打磨到</p></li><li><p>全刃打磨，将刀从刀尖往刀枕方向打磨</p></li><li><p>打磨过程中磨刀石会出现包浆，是正常状态</p></li><li><p>打磨至产生毛边，即可换面磨刀</p><p><img src="/images/renew_knife_burrs.jpeg" alt></p></li><li><p>可以使用指甲检测刀口是否会滑，会滑则代表不够锋利</p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;blockquote&gt;
+&lt;p&gt;参考 &lt;a href=&quot;https://www.kfcshop.com.tw/article.php?id=63&quot; target=&quot;_blank&quot; 
+      
+    
+    </summary>
+    
+    
+      <category term="生活" scheme="https://thomstrong.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
   
   <entry>
     <title>五笔输入法学习</title>
@@ -512,31 +536,6 @@
     
     
       <category term="虚拟化" scheme="https://thomstrong.github.io/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SQL vs NoSQL总结</title>
-    <link href="https://thomstrong.github.io/2019/07/02/SQL-vs-NoSQL/"/>
-    <id>https://thomstrong.github.io/2019/07/02/SQL-vs-NoSQL/</id>
-    <published>2019-07-02T08:02:57.000Z</published>
-    <updated>2019-07-15T03:01:04.248Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h1 id="SQL-vs-NoSQL"><a href="#SQL-vs-NoSQL" class="headerlink" title="SQL vs NoSQL"></a>SQL vs NoSQL</h1><blockquote><p><a href="https://www.xplenty.com/blog/the-sql-vs-nosql-difference/" target="_blank" rel="noopener">参考blog</a></p></blockquote><h3 id="SQL（关系型数据库）"><a href="#SQL（关系型数据库）" class="headerlink" title="SQL（关系型数据库）"></a>SQL（关系型数据库）</h3><ul><li>使用结构化查询语句（Structured Query Language)来定义和管理数据</li><li>通用且使用广泛，能够安全适用于复杂查询密集的环境</li><li>使用之前需要进行数据结构定义，所有数据遵循相同结构，结构的变化较难应付</li><li>MySql，Oracle，Sqlite，Postgres和MS-SQL</li></ul><h3 id="NoSQL（非关系数据库-分布式数据库）"><a href="#NoSQL（非关系数据库-分布式数据库）" class="headerlink" title="NoSQL（非关系数据库/分布式数据库）"></a>NoSQL（非关系数据库/分布式数据库）</h3><ul><li>非结构化数据动态模式，数据以多种方式存储，可以面向列、面向文档、基于图或者K-V模式存储</li><li>没有标准接口来执行复杂查询</li><li>数据文档无需进行预先定义和结构声明，每个文档可以拥有不同的结构，数据域能随意拓展</li><li>MongoDB，BigTable，Redis，RavenDb，Cassandra，Hbase，Neo4j和CouchDb</li></ul><hr><h3 id="拓展性"><a href="#拓展性" class="headerlink" title="拓展性"></a>拓展性</h3><ul><li>SQL具备垂直拓展性，可通过增加CPU/RAM/SSD来提升负载能力</li><li>NoSQL具备水平拓展性，可通过增加更多服务器提升负载能力</li></ul><h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><ul><li>SQL数据库基于表存储</li><li>NoSQL数据库基于文档/k-v对/图/宽列存储</li></ul><h3 id="数据存储类型"><a href="#数据存储类型" class="headerlink" title="数据存储类型"></a>数据存储类型</h3><ul><li>SQL不支持分布式数据存储</li><li>NoSQL能更好的适应分布式数据存储，因其使用了k-v对这样类似Json数据的数据存储方式，对于大型数据集的存储有更好的表现。Hbase就是一个很好的例子</li></ul><h3 id="事务应用"><a href="#事务应用" class="headerlink" title="事务应用"></a>事务应用</h3><blockquote><ul><li><p>一个事务是一连串的操作组成，增删改查的集合</p></li><li><p>特性ACID：</p><ul><li>原子性（Atomicity）：要么完整执行，要么不执行</li><li>一致性（Consistency）：执行前后，数据保持完整和逻辑一致（银行存款例子），原子性和持久性是事务一致性的充分条件</li><li>隔离性（Isolation）：多个并发事务是独立的，上下文彼此隔离，互不干扰，使用锁机制进行数据线程安全控制。四种隔离级别<ul><li>读未提交，其隔离级别最低，允许脏读。换句话说就是，如果一个事务正在处理某一数据，并对其进行了更新，但是同时没有提交事务，允许另一个事务也可以访问</li><li>读已提交，和读未提交的区别就是。读未提交可以读取到别人没有提交的数据，但是读已提交只能读取到别人提交后的值，事务进行的中间值不会读取到</li><li>可重复读，简单来说就是事务处理过程中多次读取同一个数据的时候，这个值不会发生改变，其值都和第一次查询到的数据是一致的</li><li>串行化，是最严格的隔离级别，他要求所有的事务都被串行执行，既事务只能一个接一个的进行处理，不能并发执行</li></ul></li><li>持久性（Durability）：在提交后已提交的数据应该能过永久保存，在系统发生异常后仍能回到异常发生前的状态</li></ul></li></ul></blockquote><ul><li>SQL数据库最适合重量级事务类型应用程序，因为它更稳定，且承诺了数据的原子性和完整性</li><li>NoSQL也可以在事务中应用，但是在高负载和复杂事务的应用环境下不能有更好的表现</li></ul><h3 id="外部支持"><a href="#外部支持" class="headerlink" title="外部支持"></a>外部支持</h3><ul><li>SQL数据库有更丰富的提供商和解决方案作为支持</li><li>NoSQL目前仍然依赖于社区</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;script src=&quot;/assets/js/APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h1 id=&quot;SQL-vs-NoSQL&quot;&gt;&lt;a href=&quot;#SQL-vs-NoSQL&quot; class=&quot;headerlink&quot; title=&quot;SQL vs NoSQL&quot;&gt;&lt;/a&gt;
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="https://thomstrong.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="数据库" scheme="https://thomstrong.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
